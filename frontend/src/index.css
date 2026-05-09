@@ -1,56 +1,42 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Lato', ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #1e0a3c;
+}
+
+:root {
+  font-family: 'Lato', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1e0a3c;
+  background-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'Outfit', sans-serif;
-    background-color: #ffffff;
-    color: #1e0a3c;
-    overflow-x: hidden;
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-  }
 }
 
-@layer utilities {
-  .bg-dark-blue {
-    background-color: #1e0a3c;
-  }
-  .text-dark-blue {
-    color: #1e0a3c;
-  }
-  .border-dark-blue {
-    border-color: #1e0a3c;
-  }
+/* Custom shadow for cards */
+.shadow-premium {
+  box-shadow: 0 20px 40px -15px rgba(30, 10, 60, 0.15);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1e0a3c;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #0d0520;
-}
-
-::selection {
-  background: #1e0a3c;
-  color: #ffffff;
+.shadow-glow {
+  box-shadow: 0 0 30px rgba(30, 10, 60, 0.1);
 }

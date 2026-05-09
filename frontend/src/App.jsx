@@ -3,7 +3,7 @@ import './App.css';
 
 export default function App() {
   return (
-    <div className="antialiased" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="antialiased min-h-screen bg-white" style={{ fontFamily: "'Raleway', sans-serif" }}>
       <LandingPage />
     </div>
   );
