@@ -19,34 +19,34 @@ export default function Services() {
 
   const services = [
     {
-      title: "Market Access 🌍",
-      icon: <Globe className="w-8 h-8 text-[#1e0a3c]" />,
+      title: "Market Access",
+      icon: <Globe />,
       items: ["International market entry", "Global partnerships", "Expansion strategy", "Business matchmaking"]
     },
     {
-      title: "Digital Marketing & Growth 📢",
-      icon: <TrendingUp className="w-8 h-8 text-[#1e0a3c]" />,
+      title: "Digital Marketing & Growth",
+      icon: <TrendingUp />,
       items: ["Performance marketing", "Social media growth", "Branding", "Lead generation"]
     },
     {
-      title: "Startup Funding 💰",
-      icon: <DollarSign className="w-8 h-8 text-[#1e0a3c]" />,
+      title: "Startup Funding",
       note: "TRL 6+ only",
+      icon: <DollarSign />,
       items: ["Investor introductions", "Angel network access", "VC connectivity"]
     },
     {
       title: "Incubation Support",
-      icon: <Briefcase className="w-8 h-8 text-[#1e0a3c]" />,
+      icon: <Briefcase />,
       items: ["Mentorship", "Startup planning", "Business strategy"]
     },
     {
-      title: "Export & Compliance 🚢",
-      icon: <Shield className="w-8 h-8 text-[#1e0a3c]" />,
+      title: "Export & Compliance",
+      icon: <Shield />,
       items: ["Export facilitation", "Market entry advisory"]
     },
     {
-      title: "Manufacturing & Localization 🏭",
-      icon: <Settings className="w-8 h-8 text-[#1e0a3c]" />,
+      title: "Manufacturing & Localization",
+      icon: <Settings />,
       items: ["Vendor identification", "Local production setup", "Supply chain support"]
     }
   ];
@@ -70,32 +70,38 @@ export default function Services() {
         variants={stagger}
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
-        {services.map((service, index) => (
+        {services.map((service, index) => {
+          const isDark = index % 2 === 1;
+          return (
           <motion.div 
             key={index}
             variants={fadeUp}
             whileHover={{ y: -8, transition: { duration: 0.2 } }}
-            className="bg-white rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-2xl shadow-[#1e0a3c]/10 transition-all hover:shadow-[#1e0a3c]/20"
+            className={`group flex flex-col items-center text-center h-full min-h-[340px] rounded-[1.5rem] p-8 lg:p-10 border transition-all shadow-2xl hover:shadow-xl ${
+              isDark 
+                ? "bg-[#1e0a3c] text-white border-[#1e0a3c]/10 shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50" 
+                : "bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20"
+            }`}
           >
-            <div className="w-16 h-16 rounded-2xl bg-[#1e0a3c]/5 flex items-center justify-center mb-6">
-              {service.icon}
+            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-transform duration-300 group-hover:rotate-[45deg] ${isDark ? "bg-white/10" : "bg-[#1e0a3c]/5"}`}>
+              {React.cloneElement(service.icon, { className: `w-10 h-10 ${isDark ? "text-white" : "text-[#1e0a3c]"}` })}
             </div>
-            <h3 className="text-xl font-bold text-[#1e0a3c] mb-4 tracking-tight">{service.title}</h3>
+            <h3 className={`text-2xl font-bold mb-4 tracking-tight ${isDark ? "text-white" : "text-[#1e0a3c]"}`}>{service.title}</h3>
             {service.note && (
-              <span className="inline-block px-3 py-1 bg-[#1e0a3c]/10 text-[#1e0a3c] text-xs font-bold rounded-full mb-4">
+              <span className={`inline-block w-fit px-3 py-1 text-xs font-bold rounded-full mb-4 ${isDark ? "bg-white/10 text-white" : "bg-[#1e0a3c]/10 text-[#1e0a3c]"}`}>
                 {service.note}
               </span>
             )}
-            <ul className="space-y-3">
+            <ul className="space-y-4 w-full text-left mt-4">
               {service.items.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-[14px] text-[#1e0a3c]/70 font-bold">
-                  <ArrowRight size={16} className="mt-0.5 text-[#1e0a3c]/40 shrink-0" />
+                <li key={i} className={`flex items-start gap-3 text-[15px] font-bold ${isDark ? "text-white/80" : "text-[#1e0a3c]/80"}`}>
+                  <ArrowRight size={18} className={`mt-0.5 shrink-0 ${isDark ? "text-white/40" : "text-[#1e0a3c]/40"}`} />
                   {item}
                 </li>
               ))}
             </ul>
           </motion.div>
-        ))}
+        )})}
       </motion.div>
     </div>
   );

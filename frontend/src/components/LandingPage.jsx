@@ -365,18 +365,18 @@ const HowItWorks = () => (
           { 
             icon: Target, 
             title: 'Validate', 
-            desc: 'Focus on establishing a strong brand identity, conducting thorough market validation, and developing a comprehensive go-to-market strategy to ensure a solid foundation.' 
+            desc: 'Focus on Branding, Market validation, and comprehensive Go-to-market planning. Establish a strong foundation with targeted customer research and tailored value propositions.'
           },
           { 
             icon: Shield, 
             title: 'Expand', 
-            desc: 'Begin your international journey by securing dedicated export support and establishing reliable distributor networks to build your initial global presence.',
+            desc: 'Secure Export support and establish international Distributor setups. Leverage strategic partnerships and compliance frameworks to seamlessly enter high-growth global markets.',
             isMiddle: true 
           },
           { 
             icon: Rocket, 
             title: 'Scale', 
-            desc: 'Optimize your manufacturing pipelines and gain exclusive access to our network of investors to rapidly scale your operations worldwide.' 
+            desc: 'Optimize Manufacturing pipelines and gain exclusive Investor access to scale globally. Accelerate your traction with top-tier VC connectivity and enterprise localization.'
           }
         ].map((step, i) => (
           <motion.div
@@ -386,21 +386,23 @@ const HowItWorks = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             whileHover={{ y: -10 }}
-            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50 cursor-pointer"
+            className="flex flex-col p-8 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[360px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50 cursor-pointer group"
             onClick={() => window.location.href = '/programs'}
           >
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-9 shadow-lg bg-white/10 text-white">
-                <step.icon size={36} />
+              <div className="w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-6 shadow-lg bg-white/10 text-white">
+                <step.icon size={32} />
               </div>
-              <h3 className="text-[24px] font-bold mb-5 tracking-tight">{step.title}</h3>
-              <p className="text-[15px] font-bold leading-relaxed opacity-70">
+              <h3 className="text-[32px] md:text-[36px] font-bold mb-4 tracking-tight text-white">{step.title}</h3>
+              <p className="text-[14px] md:text-[15px] font-medium leading-relaxed opacity-70 px-2 group-hover:opacity-90 transition-opacity">
                 {step.desc}
               </p>
             </div>
-            <div className="flex items-center gap-2.5 font-bold text-[13px] tracking-[0.15em] text-white">
-              View Program <ArrowRight size={16} />
-            </div>
+            {step.isMiddle && (
+              <div className="flex items-center gap-2 px-6 py-3 bg-white text-[#1e0a3c] font-bold rounded-xl hover:scale-105 transition-all text-[14px] mt-8 shadow-lg">
+                View Program <ArrowRight size={16} />
+              </div>
+            )}
           </motion.div>
         ))}
       </div>
@@ -686,60 +688,29 @@ const TimelineSection = () => (
 // --- Footer ---
 
 export const Footer = () => (
-  <footer className="pt-24 pb-12 bg-white/80 backdrop-blur-md border-t border-[#1e0a3c]/5 relative z-10 overflow-hidden">
-    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-      <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
-        <div className="lg:col-span-2">
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-[#1e0a3c] flex items-center justify-center shadow-xl shadow-[#1e0a3c]/15">
-              <Rocket size={20} className="text-white" />
-            </div>
-            <span className="text-[22px] font-bold tracking-tighter text-[#1e0a3c]">Needit.</span>
+  <footer className="bg-white pt-12 pb-6 px-6 lg:px-12 relative z-10 border-t border-[#1e0a3c]/5">
+    <div className="max-w-[1440px] mx-auto">
+      <div className="flex flex-col items-center text-center mb-8">
+        <div className="flex items-center gap-2 mb-6">
+          <div className="w-10 h-10 rounded-xl bg-[#1e0a3c] flex items-center justify-center shadow-xl shadow-[#1e0a3c]/15">
+            <Rocket size={20} className="text-white" />
           </div>
-          <p className="text-[#1e0a3c]/30 text-[14px] leading-relaxed max-w-xs mb-10 font-bold tracking-widest">
-            Empowering founders everywhere with secure tracks.
-          </p>
-          <div className="flex gap-4">
-             {[Users, Globe, Send, ExternalLink].map((Icon, i) => (
-               <div key={i} className="w-10 h-10 rounded-full bg-[#1e0a3c] flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-xl shadow-[#1e0a3c]/15">
-                 <Icon size={20} />
-               </div>
-             ))}
-          </div>
+          <span className="text-[22px] font-bold tracking-tighter text-[#1e0a3c]">Needit.</span>
         </div>
-        
-        {[
-          { title: 'Products', items: ['Tracks', 'Founder', 'SDKs'] },
-          { title: 'Information', items: ['Market', 'Token', 'Main'] },
-          { title: 'Resources', items: ['FAQ', 'Blog', 'DOC'] }
-        ].map((col) => (
-          <div key={col.title}>
-            <h4 className="font-bold text-[#1e0a3c] text-[15px] mb-8 tracking-tight uppercase">{col.title}</h4>
-            <ul className="space-y-4">
-              {col.items.map(item => (
-                <li key={item}><a href="#" className="text-[14px] font-bold text-[#1e0a3c]/30 hover:text-[#1e0a3c] transition-colors tracking-widest">{item}</a></li>
-              ))}
-            </ul>
-          </div>
-        ))}
-
-        <div className="lg:col-span-1">
-          <h4 className="font-bold text-[#1e0a3c] text-[15px] mb-8 tracking-tight uppercase">Newsletter</h4>
-          <input 
-             type="text" 
-             placeholder="Email" 
-             className="w-full bg-[#1e0a3c]/5 border border-[#1e0a3c]/10 rounded-xl px-5 py-4 text-[13px] font-bold outline-none mb-3 tracking-widest"
-          />
-          <button className="w-full py-4 bg-[#1e0a3c] text-white font-bold rounded-xl text-[12px] shadow-xl shadow-[#1e0a3c]/20 tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all">Subscribe</button>
+        <p className="text-[#1e0a3c]/40 text-[14px] leading-relaxed max-w-sm mb-8 font-bold tracking-widest">
+          Empowering founders globally with a secure, scalable ecosystem.
+        </p>
+        <div className="flex gap-4">
+           {[Users, Globe, Send, ExternalLink].map((Icon, i) => (
+             <div key={i} className="w-10 h-10 rounded-full bg-[#1e0a3c] flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-xl shadow-[#1e0a3c]/15">
+               <Icon size={20} />
+             </div>
+           ))}
         </div>
       </div>
 
-      <div className="pt-12 border-t border-[#1e0a3c]/5 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="pt-6 border-t border-[#1e0a3c]/5 flex flex-col justify-center items-center gap-6">
         <p className="text-[11px] font-bold text-[#1e0a3c]/20 tracking-[0.25em]">© 2026 NEEDIT. ALL RIGHTS RESERVED.</p>
-        <div className="flex gap-10 text-[11px] font-bold text-[#1e0a3c]/20 tracking-[0.25em]">
-          <a href="#" className="hover:text-[#1e0a3c] transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-[#1e0a3c] transition-colors">Terms of Service</a>
-        </div>
       </div>
     </div>
   </footer>
