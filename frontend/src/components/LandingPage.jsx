@@ -60,9 +60,9 @@ export const Navbar = () => {
 
   const links = [
     { name: 'Home', href: '/' },
+    { name: 'Programs', href: '/programs' },
     { name: 'Industries', href: '/industries' },
     { name: 'Services', href: '/services' },
-    { name: 'Programs', href: '/programs' },
     { name: 'Contact', href: '/contact' }
   ];
 

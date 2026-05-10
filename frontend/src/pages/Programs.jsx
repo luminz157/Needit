@@ -71,11 +71,6 @@ export default function Programs() {
               >
                 {/* Left accent line */}
                 <div className="absolute top-0 left-0 w-2 h-full bg-[#1e0a3c] transition-all duration-300 group-hover:w-3" />
-                
-                {/* Large Background Number */}
-                <div className="absolute -top-6 -right-4 text-[120px] font-black text-[#1e0a3c]/[0.03] select-none transition-all duration-500 group-hover:scale-110 group-hover:text-[#1e0a3c]/[0.08] group-hover:-rotate-3">
-                  0{index + 1}
-                </div>
 
                 {/* Content */}
                 <div className="relative z-10">
