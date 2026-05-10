@@ -112,7 +112,7 @@ export const Navbar = () => {
         scrolled ? 'shadow-sm py-4' : 'py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
           <div className="w-9 h-9 rounded-xl bg-[#1e0a3c] flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
             <Rocket size={18} className="text-white" />
@@ -120,13 +120,13 @@ export const Navbar = () => {
           <span className="text-[20px] font-bold tracking-tighter text-[#1e0a3c] whitespace-nowrap">Needit.</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10">
           {links.map((l) => (
             <a 
               key={l.name} 
               href={l.href} 
               onClick={(e) => handleNavClick(e, l)}
-              className="text-[13px] font-bold text-[#1e0a3c]/50 hover:text-[#1e0a3c] transition-colors tracking-tight whitespace-nowrap"
+              className="text-[16px] font-bold text-[#1e0a3c]/50 hover:text-[#1e0a3c] transition-colors tracking-tight whitespace-nowrap"
             >
               {l.name}
             </a>
@@ -147,28 +147,16 @@ export const Navbar = () => {
 
 const Hero = () => (
   <section id="home" className="relative pt-24 pb-14 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-12 items-center">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10">
         <motion.p variants={fadeUp} className="text-[11px] font-bold tracking-[0.35em] text-[#1e0a3c] opacity-50 mb-5 uppercase">Global Expansion Framework</motion.p>
         <motion.h1 
           variants={fadeUp}
-          className="text-5xl lg:text-[50px] leading-[1.1] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
+          className="text-5xl lg:text-[50px] leading-[1.1] font-bold text-[#1e0a3c] mb-10 tracking-tighter"
         >
           From Startup to <br />
-          Global Success 🌍
+          Global Success <Globe className="inline-block text-[#1e0a3c] w-[1em] h-[1em] -mt-2 ml-1" />
         </motion.h1>
-        
-        <motion.div variants={fadeUp} className="flex items-center gap-5 mb-9">
-          <div className="flex -space-x-3.5">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="w-11 h-11 rounded-full border-[5px] border-white bg-[#1e0a3c]/5 shadow-sm" />
-            ))}
-          </div>
-          <div className="pl-1">
-            <p className="text-[18px] font-bold text-[#1e0a3c] leading-none mb-1">168K +</p>
-            <p className="text-[10px] font-bold text-[#1e0a3c]/40 tracking-widest">Realtime users</p>
-          </div>
-        </motion.div>
 
         <motion.p variants={fadeUp} className="text-[16px] text-[#1e0a3c]/60 font-bold leading-relaxed mb-9 max-w-md">
           We help startups scale from idea to international markets with structured execution, partnerships, and market access.
@@ -188,7 +176,7 @@ const Hero = () => (
         </motion.p>
       </motion.div>
 
-      <div className="relative flex justify-center items-center py-8 scale-95 lg:scale-100 origin-center">
+      <div className="relative flex justify-center items-center py-8 scale-75 md:scale-90 lg:scale-75 xl:scale-100 origin-center lg:translate-x-4 xl:translate-x-0">
         {/* Floating Metric Cards */}
         <motion.div
           animate={{ y: [0, -20, 0], x: [0, 12, 0] }}
@@ -223,8 +211,8 @@ const Hero = () => (
             <TrendingUp size={18} />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-[#1e0a3c]/40 tracking-widest">Growth</p>
-            <p className="text-[15px] font-bold text-[#1e0a3c]">+45.2%</p>
+            <p className="text-[10px] font-bold text-[#1e0a3c]/40 tracking-widest">Startups</p>
+            <p className="text-[15px] font-bold text-[#1e0a3c]">42 Active</p>
           </div>
         </motion.div>
 
@@ -242,7 +230,7 @@ const Hero = () => (
                
                <div className="h-44 w-full bg-white/5 rounded-[2.2rem] mb-9 flex flex-col p-7 border border-white/5 gap-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-[10px] font-bold opacity-40">Funding round</p>
+                    <p className="text-[10px] font-bold opacity-40">Seed Round</p>
                     <TrendingUp size={14} className="text-emerald-400" />
                   </div>
                   <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
@@ -314,7 +302,7 @@ const Hero = () => (
 
 const TrustedSection = () => (
   <section id="about" className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
       <div className="flex flex-col lg:flex-row justify-between items-start mb-16 gap-10 lg:gap-20">
         <div className="flex-1">
           <motion.h2 
@@ -342,9 +330,9 @@ const TrustedSection = () => (
 
       <div className="grid md:grid-cols-3 gap-8 items-center">
         {[
-          { id: '01.', title: 'Expert guidance', desc: 'Tailored tools for every stage of your startup journey. We provide hands-on support to turn vision into reality.' },
-          { id: '02.', title: 'Best practices', desc: 'Needit unites and secures a growing ecosystem of startup tracks based on deep industry insights.', isMiddle: true },
-          { id: '03.', title: 'Secure growth', desc: 'Enterprise-grade security and blockchain integration for your peace of mind and scalable future.' }
+          { id: '01.', title: 'Expert guidance', desc: 'Tailored tools for every stage of your startup journey. We provide hands-on support to turn vision into reality. Leverage our global network of seasoned founders to navigate complex challenges and accelerate your market entry.' },
+          { id: '02.', title: 'Best practices', desc: 'Needit unites and secures a growing ecosystem of startup tracks based on deep industry insights. Benefit from structured frameworks that optimize your operations, reduce risk, and maximize your potential for rapid scaling.' },
+          { id: '03.', title: 'Secure growth', desc: 'Enterprise-grade security and blockchain integration for your peace of mind and scalable future. Protect your assets while maintaining the agility needed to innovate and capture new market opportunities.' }
         ].map((s, i) => (
           <motion.div
             key={i}
@@ -353,17 +341,13 @@ const TrustedSection = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             whileHover={{ y: -10 }}
-            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-[400px] justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
+            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[400px] justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
           >
-            <div>
-              <p className="text-[13px] font-bold mb-7 tracking-[0.25em] opacity-40">{s.id}</p>
-              <h3 className="text-[22px] font-bold mb-4 leading-tight tracking-tight">{s.title}</h3>
-              <p className="text-[15px] font-bold leading-relaxed opacity-70">{s.desc}</p>
+            <div className="flex flex-col items-center text-center justify-center h-full gap-4">
+              <p className="text-[72px] font-bold text-white tracking-tighter leading-none mb-8">{s.id.replace('.', '')}</p>
+              <h3 className="text-[24px] font-bold leading-tight tracking-tight">{s.title}</h3>
+              <p className="text-[15px] font-bold leading-relaxed opacity-70 px-2">{s.desc}</p>
             </div>
-            
-            <button className="w-fit px-7 py-2.5 rounded-xl font-bold text-[12px] transition-all tracking-widest bg-white text-[#1e0a3c] hover:scale-105">
-              Learn more
-            </button>
           </motion.div>
         ))}
       </div>
@@ -375,7 +359,7 @@ const TrustedSection = () => (
 
 const HowItWorks = () => (
   <section id="services" className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
       <div className="text-center mb-16">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -422,7 +406,7 @@ const HowItWorks = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             whileHover={{ y: -10 }}
-            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
+            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
           >
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-9 shadow-lg bg-white/10 text-white">
@@ -447,7 +431,7 @@ const HowItWorks = () => (
 
 const PlatformSection = () => (
   <section className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
       <div className="relative">
         <motion.div 
           initial={{ opacity: 0, x: -40 }}
@@ -464,7 +448,7 @@ const PlatformSection = () => (
           </div>
           
           <div className="h-36 w-full mb-9 relative">
-             <div className="absolute -top-7 left-0 text-[10px] font-bold opacity-30 tracking-[0.15em] uppercase">Market growth index</div>
+             <div className="absolute -top-7 left-0 text-[10px] font-bold opacity-30 tracking-[0.15em] uppercase">Startup Ecosystem Growth</div>
              <motion.svg viewBox="0 0 400 100" className="w-full h-full">
                 <motion.path
                   d="M0,80 C40,75 80,40 120,60 C160,80 200,20 240,50 C280,80 320,30 400,10"
@@ -475,18 +459,18 @@ const PlatformSection = () => (
                   whileInView={{ pathLength: 1 }}
                   transition={{ duration: 2.5, ease: "easeInOut" }}
                 />
-                <text x="50" y="95" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>Q1 START</text>
-                <text x="340" y="25" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>ATH TARGET</text>
+                <text x="50" y="95" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>COHORT 1</text>
+                <text x="320" y="25" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>GLOBAL SCALE</text>
              </motion.svg>
           </div>
 
           <div className="grid grid-cols-2 gap-5">
              <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Growth</p>
-                <p className="text-2xl font-bold">+45.0%</p>
+                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Success Rate</p>
+                <p className="text-2xl font-bold">85.0%</p>
              </div>
              <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Funded</p>
+                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Total Raised</p>
                 <p className="text-2xl font-bold">$ 14.5M</p>
              </div>
           </div>
@@ -524,7 +508,7 @@ const PlatformSection = () => (
 
 const WhatsNew = () => (
   <section id="industries" className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
       <div className="-mt-12">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -564,12 +548,12 @@ const WhatsNew = () => (
       </div>
 
       <div className="relative flex justify-center lg:justify-end py-8">
-        <div className="relative w-full max-w-[460px] h-[500px]">
+        <div className="relative w-full max-w-[460px] h-[500px] scale-75 md:scale-90 lg:scale-75 xl:scale-100 origin-center lg:origin-right">
           {[
-            { label: 'Revenue', value: '$42k', icon: TrendingUp },
-            { label: 'Users', value: '1,284', icon: Users },
-            { label: 'Cap', value: '$2.4M', icon: Activity },
-            { label: 'Analytics', value: 'Active', icon: MousePointer2 }
+            { label: 'Startups', value: '142', icon: Rocket },
+            { label: 'Mentors', value: '84', icon: Users },
+            { label: 'Funding', value: '$2.4M', icon: DollarSign },
+            { label: 'Programs', value: 'Active', icon: Zap }
           ].map((card, i) => (
             <motion.div
               key={i}
@@ -720,7 +704,7 @@ const TimelineSection = () => (
 
 export const Footer = () => (
   <footer className="pt-24 pb-12 bg-white/80 backdrop-blur-md border-t border-[#1e0a3c]/5 relative z-10 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
       <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2 mb-8">

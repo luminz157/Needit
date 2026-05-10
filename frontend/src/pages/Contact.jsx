@@ -136,7 +136,7 @@ export default function Contact() {
           className="lg:col-span-3 bg-white rounded-[2rem] p-8 lg:p-10 shadow-2xl shadow-[#1e0a3c]/10 border border-[#1e0a3c]/5"
         >
           <h3 className="text-2xl font-bold text-[#1e0a3c] mb-2">Send an Inquiry</h3>
-          <p className="text-[14px] text-[#1e0a3c]/50 font-bold mb-8">This form connects directly to our backend system.</p>
+          
           
           {isSuccess ? (
             <div className="bg-emerald-50 text-emerald-600 p-6 rounded-xl border border-emerald-100 flex items-center gap-4">
