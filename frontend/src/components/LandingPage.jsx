@@ -97,10 +97,7 @@ export const Navbar = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <div className="w-9 h-9 rounded-xl bg-[#1e0a3c] flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
-            <Rocket size={18} className="text-white" />
-          </div>
-          <span className="text-[20px] font-bold tracking-tighter text-[#1e0a3c] whitespace-nowrap">Needit.</span>
+          <img src="/web_logo.png" alt="Needit Logo" className="h-10 object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10">
@@ -118,7 +115,7 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-4 flex-shrink-0">
           <a href="/contact" className="px-7 py-2.5 rounded-xl bg-[#1e0a3c] text-white text-[14px] font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/20 tracking-wider whitespace-nowrap">
-            Explore now
+            Contact Us
           </a>
         </div>
       </div>
@@ -367,19 +364,19 @@ const HowItWorks = () => (
         {[
           { 
             icon: Target, 
-            title: 'Phase 1 — Validate', 
-            desc: 'Focus on Branding, Market validation, and comprehensive Go-to-market planning.' 
+            title: 'Validate', 
+            desc: 'Focus on establishing a strong brand identity, conducting thorough market validation, and developing a comprehensive go-to-market strategy to ensure a solid foundation.' 
           },
           { 
             icon: Shield, 
-            title: 'Phase 2 — Expand', 
-            desc: 'Secure Export support and establish international Distributor setups.',
+            title: 'Expand', 
+            desc: 'Begin your international journey by securing dedicated export support and establishing reliable distributor networks to build your initial global presence.',
             isMiddle: true 
           },
           { 
             icon: Rocket, 
-            title: 'Phase 3 — Scale', 
-            desc: 'Optimize Manufacturing pipelines and gain exclusive Investor access to scale globally.' 
+            title: 'Scale', 
+            desc: 'Optimize your manufacturing pipelines and gain exclusive access to our network of investors to rapidly scale your operations worldwide.' 
           }
         ].map((step, i) => (
           <motion.div
@@ -778,7 +775,6 @@ export default function LandingPage({ isRoute }) {
         <HowItWorks />
         <PlatformSection />
         <WhatsNew />
-        <TimelineSection />
         <Footer />
       </div>
     );
@@ -792,7 +788,6 @@ export default function LandingPage({ isRoute }) {
       <HowItWorks />
       <PlatformSection />
       <WhatsNew />
-      <TimelineSection />
     </>
   );
 }

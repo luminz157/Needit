@@ -19,23 +19,23 @@ export default function Programs() {
 
   const phases = [
     {
-      title: "Phase 1 — Validate",
-      items: ["Branding", "Market validation", "Go-to-market planning"]
+      title: "Validate",
+      desc: "Focus on establishing a strong brand identity, conducting thorough market validation, and developing a comprehensive go-to-market strategy to ensure a solid foundation."
     },
     {
-      title: "Phase 2 — Expand",
-      items: ["Export support", "Distributor setup"]
+      title: "Expand",
+      desc: "Begin your international journey by securing dedicated export support and establishing reliable distributor networks to build your initial global presence."
     },
     {
-      title: "Phase 3 — Scale",
-      items: ["Manufacturing", "Investor access"]
+      title: "Scale",
+      desc: "Optimize your manufacturing pipelines and gain exclusive access to our network of investors to rapidly scale your operations worldwide."
     }
   ];
 
   const timeline = [
-    { time: "30-Day", title: "Market Readiness" },
-    { time: "60-Day", title: "Expansion Setup" },
-    { time: "90-Day", title: "Global Scaling Roadmap" }
+    { time: "30-Day", title: "Market Readiness", desc: "Complete market research, validate product-market fit, and finalize your go-to-market strategy." },
+    { time: "60-Day", title: "Expansion Setup", desc: "Secure necessary compliance, begin distributor networking, and establish your initial presence." },
+    { time: "90-Day", title: "Global Scaling Roadmap", desc: "Launch operations, secure strategic partnerships, and prepare for TRL 6+ investor pitching." }
   ];
 
   return (
@@ -50,53 +50,61 @@ export default function Programs() {
         </motion.p>
       </motion.div>
 
-      <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <div className="grid lg:grid-cols-2 gap-16 items-stretch">
         {/* Phases Section */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-6">
+        <motion.div initial="hidden" animate="visible" variants={stagger} className="space-y-6 flex flex-col h-full">
           <h2 className="text-2xl font-bold text-[#1e0a3c] mb-8 tracking-tight">Expansion Phases</h2>
-          {phases.map((phase, index) => (
-            <motion.div 
-              key={index}
-              variants={fadeUp}
-              className="bg-white rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-xl shadow-[#1e0a3c]/5 relative overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-2 h-full bg-[#1e0a3c]" />
-              <h3 className="text-xl font-bold text-[#1e0a3c] mb-5 tracking-tight pl-4">{phase.title}</h3>
-              <ul className="space-y-3 pl-4">
-                {phase.items.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[15px] text-[#1e0a3c]/80 font-bold">
-                    <CheckCircle2 size={18} className="text-[#1e0a3c]/60 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          <div className="flex flex-col gap-6 flex-grow">
+            {phases.map((phase, index) => (
+              <motion.div 
+                key={index}
+                variants={fadeUp}
+                className="bg-white rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-xl shadow-[#1e0a3c]/5 relative overflow-hidden flex-grow"
+              >
+                <div className="absolute top-0 left-0 w-2 h-full bg-[#1e0a3c]" />
+                <h3 className="text-xl font-bold text-[#1e0a3c] mb-4 tracking-tight pl-4">{phase.title}</h3>
+                <p className="text-[15px] text-[#1e0a3c]/70 font-medium leading-relaxed pl-4">
+                  {phase.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Timeline Section */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="bg-[#1e0a3c] text-white rounded-[2rem] p-10 lg:p-12 shadow-2xl sticky top-32">
-          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
-            <Clock className="w-8 h-8 text-white/50" />
-            <h2 className="text-3xl font-bold tracking-tight">Timeline</h2>
-          </motion.div>
+        <motion.div initial="hidden" animate="visible" variants={stagger} className="bg-white rounded-[2rem] p-10 lg:p-12 shadow-2xl shadow-[#1e0a3c]/5 border border-[#1e0a3c]/5 flex flex-col h-full">
+          <h2 className="text-2xl font-bold text-[#1e0a3c] mb-12 tracking-tight">Timeline</h2>
           
-          <div className="space-y-10 relative before:absolute before:inset-0 before:ml-[1.1rem] before:w-0.5 before:-translate-x-px before:bg-gradient-to-b before:from-white/20 before:to-transparent">
+          <div className="space-y-12 relative flex-grow">
+            {/* Animated Vertical Line */}
+            <motion.div 
+              initial={{ height: 0 }}
+              animate={{ height: "100%" }}
+              transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
+              className="absolute top-0 left-[0.9rem] w-[2px] -translate-x-px bg-[#1e0a3c]/20 z-0"
+            />
+            
             {timeline.map((item, index) => (
-              <motion.div key={index} variants={fadeUp} className="relative flex items-center gap-6">
-                <div className="w-9 h-9 rounded-full bg-[#1e0a3c] border-4 border-white flex items-center justify-center shrink-0 z-10 shadow-lg">
-                  <div className="w-2 h-2 rounded-full bg-white" />
+              <motion.div key={index} variants={fadeUp} className="relative flex items-start gap-8 z-10">
+                <div className="w-8 h-8 rounded-full bg-white border-4 border-[#1e0a3c] flex items-center justify-center shrink-0 z-10 shadow-sm mt-1">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#1e0a3c]" />
                 </div>
                 <div>
-                  <p className="text-[13px] font-bold tracking-wider text-white/50 mb-1">{item.time}</p>
-                  <p className="text-xl font-bold">{item.title}</p>
+                  <div className="flex items-center gap-3 mb-3">
+                    <p className="text-lg font-bold text-[#1e0a3c]">{item.time}</p>
+                    <span className="w-5 h-[2px] bg-[#1e0a3c]/20"></span>
+                    <p className="text-xl font-bold text-[#1e0a3c]">{item.title}</p>
+                  </div>
+                  <p className="text-[15px] text-[#1e0a3c]/60 font-medium leading-relaxed max-w-sm">
+                    {item.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <motion.div variants={fadeUp} className="mt-14">
-            <a href="/contact" className="w-full py-4 rounded-xl bg-white text-[#1e0a3c] font-bold flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors">
+          <motion.div variants={fadeUp} className="mt-16 pt-8">
+            <a href="/contact" className="w-full py-4 rounded-xl bg-[#1e0a3c] text-white font-bold flex items-center justify-center gap-2 hover:bg-[#1e0a3c]/90 transition-colors shadow-lg shadow-[#1e0a3c]/20">
               Start Your Journey <ArrowRight size={18} />
             </a>
           </motion.div>
