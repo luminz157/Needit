@@ -97,7 +97,7 @@ export const Navbar = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <img src="/web_logo.png" alt="Needit Logo" className="h-10 object-contain group-hover:scale-105 transition-transform" />
+          <img src="/final_logo_cropped.png" alt="Needit Logo" className="h-12 md:h-14 object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10">
@@ -714,6 +714,57 @@ export const Footer = () => (
       </div>
     </div>
   </footer>
+);// --- Pricing Section ---
+
+const PricingSection = () => (
+  <section className="py-24 bg-[#1e0a3c]/[0.02] border-t border-[#1e0a3c]/5 relative overflow-hidden">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+      <div className="flex flex-col items-center text-center mb-16">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1e0a3c]/10 text-[#1e0a3c] font-bold text-[12px] tracking-widest uppercase mb-6">
+          <DollarSign size={14} /> Pricing
+        </motion.div>
+        <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-4xl md:text-5xl font-bold text-[#1e0a3c] tracking-tight mb-6">
+          Transparent Pricing <br className="hidden md:block" /> <span className="opacity-40 text-3xl">(Startup Friendly)</span>
+        </motion.h2>
+      </div>
+      
+      <div className="max-w-4xl mx-auto">
+        <motion.div 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={stagger}
+          className="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-[#1e0a3c]/10 border border-[#1e0a3c]/5 flex flex-col md:flex-row gap-12 items-center"
+        >
+          <div className="flex-1 w-full space-y-6">
+            {[
+              { label: 'Market Access', price: '₹20K – ₹75K' },
+              { label: 'Digital Marketing', price: '₹25K – ₹60K/month' },
+              { label: 'Export', price: '₹20K' },
+              { label: 'Distributor Network', price: '₹30K' }
+            ].map((item, i) => (
+              <motion.div key={i} variants={fadeUp} className="flex justify-between items-center py-4 border-b border-[#1e0a3c]/5 last:border-0">
+                <span className="font-bold text-[#1e0a3c]/80 text-[16px] md:text-[18px]">{item.label}</span>
+                <span className="font-black text-[#1e0a3c] text-[18px] md:text-[20px]">{item.price}</span>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div variants={fadeUp} className="w-full md:w-auto bg-[#1e0a3c] text-white rounded-[1.5rem] p-8 text-center flex flex-col justify-center items-center gap-4 shadow-xl shadow-[#1e0a3c]/20">
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2">
+              <Star size={20} className="text-white" />
+            </div>
+            <p className="font-bold text-[15px] leading-relaxed max-w-[200px]">
+              Custom packages available based on stage & market.
+            </p>
+            <a href="/contact" className="mt-4 px-6 py-3 bg-white text-[#1e0a3c] font-bold rounded-xl text-[13px] tracking-widest hover:scale-105 transition-transform w-full">
+              Get Quote
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  </section>
 );
 
 // --- Main Landing Page ---
@@ -746,6 +797,7 @@ export default function LandingPage({ isRoute }) {
         <HowItWorks />
         <PlatformSection />
         <WhatsNew />
+        <PricingSection />
         <Footer />
       </div>
     );
@@ -759,6 +811,7 @@ export default function LandingPage({ isRoute }) {
       <HowItWorks />
       <PlatformSection />
       <WhatsNew />
+      <PricingSection />
     </>
   );
 }
