@@ -60,9 +60,9 @@ export const Navbar = () => {
 
   const links = [
     { name: 'Home', href: '/' },
+    { name: 'Programs', href: '/programs' },
     { name: 'Industries', href: '/industries' },
     { name: 'Services', href: '/services' },
-    { name: 'Programs', href: '/programs' },
     { name: 'Contact', href: '/contact' }
   ];
 
@@ -92,7 +92,7 @@ export const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        scrolled ? 'shadow-sm py-4' : 'py-6'
+        scrolled ? 'shadow-sm py-2' : 'py-3'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
@@ -115,7 +115,7 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-4 flex-shrink-0">
           <a href="/contact" className="px-7 py-2.5 rounded-xl bg-[#1e0a3c] text-white text-[14px] font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/20 tracking-wider whitespace-nowrap">
-            Contact Us
+            Explore now
           </a>
         </div>
       </div>

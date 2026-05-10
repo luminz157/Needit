@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useScroll } from 'framer-motion';
 import { CheckCircle2, Clock, Calendar, ArrowRight } from 'lucide-react';
 
 const fadeUp = {
@@ -16,6 +16,12 @@ export default function Programs() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 60%", "end 80%"]
+  });
 
   const phases = [
     {
@@ -59,29 +65,46 @@ export default function Programs() {
               <motion.div 
                 key={index}
                 variants={fadeUp}
-                className="bg-white rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-xl shadow-[#1e0a3c]/5 relative overflow-hidden flex-grow"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="group bg-white rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-xl shadow-[#1e0a3c]/5 relative overflow-hidden flex-grow cursor-default hover:shadow-2xl hover:border-[#1e0a3c]/20"
               >
-                <div className="absolute top-0 left-0 w-2 h-full bg-[#1e0a3c]" />
-                <h3 className="text-xl font-bold text-[#1e0a3c] mb-4 tracking-tight pl-4">{phase.title}</h3>
-                <p className="text-[15px] text-[#1e0a3c]/70 font-medium leading-relaxed pl-4">
-                  {phase.desc}
-                </p>
+                {/* Left accent line */}
+                <div className="absolute top-0 left-0 w-2 h-full bg-[#1e0a3c] transition-all duration-300 group-hover:w-3" />
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4 pl-4">
+                    <h3 className="text-xl font-bold text-[#1e0a3c] tracking-tight transition-transform duration-300 group-hover:translate-x-2">{phase.title}</h3>
+                    <motion.div 
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 0 }}
+                      className="opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+                    >
+                      <ArrowRight size={20} className="text-[#1e0a3c]/50" />
+                    </motion.div>
+                  </div>
+                  <p className="text-[15px] text-[#1e0a3c]/70 font-medium leading-relaxed pl-4 transition-transform duration-300 group-hover:translate-x-2">
+                    {phase.desc}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
         {/* Timeline Section */}
-        <motion.div initial="hidden" animate="visible" variants={stagger} className="bg-white rounded-[2rem] p-10 lg:p-12 shadow-2xl shadow-[#1e0a3c]/5 border border-[#1e0a3c]/5 flex flex-col h-full">
-          <h2 className="text-2xl font-bold text-[#1e0a3c] mb-12 tracking-tight">Timeline</h2>
+        <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col h-full lg:pl-10">
+          <h2 className="text-2xl font-bold text-[#1e0a3c] mb-8 tracking-tight">Timeline</h2>
           
-          <div className="space-y-12 relative flex-grow">
-            {/* Animated Vertical Line */}
+          <div ref={containerRef} className="space-y-12 relative flex-grow">
+            {/* Background Line */}
+            <div className="absolute top-0 left-[0.9rem] bottom-0 w-[2px] -translate-x-px bg-[#1e0a3c]/10 z-0" />
+            
+            {/* Animated Active Scroll Line */}
             <motion.div 
-              initial={{ height: 0 }}
-              animate={{ height: "100%" }}
-              transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
-              className="absolute top-0 left-[0.9rem] w-[2px] -translate-x-px bg-[#1e0a3c]/20 z-0"
+              style={{ scaleY: scrollYProgress, transformOrigin: 'top' }}
+              className="absolute top-0 left-[0.9rem] bottom-0 w-[2px] -translate-x-px bg-[#1e0a3c] z-0"
             />
             
             {timeline.map((item, index) => (
