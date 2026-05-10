@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { Rocket, Menu, X, ArrowRight, TrendingUp, Activity, Star, Users, Globe, Lightbulb, Shield, Send, ExternalLink, Check, BarChart2, TrendingDown, Zap, Target, Award, PieChart, Briefcase, Layout, Layers, Box, Terminal, MousePointer2, CreditCard, DollarSign } from 'lucide-react';
 import { fadeUp, stagger } from '../utils/animations.js';
 
@@ -18,64 +19,15 @@ const Card = ({ children, className = "" }) => (
   </motion.div>
 );
 
-const MainBackground = () => (
+export const MainBackground = () => (
   <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
     {/* Faded Grid */}
-    <div className="absolute inset-0 opacity-[0.04]" 
-         style={{ backgroundImage: `linear-gradient(#1e0a3c 1px, transparent 1px), linear-gradient(90deg, #1e0a3c 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
-    
-    {/* Floating Blue Dots */}
-    {[...Array(30)].map((_, i) => (
-      <motion.div
-        key={`dot-${i}`}
-        className="absolute w-1 h-1 rounded-full bg-[#1e0a3c]/30"
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          y: [0, -40, 0],
-          opacity: [0.1, 0.4, 0.1],
-          scale: [1, 1.5, 1]
-        }}
-        transition={{
-          duration: 5 + Math.random() * 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: Math.random() * 5
-        }}
-      />
-    ))}
-
-    {/* Neural Lines */}
-    <svg className="w-full h-full opacity-[0.06]" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-      {[...Array(15)].map((_, i) => (
-        <React.Fragment key={`neural-${i}`}>
-          {[...Array(2)].map((_, j) => (
-            <motion.line
-              key={`line-${i}-${j}`}
-              x1={Math.random() * 1000}
-              y1={Math.random() * 1000}
-              x2={Math.random() * 1000}
-              y2={Math.random() * 1000}
-              stroke="#1e0a3c"
-              strokeWidth="0.5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.3 }}
-              transition={{ 
-                duration: 8 + Math.random() * 8,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-          ))}
-        </React.Fragment>
-      ))}
-    </svg>
+    <div className="absolute inset-0 opacity-[0.06]" 
+         style={{ backgroundImage: `linear-gradient(#1e0a3c 1px, transparent 1px), linear-gradient(90deg, #1e0a3c 1px, transparent 1px)`, backgroundSize: '80px 80px' }} />
   </div>
 );
 
-const MouseBackground = () => {
+export const MouseBackground = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springConfig = { damping: 45, stiffness: 250 };
@@ -101,13 +53,17 @@ const MouseBackground = () => {
 
 // --- Navbar Section ---
 
-const Navbar = () => {
+export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const links = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: "What's new?", href: '#whats-new' }
+    { name: 'Home', href: '/', id: '#home' },
+    { name: 'Services', href: '/#services', id: '#services' },
+    { name: 'Industries', href: '/#industries', id: '#industries' },
+    { name: 'Programs', href: '/#programs', id: '#programs' },
+    { name: 'Contact', href: '/contact', id: null }
   ];
 
   useEffect(() => {
@@ -116,32 +72,48 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (e, id) => {
+  const handleNavClick = (e, link) => {
     e.preventDefault();
-    const element = document.querySelector(id);
-    if (element) {
-      let offset = 0; 
-      if (id === '#whats-new') offset = 100;
-      
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    if (link.href === '/contact') {
+      navigate('/contact');
+      return;
+    }
+    
+    if (link.href === '/') {
+      if (location.pathname !== '/') {
+        navigate('/');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (link.id) {
+      if (location.pathname !== '/') {
+        navigate(link.href);
+      } else {
+        const element = document.querySelector(link.id);
+        if (element) {
+          const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 100;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
     }
   };
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-white/95 backdrop-blur-xl border-b border-[#1e0a3c]/5 py-2.5' : 'bg-transparent py-5'
+    <motion.header 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+        scrolled ? 'shadow-sm py-4' : 'py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-        <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="flex items-center gap-2 flex-shrink-0 group">
+        <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
           <div className="w-9 h-9 rounded-xl bg-[#1e0a3c] flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
             <Rocket size={18} className="text-white" />
           </div>
@@ -153,7 +125,7 @@ const Navbar = () => {
             <a 
               key={l.name} 
               href={l.href} 
-              onClick={(e) => scrollToSection(e, l.href)}
+              onClick={(e) => handleNavClick(e, l)}
               className="text-[13px] font-bold text-[#1e0a3c]/50 hover:text-[#1e0a3c] transition-colors tracking-tight whitespace-nowrap"
             >
               {l.name}
@@ -162,7 +134,7 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-4 flex-shrink-0">
-          <a href="#" className="px-7 py-2.5 rounded-xl bg-[#1e0a3c] text-white text-[14px] font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-blue-900/10 tracking-wider whitespace-nowrap">
+          <a href="/contact" className="px-7 py-2.5 rounded-xl bg-[#1e0a3c] text-white text-[14px] font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/20 tracking-wider whitespace-nowrap">
             Explore now
           </a>
         </div>
@@ -174,17 +146,16 @@ const Navbar = () => {
 // --- Hero Section ---
 
 const Hero = () => (
-  <section id="home" className="relative pt-24 pb-14 overflow-hidden bg-white">
+  <section id="home" className="relative pt-24 pb-14 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10">
-        <motion.p variants={fadeUp} className="text-[11px] font-bold tracking-[0.35em] text-[#1e0a3c]/30 mb-5">Keep your money safe !</motion.p>
+        <motion.p variants={fadeUp} className="text-[11px] font-bold tracking-[0.35em] text-[#1e0a3c] opacity-50 mb-5 uppercase">Global Expansion Framework</motion.p>
         <motion.h1 
           variants={fadeUp}
-          className="text-5xl lg:text-[60px] leading-[1.05] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
+          className="text-5xl lg:text-[50px] leading-[1.1] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
         >
-          Best startup <br />
-          investing platform <br />
-          for your future.
+          From Startup to <br />
+          Global Success 🌍
         </motion.h1>
         
         <motion.div variants={fadeUp} className="flex items-center gap-5 mb-9">
@@ -199,14 +170,22 @@ const Hero = () => (
           </div>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="flex items-center gap-7">
-          <button className="w-14 h-14 rounded-full bg-[#1e0a3c] flex items-center justify-center text-white hover:scale-110 active:scale-90 transition-all shadow-xl shadow-[#1e0a3c]/15">
-            <ArrowRight size={24} />
-          </button>
-          <p className="text-[15px] text-[#1e0a3c]/50 max-w-[320px] font-bold leading-relaxed">
-            Needit unites and secures a growing ecosystem of specialized startup tracks.
-          </p>
+        <motion.p variants={fadeUp} className="text-[16px] text-[#1e0a3c]/60 font-bold leading-relaxed mb-9 max-w-md">
+          We help startups scale from idea to international markets with structured execution, partnerships, and market access.
+        </motion.p>
+
+        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-4">
+          <a href="https://docs.google.com/forms/d/1CP_Aad1Ts39tiaHTDyTEvIQT4NgroCibfqgz2qhIlvg/viewform" target="_blank" rel="noreferrer" className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#1e0a3c] flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/20 font-bold tracking-widest text-[13px] gap-2">
+            <Rocket size={18} /> Apply for Global Expansion
+          </a>
+          <a href="/contact" className="w-full sm:w-auto px-7 py-4 rounded-xl bg-white border-2 border-[#1e0a3c]/20 flex items-center justify-center text-[#1e0a3c] hover:bg-gray-50 active:scale-95 transition-all font-bold tracking-widest text-[13px]">
+            Book a Consultation
+          </a>
         </motion.div>
+        
+        <motion.p variants={fadeUp} className="mt-6 text-[12px] font-bold text-[#1e0a3c]/40">
+          * Click Apply to fill out our Startup Scouting Form to get started.
+        </motion.p>
       </motion.div>
 
       <div className="relative flex justify-center items-center py-8 scale-95 lg:scale-100 origin-center">
@@ -334,7 +313,7 @@ const Hero = () => (
 // --- Trusted Partner Section (About) ---
 
 const TrustedSection = () => (
-  <section id="about" className="py-20 bg-white/30 backdrop-blur-sm relative z-10 overflow-hidden">
+  <section id="about" className="py-20 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-col lg:flex-row justify-between items-start mb-16 gap-10 lg:gap-20">
         <div className="flex-1">
@@ -374,23 +353,15 @@ const TrustedSection = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             whileHover={{ y: -10 }}
-            className={`flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-[400px] justify-between shadow-2xl shadow-[#1e0a3c]/10 ${
-              s.isMiddle 
-                ? "bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-[#1e0a3c]/30" 
-                : "bg-white text-[#1e0a3c] border-[#1e0a3c]/5 hover:bg-gray-50 hover:shadow-[#1e0a3c]/20"
-            }`}
+            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-[400px] justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
           >
             <div>
-              <p className={`text-[13px] font-bold mb-7 tracking-[0.25em] ${s.isMiddle ? "opacity-40" : "opacity-20"}`}>{s.id}</p>
+              <p className="text-[13px] font-bold mb-7 tracking-[0.25em] opacity-40">{s.id}</p>
               <h3 className="text-[22px] font-bold mb-4 leading-tight tracking-tight">{s.title}</h3>
-              <p className={`text-[15px] font-bold leading-relaxed ${s.isMiddle ? "opacity-70" : "opacity-40"}`}>{s.desc}</p>
+              <p className="text-[15px] font-bold leading-relaxed opacity-70">{s.desc}</p>
             </div>
             
-            <button className={`w-fit px-7 py-2.5 rounded-xl font-bold text-[12px] transition-all tracking-widest ${
-              s.isMiddle 
-                ? "bg-white text-[#1e0a3c] hover:scale-105" 
-                : "bg-[#1e0a3c] text-white hover:scale-105"
-            }`}>
+            <button className="w-fit px-7 py-2.5 rounded-xl font-bold text-[12px] transition-all tracking-widest bg-white text-[#1e0a3c] hover:scale-105">
               Learn more
             </button>
           </motion.div>
@@ -403,7 +374,7 @@ const TrustedSection = () => (
 // --- Portfolio Process Section (Services) ---
 
 const HowItWorks = () => (
-  <section id="services" className="py-20 bg-white/30 backdrop-blur-sm relative z-10 overflow-hidden">
+  <section id="services" className="py-20 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-16">
         <motion.h2 
@@ -451,26 +422,18 @@ const HowItWorks = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             whileHover={{ y: -10 }}
-            className={`flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/10 ${
-              step.isMiddle 
-                ? "bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-[#1e0a3c]/30" 
-                : "bg-white text-[#1e0a3c] border-[#1e0a3c]/5 hover:bg-gray-50 hover:shadow-[#1e0a3c]/20"
-            }`}
+            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
           >
             <div className="flex flex-col items-center">
-              <div 
-                className={`w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-9 shadow-lg ${
-                  step.isMiddle ? "bg-white/10 text-white" : "bg-[#1e0a3c]/5 text-[#1e0a3c]"
-                }`}
-              >
+              <div className="w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-9 shadow-lg bg-white/10 text-white">
                 <step.icon size={36} />
               </div>
               <h3 className="text-[24px] font-bold mb-5 tracking-tight">{step.title}</h3>
-              <p className={`text-[15px] font-bold leading-relaxed ${step.isMiddle ? "opacity-70" : "opacity-40"}`}>
+              <p className="text-[15px] font-bold leading-relaxed opacity-70">
                 {step.desc}
               </p>
             </div>
-            <div className={`flex items-center gap-2.5 font-bold text-[13px] tracking-[0.15em] ${step.isMiddle ? "text-white" : "text-[#1e0a3c]"}`}>
+            <div className="flex items-center gap-2.5 font-bold text-[13px] tracking-[0.15em] text-white">
               Stage {i + 1} <ArrowRight size={16} />
             </div>
           </motion.div>
@@ -483,7 +446,7 @@ const HowItWorks = () => (
 // --- Platform Section ---
 
 const PlatformSection = () => (
-  <section className="py-20 bg-white/30 backdrop-blur-sm relative z-10 overflow-hidden">
+  <section className="py-20 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
       <div className="relative">
         <motion.div 
@@ -560,7 +523,7 @@ const PlatformSection = () => (
 // --- What's New Section ---
 
 const WhatsNew = () => (
-  <section id="whats-new" className="py-20 bg-white/30 backdrop-blur-sm relative z-10 overflow-hidden">
+  <section id="industries" className="py-20 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
       <div className="-mt-12">
         <motion.h2 
@@ -666,9 +629,96 @@ const WhatsNew = () => (
   </section>
 );
 
+// --- Timeline Section ---
+
+const TimelineSection = () => (
+  <section id="programs" className="py-20 relative z-10 overflow-hidden">
+    <div className="max-w-4xl mx-auto px-6">
+      <div className="text-center mb-16">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          className="text-4xl lg:text-[50px] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
+        >
+          Timeline Section
+        </motion.h2>
+      </div>
+
+      <div className="relative ml-2 md:ml-10">
+        {/* Timeline Vertical Line */}
+        <div className="absolute top-4 bottom-4 left-[14px] w-[3px] bg-gray-200/40 rounded-full overflow-hidden">
+          <motion.div 
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full bg-[#1e0a3c]/30"
+          />
+        </div>
+
+        <div className="space-y-12">
+          {[
+            { 
+              time: '30-Day', 
+              title: 'Market Readiness', 
+              desc: 'Complete market research, validate product-market fit, and finalize your go-to-market strategy.' 
+            },
+            { 
+              time: '60-Day', 
+              title: 'Expansion Setup', 
+              desc: 'Secure necessary compliance, begin distributor networking, and establish your initial presence.' 
+            },
+            { 
+              time: '90-Day', 
+              title: 'Global Scaling Roadmap', 
+              desc: 'Launch operations, secure strategic partnerships, and prepare for TRL 6+ investor pitching.' 
+            }
+          ].map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ delay: i * 0.15 }}
+              className="relative flex items-start gap-8"
+            >
+              {/* Timeline Dot */}
+              <div className="relative z-10 flex items-center justify-center bg-transparent mt-1 group">
+                <motion.div 
+                  whileHover={{ scale: 1.2 }}
+                  className="w-[30px] h-[30px] rounded-full bg-white flex items-center justify-center shadow-md border-4 border-white relative cursor-pointer"
+                >
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+                    className="w-[18px] h-[18px] bg-[#1e0a3c] rounded-full flex items-center justify-center transition-colors"
+                  >
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </motion.div>
+                </motion.div>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 pb-4 group-hover:translate-x-2 transition-transform duration-300">
+                <h3 className="text-[22px] font-bold text-[#1e0a3c] mb-3">
+                  <span className="text-[#1e0a3c]">{step.time}</span> <span className="text-[#1e0a3c]/40 mx-1">—</span> {step.title}
+                </h3>
+                <p className="text-[16px] text-[#1e0a3c]/50 font-bold leading-relaxed max-w-2xl">
+                  {step.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 // --- Footer ---
 
-const Footer = () => (
+export const Footer = () => (
   <footer className="pt-24 pb-12 bg-white/80 backdrop-blur-md border-t border-[#1e0a3c]/5 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
@@ -730,18 +780,49 @@ const Footer = () => (
 
 // --- Main Landing Page ---
 
-export default function LandingPage() {
+export default function LandingPage({ isRoute }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 100;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
+  if (!isRoute) {
+    return (
+      <div className="relative min-h-screen selection:bg-[#1e0a3c] selection:text-white overflow-x-hidden bg-white" style={{ fontFamily: "'Lato', sans-serif" }}>
+        <MainBackground />
+        <MouseBackground />
+        <Navbar />
+        <Hero />
+        <TrustedSection />
+        <HowItWorks />
+        <PlatformSection />
+        <WhatsNew />
+        <TimelineSection />
+        <Footer />
+      </div>
+    );
+  }
+
+  // When used in React Router (App.jsx handles layout)
   return (
-    <div className="relative min-h-screen selection:bg-[#1e0a3c] selection:text-white overflow-x-hidden bg-white" style={{ fontFamily: "'Lato', sans-serif" }}>
-      <MainBackground />
-      <MouseBackground />
-      <Navbar />
+    <>
       <Hero />
       <TrustedSection />
       <HowItWorks />
       <PlatformSection />
       <WhatsNew />
-      <Footer />
-    </div>
+      <TimelineSection />
+    </>
   );
 }
