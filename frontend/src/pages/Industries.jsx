@@ -43,7 +43,7 @@ export default function Industries() {
       opportunity: "Expand into emerging markets and secure agricultural subsidies."
     },
     {
-      title: "Food",
+      title: "Food Tech",
       icon: <Coffee className="w-8 h-8 text-[#1e0a3c]" />,
       description: "Innovating the food industry from alternative proteins to smart kitchen technologies.",
       opportunity: "Scale production manufacturing and establish international distribution."
@@ -68,9 +68,19 @@ export default function Industries() {
     }
   ];
 
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
   return (
-    <div className="pt-32 pb-20 px-6 lg:px-12 max-w-[1440px] mx-auto min-h-screen">
-      <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center mb-16">
+    <div className="pt-32 pb-20 px-6 lg:px-12 max-w-[1200px] mx-auto min-h-screen overflow-x-hidden">
+      <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center mb-24">
         <motion.p variants={fadeUp} className="text-[11px] font-bold tracking-[0.35em] text-[#1e0a3c] opacity-50 mb-5 uppercase">Sectors</motion.p>
         <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-[#1e0a3c] mb-6 tracking-tighter">
           Industries We Support
@@ -80,34 +90,61 @@ export default function Industries() {
         </motion.p>
       </motion.div>
 
-      <motion.div 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true }} 
-        variants={stagger}
-        className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-      >
+      <div className="flex flex-col gap-8 lg:gap-10">
         {industries.map((ind, index) => (
-          <motion.div 
+          <div 
             key={index}
-            variants={fadeUp}
-            whileHover={{ y: -8, transition: { duration: 0.2 } }}
-            className="bg-white rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-xl shadow-[#1e0a3c]/5 transition-all hover:shadow-[#1e0a3c]/20 group flex flex-col h-full"
+            className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-stretch gap-4 lg:gap-6`}
           >
-            <div className="w-14 h-14 rounded-2xl bg-[#1e0a3c]/5 flex items-center justify-center mb-6 group-hover:bg-[#1e0a3c] group-hover:text-white transition-colors">
-              {ind.icon}
-            </div>
-            <h3 className="text-lg font-bold text-[#1e0a3c] mb-3 tracking-tight">{ind.title}</h3>
-            <p className="text-[14px] text-[#1e0a3c]/60 font-medium mb-6 flex-grow leading-relaxed">
-              {ind.description}
-            </p>
-            <div className="pt-5 border-t border-[#1e0a3c]/10 mt-auto">
-              <p className="text-[10px] font-bold tracking-widest text-[#1e0a3c]/40 uppercase mb-2">Startup Opportunity</p>
-              <p className="text-[13px] font-bold text-[#1e0a3c]/80 leading-tight">{ind.opportunity}</p>
-            </div>
-          </motion.div>
+            {/* Title Box (Deep Purple) */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={index % 2 === 0 ? slideInLeft : slideInRight}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="w-full lg:w-[32%] group cursor-default"
+            >
+              <div className="bg-[#1e0a3c] h-full rounded-[1.5rem] p-6 lg:p-8 shadow-2xl shadow-[#1e0a3c]/20 flex flex-col items-center justify-center text-center relative overflow-hidden transition-all duration-500">
+                <div className={`absolute top-0 ${index % 2 === 0 ? 'left-0' : 'right-0'} w-1.5 h-full bg-white/20`} />
+                
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-[#1e0a3c] transition-all duration-500">
+                  <div className="text-white group-hover:text-[#1e0a3c] transition-colors duration-500">
+                    {React.cloneElement(ind.icon, { className: "w-6 h-6" })}
+                  </div>
+                </div>
+                
+                <h3 className="text-xl lg:text-2xl font-bold text-white tracking-tight leading-tight">
+                  {ind.title}
+                </h3>
+              </div>
+            </motion.div>
+
+            {/* Information Box (White) */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={index % 2 === 0 ? slideInRight : slideInLeft}
+              whileHover={{ scale: 1.01, y: -2 }}
+              className="w-full lg:w-[68%] group cursor-default"
+            >
+              <div className="bg-white h-full rounded-[1.5rem] p-6 lg:p-8 border border-[#1e0a3c]/5 shadow-xl shadow-[#1e0a3c]/5 relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:border-[#1e0a3c]/20 flex flex-col justify-center">
+                <p className="text-[15px] lg:text-[17px] text-[#1e0a3c]/70 font-medium mb-4 leading-relaxed">
+                  {ind.description}
+                </p>
+                
+                <div className="pt-4 border-t border-[#1e0a3c]/10">
+                  <span className="text-[9px] font-bold tracking-[0.2em] text-[#1e0a3c]/40 uppercase block mb-1">Startup Opportunity</span>
+                  <p className="text-[14px] lg:text-[16px] font-bold text-[#1e0a3c]/90 leading-relaxed italic">
+                    "{ind.opportunity}"
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

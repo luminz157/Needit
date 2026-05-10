@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
 // API Endpoints
 
 // 1. Submit a new contact inquiry
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const { name, email, company, message } = req.body;
 
   if (!name || !email || !message) {
@@ -56,7 +56,8 @@ app.post('/api/contact', (req, res) => {
       `
     };
 
-    transporter.sendMail(mailOptions).catch(err => console.error('Email sending failed (Check .env credentials):', err.message));
+    // Await email sending to catch SMTP/Login errors
+    await transporter.sendMail(mailOptions);
 
     res.status(201).json({ 
       success: true, 
@@ -64,8 +65,11 @@ app.post('/api/contact', (req, res) => {
       id: info.lastInsertRowid 
     });
   } catch (error) {
-    console.error('Database error:', error);
-    res.status(500).json({ error: 'Failed to save inquiry to the database.' });
+    console.error('Contact error:', error);
+    res.status(500).json({ 
+      error: 'Backend Error: Failed to send email.',
+      details: error.message 
+    });
   }
 });
 
