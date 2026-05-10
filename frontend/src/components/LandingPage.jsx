@@ -97,7 +97,7 @@ export const Navbar = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <img src="/final_logo_cropped.png" alt="Needit Logo" className="h-12 md:h-14 object-contain group-hover:scale-105 transition-transform" />
+          <img src="/final_logo_cropped.png" alt="Needit Logo" className="h-16 md:h-20 object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10">
@@ -728,38 +728,41 @@ const PricingSection = () => (
         </motion.h2>
       </div>
       
-      <div className="max-w-4xl mx-auto">
-        <motion.div 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
-          variants={stagger}
-          className="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-[#1e0a3c]/10 border border-[#1e0a3c]/5 flex flex-col md:flex-row gap-12 items-center"
-        >
-          <div className="flex-1 w-full space-y-6">
-            {[
-              { label: 'Market Access', price: '₹20K – ₹75K' },
-              { label: 'Digital Marketing', price: '₹25K – ₹60K/month' },
-              { label: 'Export', price: '₹20K' },
-              { label: 'Distributor Network', price: '₹30K' }
-            ].map((item, i) => (
-              <motion.div key={i} variants={fadeUp} className="flex justify-between items-center py-4 border-b border-[#1e0a3c]/5 last:border-0">
-                <span className="font-bold text-[#1e0a3c]/80 text-[16px] md:text-[18px]">{item.label}</span>
-                <span className="font-black text-[#1e0a3c] text-[18px] md:text-[20px]">{item.price}</span>
-              </motion.div>
-            ))}
+      <div className="max-w-[1100px] mx-auto grid md:grid-cols-3 gap-6 items-center">
+        {/* Left Column */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="flex flex-col gap-6">
+          <motion.div variants={fadeUp} className="bg-white rounded-[2rem] p-8 shadow-2xl shadow-[#1e0a3c]/5 border border-[#1e0a3c]/5 flex flex-col justify-center h-[160px] hover:-translate-y-1 transition-transform group">
+            <h3 className="font-bold text-[#1e0a3c]/60 text-[14px] uppercase tracking-widest mb-2 group-hover:text-[#1e0a3c]/80 transition-colors">Market Access</h3>
+            <p className="font-black text-[#1e0a3c] text-[28px]">₹20K – ₹75K</p>
+          </motion.div>
+          <motion.div variants={fadeUp} className="bg-white rounded-[2rem] p-8 shadow-2xl shadow-[#1e0a3c]/5 border border-[#1e0a3c]/5 flex flex-col justify-center h-[160px] hover:-translate-y-1 transition-transform group">
+            <h3 className="font-bold text-[#1e0a3c]/60 text-[14px] uppercase tracking-widest mb-2 group-hover:text-[#1e0a3c]/80 transition-colors">Digital Marketing</h3>
+            <p className="font-black text-[#1e0a3c] text-[28px]">₹25K – ₹60K<span className="text-[16px] font-bold opacity-50 ml-1">/mo</span></p>
+          </motion.div>
+        </motion.div>
+        
+        {/* Middle Column */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-[#1e0a3c] text-white rounded-[2.5rem] p-8 aspect-square flex flex-col justify-center items-center text-center shadow-2xl shadow-[#1e0a3c]/20 hover:scale-105 transition-transform z-10 relative">
+          <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-6">
+            <Star size={24} className="text-white" />
           </div>
-          
-          <motion.div variants={fadeUp} className="w-full md:w-auto bg-[#1e0a3c] text-white rounded-[1.5rem] p-8 text-center flex flex-col justify-center items-center gap-4 shadow-xl shadow-[#1e0a3c]/20">
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2">
-              <Star size={20} className="text-white" />
-            </div>
-            <p className="font-bold text-[15px] leading-relaxed max-w-[200px]">
-              Custom packages available based on stage & market.
-            </p>
-            <a href="/contact" className="mt-4 px-6 py-3 bg-white text-[#1e0a3c] font-bold rounded-xl text-[13px] tracking-widest hover:scale-105 transition-transform w-full">
-              Get Quote
-            </a>
+          <p className="font-bold text-[18px] leading-relaxed max-w-[220px]">
+            Custom packages available based on stage & market.
+          </p>
+          <a href="/contact" className="mt-8 px-8 py-4 bg-white text-[#1e0a3c] font-black rounded-xl text-[14px] tracking-widest hover:bg-gray-100 transition-colors w-full uppercase">
+            Get Quote
+          </a>
+        </motion.div>
+
+        {/* Right Column */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="flex flex-col gap-6">
+          <motion.div variants={fadeUp} className="bg-white rounded-[2rem] p-8 shadow-2xl shadow-[#1e0a3c]/5 border border-[#1e0a3c]/5 flex flex-col justify-center h-[160px] hover:-translate-y-1 transition-transform group">
+            <h3 className="font-bold text-[#1e0a3c]/60 text-[14px] uppercase tracking-widest mb-2 group-hover:text-[#1e0a3c]/80 transition-colors">Export</h3>
+            <p className="font-black text-[#1e0a3c] text-[28px]">₹20K</p>
+          </motion.div>
+          <motion.div variants={fadeUp} className="bg-white rounded-[2rem] p-8 shadow-2xl shadow-[#1e0a3c]/5 border border-[#1e0a3c]/5 flex flex-col justify-center h-[160px] hover:-translate-y-1 transition-transform group">
+            <h3 className="font-bold text-[#1e0a3c]/60 text-[14px] uppercase tracking-widest mb-2 group-hover:text-[#1e0a3c]/80 transition-colors">Distributor Network</h3>
+            <p className="font-black text-[#1e0a3c] text-[28px]">₹30K</p>
           </motion.div>
         </motion.div>
       </div>
