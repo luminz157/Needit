@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import LandingPage, { Navbar, Footer, MainBackground, MouseBackground } from './components/LandingPage.jsx';
 import Contact from './pages/Contact.jsx';
 import Admin from './pages/Admin.jsx';
+import Services from './pages/Services.jsx';
+import Programs from './pages/Programs.jsx';
+import Industries from './pages/Industries.jsx';
 import './App.css';
 
 // We'll use a wrapper to provide the layout for all pages
@@ -27,14 +30,12 @@ export default function App() {
     <Router>
       <Layout>
         <Routes>
-          {/* We render the existing LandingPage sections on the Home route for now */}
           <Route path="/" element={<LandingPage isRoute={true} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
-          {/* Placeholders for other pages to prevent 404s */}
-          <Route path="/programs" element={<div className="pt-32 pb-20 text-center text-2xl font-bold">Programs Page (Coming Soon)</div>} />
-          <Route path="/services" element={<div className="pt-32 pb-20 text-center text-2xl font-bold">Services Page (Coming Soon)</div>} />
-          <Route path="/industries" element={<div className="pt-32 pb-20 text-center text-2xl font-bold">Industries Page (Coming Soon)</div>} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/industries" element={<Industries />} />
         </Routes>
       </Layout>
     </Router>

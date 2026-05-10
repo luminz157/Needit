@@ -59,11 +59,11 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   const links = [
-    { name: 'Home', href: '/', id: '#home' },
-    { name: 'Services', href: '/#services', id: '#services' },
-    { name: 'Industries', href: '/#industries', id: '#industries' },
-    { name: 'Programs', href: '/#programs', id: '#programs' },
-    { name: 'Contact', href: '/contact', id: null }
+    { name: 'Home', href: '/' },
+    { name: 'Industries', href: '/industries' },
+    { name: 'Services', href: '/services' },
+    { name: 'Programs', href: '/programs' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   useEffect(() => {
@@ -74,11 +74,6 @@ export const Navbar = () => {
 
   const handleNavClick = (e, link) => {
     e.preventDefault();
-    if (link.href === '/contact') {
-      navigate('/contact');
-      return;
-    }
-    
     if (link.href === '/') {
       if (location.pathname !== '/') {
         navigate('/');
@@ -87,21 +82,9 @@ export const Navbar = () => {
       }
       return;
     }
-
-    if (link.id) {
-      if (location.pathname !== '/') {
-        navigate(link.href);
-      } else {
-        const element = document.querySelector(link.id);
-        if (element) {
-          const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 100;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }
-    }
+    
+    // For other links like /services, /programs, /industries
+    navigate(link.href);
   };
 
   return (
@@ -355,10 +338,10 @@ const TrustedSection = () => (
   </section>
 );
 
-// --- Portfolio Process Section (Services) ---
+// --- Programs Preview Section (How It Works) ---
 
 const HowItWorks = () => (
-  <section id="services" className="py-20 relative z-10 overflow-hidden">
+  <section className="py-20 relative z-10 overflow-hidden">
     <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
       <div className="text-center mb-16">
         <motion.h2 
@@ -367,7 +350,7 @@ const HowItWorks = () => (
           viewport={{ once: true }}
           className="text-4xl lg:text-[50px] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
         >
-          Build your startup portfolio
+          Global Expansion Program
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -376,7 +359,7 @@ const HowItWorks = () => (
           transition={{ delay: 0.1 }}
           className="text-[16px] text-[#1e0a3c]/40 font-bold max-w-2xl mx-auto leading-relaxed"
         >
-          Unlock the potential of your startup with our comprehensive vetting and launch system. We provide the tools, mentorship, and network you need to transition from a simple idea to a market-ready, funded enterprise.
+          A structured, phased approach designed to build credibility and systematically scale your business into international markets.
         </motion.p>
       </div>
 
@@ -384,19 +367,19 @@ const HowItWorks = () => (
         {[
           { 
             icon: Target, 
-            title: 'Submit idea', 
-            desc: 'Present your vision to our panel of experts. We look for scalable solutions and passionate founders ready to disrupt the status quo.' 
+            title: 'Phase 1 — Validate', 
+            desc: 'Focus on Branding, Market validation, and comprehensive Go-to-market planning.' 
           },
           { 
             icon: Shield, 
-            title: 'Get vetted', 
-            desc: 'Go through our rigorous selection process. Our tracks ensure your business model is sound and your technology is enterprise-grade.',
+            title: 'Phase 2 — Expand', 
+            desc: 'Secure Export support and establish international Distributor setups.',
             isMiddle: true 
           },
           { 
             icon: Rocket, 
-            title: 'Launch', 
-            desc: 'Scale globally with world-class mentors. Access exclusive funding rounds and partner with industry leaders to accelerate your traction.' 
+            title: 'Phase 3 — Scale', 
+            desc: 'Optimize Manufacturing pipelines and gain exclusive Investor access to scale globally.' 
           }
         ].map((step, i) => (
           <motion.div
@@ -406,7 +389,8 @@ const HowItWorks = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             whileHover={{ y: -10 }}
-            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
+            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[420px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50 cursor-pointer"
+            onClick={() => window.location.href = '/programs'}
           >
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-9 shadow-lg bg-white/10 text-white">
@@ -418,7 +402,7 @@ const HowItWorks = () => (
               </p>
             </div>
             <div className="flex items-center gap-2.5 font-bold text-[13px] tracking-[0.15em] text-white">
-              Stage {i + 1} <ArrowRight size={16} />
+              View Program <ArrowRight size={16} />
             </div>
           </motion.div>
         ))}
@@ -427,7 +411,7 @@ const HowItWorks = () => (
   </section>
 );
 
-// --- Platform Section ---
+// --- Platform Section (Industries Preview) ---
 
 const PlatformSection = () => (
   <section className="py-20 relative z-10 overflow-hidden">
@@ -437,18 +421,19 @@ const PlatformSection = () => (
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="bg-[#1e0a3c] rounded-[2.5rem] p-10 text-white relative z-10 shadow-2xl shadow-[#1e0a3c]/40"
+          className="bg-[#1e0a3c] rounded-[2.5rem] p-10 text-white relative z-10 shadow-2xl shadow-[#1e0a3c]/40 cursor-pointer"
+          onClick={() => window.location.href = '/industries'}
         >
           <div className="flex items-center justify-between mb-9">
              <div>
-               <p className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-2">$4,528 USD</p>
-               <p className="text-[14px] font-bold text-white/50 leading-tight">Real-time growth tracking and analytics ecosystem.</p>
+               <p className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-2">INDUSTRY FOCUS</p>
+               <p className="text-[14px] font-bold text-white/50 leading-tight">Specialized networks across high-impact sectors.</p>
              </div>
              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-[14px] font-bold shadow-lg">N</div>
           </div>
           
           <div className="h-36 w-full mb-9 relative">
-             <div className="absolute -top-7 left-0 text-[10px] font-bold opacity-30 tracking-[0.15em] uppercase">Startup Ecosystem Growth</div>
+             <div className="absolute -top-7 left-0 text-[10px] font-bold opacity-30 tracking-[0.15em] uppercase">DeepTech & AI Growth</div>
              <motion.svg viewBox="0 0 400 100" className="w-full h-full">
                 <motion.path
                   d="M0,80 C40,75 80,40 120,60 C160,80 200,20 240,50 C280,80 320,30 400,10"
@@ -459,15 +444,15 @@ const PlatformSection = () => (
                   whileInView={{ pathLength: 1 }}
                   transition={{ duration: 2.5, ease: "easeInOut" }}
                 />
-                <text x="50" y="95" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>COHORT 1</text>
-                <text x="320" y="25" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>GLOBAL SCALE</text>
+                <text x="50" y="95" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>FINTECH</text>
+                <text x="320" y="25" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>CLIMATETECH</text>
              </motion.svg>
           </div>
 
           <div className="grid grid-cols-2 gap-5">
              <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Success Rate</p>
-                <p className="text-2xl font-bold">85.0%</p>
+                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Active Sectors</p>
+                <p className="text-2xl font-bold">8+</p>
              </div>
              <div className="bg-white/5 border border-white/10 rounded-xl p-5">
                 <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Total Raised</p>
@@ -484,8 +469,8 @@ const PlatformSection = () => (
           viewport={{ once: true }}
           className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-7 tracking-tighter"
         >
-          Trusted platform <br />
-          anytime & anywhere.
+          Industries we <br />
+          support globally.
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -494,20 +479,20 @@ const PlatformSection = () => (
           transition={{ delay: 0.1 }}
           className="text-[16px] text-[#1e0a3c]/40 font-bold leading-relaxed mb-9 max-w-md"
         >
-          Needit is more than just an investment portal; it's a comprehensive ecosystem designed for the modern entrepreneur. We combine real-time data analytics with a secure blockchain-backed infrastructure.
+          We bring specialized expertise and global networks to startups across diverse, high-impact industries including Artificial Intelligence, FinTech, BioTech, AgriTech, and ClimateTech.
         </motion.p>
-        <button className="px-9 py-4.5 rounded-xl bg-[#1e0a3c] text-white font-bold text-[13px] tracking-[0.15em] flex items-center gap-2.5 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-blue-900/15">
-          Learn more <ArrowRight size={18} />
-        </button>
+        <a href="/industries" className="inline-flex px-9 py-4.5 rounded-xl bg-[#1e0a3c] text-white font-bold text-[13px] tracking-[0.15em] items-center gap-2.5 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-blue-900/15">
+          Explore Industries <ArrowRight size={18} />
+        </a>
       </div>
     </div>
   </section>
 );
 
-// --- What's New Section ---
+// --- What's New Section (Services Preview) ---
 
 const WhatsNew = () => (
-  <section id="industries" className="py-20 relative z-10 overflow-hidden">
+  <section className="py-20 relative z-10 overflow-hidden">
     <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
       <div className="-mt-12">
         <motion.h2 
@@ -516,15 +501,15 @@ const WhatsNew = () => (
           viewport={{ once: true }}
           className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-10 tracking-tighter"
         >
-          What's new we <br />
-          provide for you ?
+          Core services we <br />
+          provide for you
         </motion.h2>
         <div className="grid sm:grid-cols-2 gap-x-6 gap-y-6">
           {[
-            { icon: Layout, title: 'Modular UI', desc: 'Customizable dashboard components for founders.' },
-            { icon: Layers, title: 'Multi-chain', desc: 'Secure asset management across platforms.' },
-            { icon: Box, title: 'Sandbox', desc: 'Test and iterate ideas in real-time.' },
-            { icon: Terminal, title: 'Dev-SDK', desc: 'Build faster with integrated Needit tools.' }
+            { icon: Globe, title: 'Market Access', desc: 'International market entry & Global partnerships.' },
+            { icon: TrendingUp, title: 'Digital Growth', desc: 'Performance marketing, Branding & Lead generation.' },
+            { icon: DollarSign, title: 'Startup Funding', desc: 'Investor introductions & VC connectivity (TRL 6+).' },
+            { icon: Briefcase, title: 'Incubation', desc: 'Mentorship, Startup planning & Business strategy.' }
           ].map((f, i) => (
             <motion.div 
               key={i} 
@@ -534,6 +519,7 @@ const WhatsNew = () => (
               transition={{ delay: i * 0.1 }}
               whileHover={{ backgroundColor: "rgba(30, 10, 60, 1)", color: "white" }}
               className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
+              onClick={() => window.location.href = '/services'}
             >
               <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md group-hover:bg-white group-hover:text-[#1e0a3c] transition-colors">
                 <f.icon size={20} />
@@ -548,7 +534,7 @@ const WhatsNew = () => (
       </div>
 
       <div className="relative flex justify-center lg:justify-end py-8">
-        <div className="relative w-full max-w-[460px] h-[500px] scale-75 md:scale-90 lg:scale-75 xl:scale-100 origin-center lg:origin-right">
+        <div className="relative w-full max-w-[460px] h-[500px] scale-75 md:scale-90 lg:scale-75 xl:scale-100 origin-center lg:origin-right cursor-pointer" onClick={() => window.location.href = '/services'}>
           {[
             { label: 'Startups', value: '142', icon: Rocket },
             { label: 'Mentors', value: '84', icon: Users },
