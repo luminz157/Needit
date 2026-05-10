@@ -2,7 +2,9 @@ const Database = require('better-sqlite3');
 const path = require('path');
 
 // Create or connect to the SQLite database file
-const dbPath = path.join(__dirname, 'database.sqlite');
+// Render requires a persistent disk for SQLite. We allow overriding the path via environment variable.
+const defaultDbPath = path.join(__dirname, 'database.sqlite');
+const dbPath = process.env.DB_PATH || defaultDbPath;
 const db = new Database(dbPath, { verbose: console.log });
 
 // Initialize the database table if it doesn't exist
