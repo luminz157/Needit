@@ -13,23 +13,34 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Mock function to demonstrate backend connection
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate an API call to a backend
-    // In a real application, you would use fetch() or axios to send data to your server
-    // e.g., await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
-    
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSuccess(true);
+        setFormData({ name: '', email: '', company: '', message: '' });
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        alert(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Could not connect to the server. Please try again later.');
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({ name: '', email: '', company: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    }
   };
 
   const handleChange = (e) => {
