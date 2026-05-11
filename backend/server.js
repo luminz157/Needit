@@ -101,84 +101,75 @@ app.post('/api/google-form', async (req, res) => {
     const userEmail = findEmail(formData);
     console.log("Detected User Email:", userEmail);
 
+    console.log("Step 1: Starting PDF Generation...");
     // Generate Premium PDF Report
     const generatePDF = () => new Promise((resolve, reject) => {
-      const doc = new PDFDocument({ margin: 50, size: 'A4' });
-      const buffers = [];
-      doc.on('data', buffers.push.bind(buffers));
-      doc.on('end', () => resolve(Buffer.concat(buffers)));
-      doc.on('error', reject);
+      try {
+        const doc = new PDFDocument({ margin: 50, size: 'A4' });
+        const buffers = [];
+        doc.on('data', buffers.push.bind(buffers));
+        doc.on('end', () => resolve(Buffer.concat(buffers)));
+        doc.on('error', (err) => {
+          console.error("PDF Error Event:", err);
+          reject(err);
+        });
 
-      // --- PDF HEADER ---
-      doc.rect(0, 0, 600, 150).fill('#1e0a3c');
-      doc.fontSize(30).fillColor('#ffffff').text('NEEDIT STARTUP', 50, 60, { characterSpacing: 2 });
-      doc.fontSize(10).fillColor('#ffffff').text('GLOBAL EXPANSION BRIEFING', 50, 100, { characterSpacing: 1 });
-      
-      doc.moveDown(5);
-
-      // --- CONTENT ---
-      doc.fillColor('#1e0a3c').fontSize(18).text('Application Receipt & Initial Briefing', { underline: true });
-      doc.moveDown(1.5);
-      
-      doc.fontSize(10).fillColor('#888888').text(`Reference ID: #APP-${info.lastInsertRowid}`, { align: 'right' });
-      doc.text(`Date: ${new Date().toLocaleDateString('en-US', { dateStyle: 'long' })}`, { align: 'right' });
-      doc.moveDown(2);
-
-      Object.entries(formData).forEach(([question, answer]) => {
-        if (!answer) return;
-        doc.fontSize(11).fillColor('#1e0a3c').font('Helvetica-Bold').text(question.trim().toUpperCase());
-        doc.moveDown(0.3);
-        doc.fontSize(11).fillColor('#444444').font('Helvetica').text(String(answer), { indent: 15 });
-        doc.moveDown(1.2);
+        // --- PDF HEADER ---
+        doc.rect(0, 0, 600, 150).fill('#1e0a3c');
+        doc.fontSize(28).fillColor('#ffffff').text('NEEDIT STARTUP', 50, 65);
         
-        // Add subtle separator
-        const currentY = doc.y;
-        doc.moveTo(50, currentY).lineTo(550, currentY).strokeColor('#eeeeee').lineWidth(0.5).stroke();
-        doc.moveDown(1);
-      });
+        doc.moveDown(5);
 
-      // --- FOOTER ---
-      doc.fontSize(9).fillColor('#aaaaaa').text('This document serves as an official confirmation of your application to Needit Startup. Our team will review your responses and reach out shortly.', 50, 750, { align: 'center', width: 500 });
+        // --- CONTENT ---
+        doc.fillColor('#1e0a3c').fontSize(16).text('Application Receipt & Initial Briefing');
+        doc.moveDown(1.5);
+        
+        doc.fontSize(10).fillColor('#888888').text(`Reference ID: #APP-${info.lastInsertRowid}`, { align: 'right' });
+        doc.moveDown(2);
 
-      doc.end();
+        Object.entries(formData).forEach(([question, answer]) => {
+          if (!answer || !question) return;
+          doc.fontSize(10).fillColor('#1e0a3c').text(String(question).trim().toUpperCase());
+          doc.moveDown(0.2);
+          doc.fontSize(10).fillColor('#444444').text(String(answer).trim(), { indent: 15 });
+          doc.moveDown(1);
+        });
+
+        doc.end();
+      } catch (err) {
+        console.error("PDF Catch Error:", err);
+        reject(err);
+      }
     });
 
     const pdfBuffer = await generatePDF();
+    console.log("Step 2: PDF Generated successfully. Size:", pdfBuffer.length);
 
     // 1. Send Briefing to User
     if (userEmail) {
+      console.log("Step 3: Sending email to USER:", userEmail);
       const userMail = {
         from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
         to: userEmail,
         subject: `Your Global Expansion Briefing - Needit Startup`,
-        html: `
-          <div style="font-family: 'Helvetica', Arial, sans-serif; max-w: 600px; margin: 0 auto; padding: 40px; border: 1px solid #e0e0e0; border-radius: 20px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #1e0a3c; margin: 0; font-size: 28px;">Hello!</h1>
-              <p style="color: #666; font-size: 16px;">Thank you for applying to Needit Startup.</p>
-            </div>
-            <div style="background-color: #f8f9fa; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
-              <h2 style="color: #1e0a3c; font-size: 18px; margin-top: 0;">What's Next?</h2>
-              <p style="color: #444; line-height: 1.6;">We have received your application. To help you get started, we've generated an <b>Initial Expansion Briefing</b> based on your responses.</p>
-              <p style="color: #444; line-height: 1.6;">Please find your formatted report attached to this email.</p>
-            </div>
-            <p style="color: #888; font-size: 12px; text-align: center;">This is an automated briefing. Our strategists will contact you within 48 hours.</p>
-          </div>
-        `,
+        html: `<h3>Thank you for applying to Needit Startup.</h3><p>Please find your briefing report attached.</p>`,
         attachments: [{ filename: 'Needit_Expansion_Briefing.pdf', content: pdfBuffer }]
       };
       await transporter.sendMail(userMail);
+      console.log("Step 4: User email SENT.");
     }
 
     // 2. Send Copy to Founder
+    console.log("Step 5: Sending email to FOUNDER...");
     const founderMail = {
       from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
       to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
-      subject: `🚀 New Application: ${formData['Name'] || formData[' Founder Name '] || 'New User'}`,
+      subject: `🚀 New Application Received`,
       html: `<p>New application received. See attached briefing.</p>`,
       attachments: [{ filename: 'Report.pdf', content: pdfBuffer }]
     };
     await transporter.sendMail(founderMail);
+    console.log("Step 6: Founder email SENT.");
 
     res.status(201).json({ success: true, message: 'Application stored and briefings sent' });
   } catch (error) {
