@@ -14,7 +14,9 @@ app.use(express.json());
 
 // Email Transporter Setup
 const transporter = nodemailer.createTransport({
-  service: 'gmail', 
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // Use STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -56,7 +58,6 @@ app.post('/api/contact', async (req, res) => {
       `
     };
 
-    // Await email sending to catch SMTP/Login errors
     await transporter.sendMail(mailOptions);
 
     res.status(201).json({ 
@@ -84,14 +85,16 @@ app.post('/api/google-form', async (req, res) => {
     console.log("--- New Application Received ---");
     console.log("Form Data:", JSON.stringify(formData, null, 2));
     
-    // Find User Email from Form Data
+    // Find User Email from Form Data (Better detection for spaced keys)
     const findEmail = (data) => {
       const keys = Object.keys(data);
-      const emailKey = keys.find(k => k.toLowerCase().includes('email'));
-      return emailKey ? data[emailKey] : null;
+      // Look for any key that contains "email" after trimming spaces
+      const emailKey = keys.find(k => k.trim().toLowerCase().includes('email'));
+      return emailKey ? data[emailKey].trim() : null;
     };
     
     const userEmail = findEmail(formData);
+    console.log("Detected User Email:", userEmail);
 
     // Generate Premium PDF Report
     const generatePDF = () => new Promise((resolve, reject) => {
@@ -118,7 +121,7 @@ app.post('/api/google-form', async (req, res) => {
 
       Object.entries(formData).forEach(([question, answer]) => {
         if (!answer) return;
-        doc.fontSize(11).fillColor('#1e0a3c').font('Helvetica-Bold').text(question.toUpperCase());
+        doc.fontSize(11).fillColor('#1e0a3c').font('Helvetica-Bold').text(question.trim().toUpperCase());
         doc.moveDown(0.3);
         doc.fontSize(11).fillColor('#444444').font('Helvetica').text(String(answer), { indent: 15 });
         doc.moveDown(1.2);
@@ -137,16 +140,7 @@ app.post('/api/google-form', async (req, res) => {
 
     const pdfBuffer = await generatePDF();
 
-    // 1. Send Copy to Founder
-    const founderMail = {
-      from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
-      to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
-      subject: `🚀 New Application: ${formData['Name'] || 'New User'}`,
-      html: `<p>New application received. See attached briefing.</p>`,
-      attachments: [{ filename: 'Report.pdf', content: pdfBuffer }]
-    };
-
-    // 2. Send Briefing to User
+    // 1. Send Briefing to User
     if (userEmail) {
       const userMail = {
         from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
@@ -166,17 +160,19 @@ app.post('/api/google-form', async (req, res) => {
             <p style="color: #888; font-size: 12px; text-align: center;">This is an automated briefing. Our strategists will contact you within 48 hours.</p>
           </div>
         `,
-        attachments: [
-          {
-            filename: 'Needit_Expansion_Briefing.pdf',
-            content: pdfBuffer,
-            contentType: 'application/pdf'
-          }
-        ]
+        attachments: [{ filename: 'Needit_Expansion_Briefing.pdf', content: pdfBuffer }]
       };
       await transporter.sendMail(userMail);
     }
 
+    // 2. Send Copy to Founder
+    const founderMail = {
+      from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
+      to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
+      subject: `🚀 New Application: ${formData['Name'] || formData[' Founder Name '] || 'New User'}`,
+      html: `<p>New application received. See attached briefing.</p>`,
+      attachments: [{ filename: 'Report.pdf', content: pdfBuffer }]
+    };
     await transporter.sendMail(founderMail);
 
     res.status(201).json({ success: true, message: 'Application stored and briefings sent' });
