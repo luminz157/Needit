@@ -12,6 +12,64 @@ const stagger = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
 };
 
+const cardHover = {
+  rest: {
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.3, ease: "easeOut" }
+  },
+  hover: {
+    y: -12,
+    scale: 1.02,
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
+
+const iconAnimation = {
+  rest: {
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.3 }
+  },
+  hover: {
+    scale: 1.15,
+    rotate: 10,
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
+
+const itemAnimation = {
+  rest: { x: 0, opacity: 1 },
+  hover: {
+    x: 4,
+    opacity: 1,
+    transition: { duration: 0.2 }
+  }
+};
+
+const scrollReveal = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+const cardCombined = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  },
+  hover: {
+    y: -12,
+    scale: 1.02,
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
+
 export default function Services() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,29 +133,61 @@ export default function Services() {
           return (
           <motion.div 
             key={index}
-            variants={fadeUp}
-            whileHover={{ y: -8, transition: { duration: 0.2 } }}
-            className={`group flex flex-col items-center text-center h-full min-h-[340px] rounded-[1.5rem] p-8 lg:p-10 border transition-all shadow-2xl hover:shadow-xl ${
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={cardCombined}
+            className={`group relative flex flex-col items-center text-center h-full min-h-[340px] rounded-[1.5rem] p-8 lg:p-10 border transition-all shadow-2xl hover:shadow-xl overflow-hidden ${
               isDark 
                 ? "bg-[#1e0a3c] text-white border-[#1e0a3c]/10 shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50" 
                 : "bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20"
             }`}
           >
-            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-transform duration-300 group-hover:rotate-[45deg] ${isDark ? "bg-white/10" : "bg-[#1e0a3c]/5"}`}>
+            {/* Animated border glow effect */}
+            <motion.div 
+              className={`absolute inset-0 rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
+                isDark 
+                  ? "bg-gradient-to-r from-white/10 via-white/5 to-transparent" 
+                  : "bg-gradient-to-r from-[#1e0a3c]/10 via-[#1e0a3c]/5 to-transparent"
+              }`}
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+            
+            <motion.div 
+              className={`relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-all duration-300 ${isDark ? "bg-white/10 group-hover:bg-white/15" : "bg-[#1e0a3c]/5 group-hover:bg-[#1e0a3c]/10"}`}
+              initial="rest"
+              whileHover="hover"
+              variants={iconAnimation}
+            >
               {React.cloneElement(service.icon, { className: `w-10 h-10 ${isDark ? "text-white" : "text-[#1e0a3c]"}` })}
-            </div>
-            <h3 className={`text-2xl font-bold mb-4 tracking-tight ${isDark ? "text-white" : "text-[#1e0a3c]"}`}>{service.title}</h3>
+            </motion.div>
+            <h3 className={`relative z-10 text-2xl font-bold mb-4 tracking-tight ${isDark ? "text-white" : "text-[#1e0a3c]"}`}>{service.title}</h3>
             {service.note && (
-              <span className={`inline-block w-fit px-3 py-1 text-xs font-bold rounded-full mb-4 ${isDark ? "bg-white/10 text-white" : "bg-[#1e0a3c]/10 text-[#1e0a3c]"}`}>
+              <motion.span 
+                className={`relative z-10 inline-block w-fit px-3 py-1 text-xs font-bold rounded-full mb-4 ${isDark ? "bg-white/10 text-white" : "bg-[#1e0a3c]/10 text-[#1e0a3c]"}`}
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
+              >
                 {service.note}
-              </span>
+              </motion.span>
             )}
-            <ul className="space-y-4 w-full text-left mt-4">
+            <ul className="relative z-10 space-y-4 w-full text-left mt-4">
               {service.items.map((item, i) => (
-                <li key={i} className={`flex items-start gap-3 text-[15px] font-bold ${isDark ? "text-white/80" : "text-[#1e0a3c]/80"}`}>
-                  <ArrowRight size={18} className={`mt-0.5 shrink-0 ${isDark ? "text-white/40" : "text-[#1e0a3c]/40"}`} />
+                <motion.li 
+                  key={i} 
+                  className={`flex items-start gap-3 text-[15px] font-bold ${isDark ? "text-white/80" : "text-[#1e0a3c]/80"}`}
+                  initial="rest"
+                  whileHover="hover"
+                  variants={itemAnimation}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <ArrowRight size={18} className={`mt-0.5 shrink-0 transition-colors duration-300 ${isDark ? "text-white/40 group-hover:text-white/60" : "text-[#1e0a3c]/40 group-hover:text-[#1e0a3c]/60"}`} />
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
