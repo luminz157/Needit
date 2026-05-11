@@ -85,12 +85,17 @@ app.post('/api/google-form', async (req, res) => {
     console.log("--- New Application Received ---");
     console.log("Form Data:", JSON.stringify(formData, null, 2));
     
-    // Find User Email from Form Data (Better detection for spaced keys)
+    // Find User Email from Form Data (Finds the first NON-EMPTY email)
     const findEmail = (data) => {
       const keys = Object.keys(data);
-      // Look for any key that contains "email" after trimming spaces
-      const emailKey = keys.find(k => k.trim().toLowerCase().includes('email'));
-      return emailKey ? data[emailKey].trim() : null;
+      // Look for keys containing "email", then check if they have a value
+      for (const key of keys) {
+        if (key.toLowerCase().includes('email')) {
+          const value = data[key] ? data[key].trim() : '';
+          if (value && value.includes('@')) return value;
+        }
+      }
+      return null;
     };
     
     const userEmail = findEmail(formData);
