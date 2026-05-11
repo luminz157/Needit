@@ -153,7 +153,7 @@ export default function Admin() {
 
   if (view === 'login') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-6">
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-6 pt-48 pb-20">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md bg-white p-10 rounded-[2.5rem] shadow-premium border border-[#1e0a3c]/10 text-center">
           <div className="w-20 h-20 bg-[#1e0a3c] rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl"><Lock size={32} className="text-white" /></div>
           <h1 className="text-3xl font-bold text-[#1e0a3c] mb-2 tracking-tighter">Secure Login</h1>
@@ -171,7 +171,7 @@ export default function Admin() {
 
   if (view === '2fa') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-6">
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-6 pt-48 pb-20">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md bg-white p-10 rounded-[2.5rem] shadow-premium border border-[#1e0a3c]/10 text-center">
           <div className="w-20 h-20 bg-[#1e0a3c] rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl"><ShieldCheck size={32} className="text-white" /></div>
           <h1 className="text-3xl font-bold text-[#1e0a3c] mb-2 tracking-tighter">Two-Factor Auth</h1>
