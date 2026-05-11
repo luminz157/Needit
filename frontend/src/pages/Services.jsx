@@ -24,30 +24,30 @@ export default function Services() {
       items: ["International market entry", "Global partnerships", "Expansion strategy", "Business matchmaking"]
     },
     {
-      title: "Digital Marketing & Growth",
-      icon: <TrendingUp />,
-      items: ["Performance marketing", "Social media growth", "Branding", "Lead generation"]
-    },
-    {
-      title: "Startup Funding",
-      note: "TRL 6+ only",
-      icon: <DollarSign />,
-      items: ["Investor introductions", "Angel network access", "VC connectivity"]
-    },
-    {
-      title: "Incubation Support",
-      icon: <Briefcase />,
-      items: ["Mentorship", "Startup planning", "Business strategy"]
-    },
-    {
-      title: "Export & Compliance",
+      title: "Export Support",
       icon: <Shield />,
-      items: ["Export facilitation", "Market entry advisory"]
+      items: ["Regulatory guidance for export markets", "Export documentation and customs support", "Market clearance and compliance assistance", "Strategic export route planning"]
     },
     {
-      title: "Manufacturing & Localization",
+      title: "Distributor Network",
+      icon: <Briefcase />,
+      items: ["Channel partner sourcing and onboarding", "Distributor agreement support", "Market coverage planning", "Logistics and local distribution coordination"]
+    },
+    {
+      title: "Manufacturing Support",
       icon: <Settings />,
-      items: ["Vendor identification", "Local production setup", "Supply chain support"]
+      items: ["Vendor evaluation and selection", "Local production setup", "Manufacturing optimization", "Quality assurance and supply chain support"]
+    },
+    {
+      title: "Investor Access",
+      note: "For eligible startups",
+      icon: <TrendingUp />,
+      items: ["Investor introductions and networking", "Pitch deck preparation", "Due diligence readiness", "Capital raise guidance"]
+    },
+    {
+      title: "Grant Application",
+      icon: <DollarSign />,
+      items: ["Grant opportunity sourcing", "Proposal and application support", "Submission tracking", "Eligibility and documentation review"]
     }
   ];
 

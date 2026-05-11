@@ -65,7 +65,7 @@ export const Navbar = () => {
     { name: 'Industries', href: '/industries' },
     { name: 'Services', href: '/services' },
     { name: 'Blogs', href: '/blogs' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Application', href: '/contact' }
   ];
 
   useEffect(() => {
