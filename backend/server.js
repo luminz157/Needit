@@ -14,7 +14,9 @@ app.use(express.json());
 
 // Email Transporter Setup
 const transporter = nodemailer.createTransport({
-  service: 'gmail', 
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // Use STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -24,7 +26,7 @@ const transporter = nodemailer.createTransport({
 // API Endpoints
 
 // 1. Submit a new contact inquiry
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const { name, email, company, message } = req.body;
 
   if (!name || !email || !message) {
@@ -56,7 +58,7 @@ app.post('/api/contact', (req, res) => {
       `
     };
 
-    transporter.sendMail(mailOptions).catch(err => console.error('Email sending failed (Check .env credentials):', err.message));
+    await transporter.sendMail(mailOptions);
 
     res.status(201).json({ 
       success: true, 
@@ -64,8 +66,11 @@ app.post('/api/contact', (req, res) => {
       id: info.lastInsertRowid 
     });
   } catch (error) {
-    console.error('Database error:', error);
-    res.status(500).json({ error: 'Failed to save inquiry to the database.' });
+    console.error('Contact error:', error);
+    res.status(500).json({ 
+      error: 'Backend Error: Failed to send email.',
+      details: error.message 
+    });
   }
 });
 
@@ -77,64 +82,100 @@ app.post('/api/google-form', async (req, res) => {
     const insert = db.prepare('INSERT INTO applications (data) VALUES (?)');
     const info = insert.run(JSON.stringify(formData));
     
-    // Generate PDF Report in memory
+    console.log("--- New Application Received ---");
+    console.log("Form Data:", JSON.stringify(formData, null, 2));
+    
+    // Find User Email from Form Data (Better detection for spaced keys)
+    const findEmail = (data) => {
+      const keys = Object.keys(data);
+      // Look for any key that contains "email" after trimming spaces
+      const emailKey = keys.find(k => k.trim().toLowerCase().includes('email'));
+      return emailKey ? data[emailKey].trim() : null;
+    };
+    
+    const userEmail = findEmail(formData);
+    console.log("Detected User Email:", userEmail);
+
+    // Generate Premium PDF Report
     const generatePDF = () => new Promise((resolve, reject) => {
-      const doc = new PDFDocument({ margin: 50 });
+      const doc = new PDFDocument({ margin: 50, size: 'A4' });
       const buffers = [];
       doc.on('data', buffers.push.bind(buffers));
       doc.on('end', () => resolve(Buffer.concat(buffers)));
       doc.on('error', reject);
 
-      // Design the PDF
-      doc.fontSize(24).fillColor('#1e0a3c').text('Needit Startup', { align: 'center' });
-      doc.moveDown();
-      doc.fontSize(18).fillColor('#333333').text('Official Application Report', { align: 'center' });
-      doc.moveDown(2);
+      // --- PDF HEADER ---
+      doc.rect(0, 0, 600, 150).fill('#1e0a3c');
+      doc.fontSize(30).fillColor('#ffffff').text('NEEDIT STARTUP', 50, 60, { characterSpacing: 2 });
+      doc.fontSize(10).fillColor('#ffffff').text('GLOBAL EXPANSION BRIEFING', 50, 100, { characterSpacing: 1 });
       
-      doc.fontSize(10).fillColor('#888888').text(`Generated: ${new Date().toLocaleString()}`, { align: 'right' });
-      doc.moveDown();
+      doc.moveDown(5);
+
+      // --- CONTENT ---
+      doc.fillColor('#1e0a3c').fontSize(18).text('Application Receipt & Initial Briefing', { underline: true });
+      doc.moveDown(1.5);
       
-      doc.rect(50, doc.y, 500, 1).fill('#dddddd');
+      doc.fontSize(10).fillColor('#888888').text(`Reference ID: #APP-${info.lastInsertRowid}`, { align: 'right' });
+      doc.text(`Date: ${new Date().toLocaleDateString('en-US', { dateStyle: 'long' })}`, { align: 'right' });
       doc.moveDown(2);
 
       Object.entries(formData).forEach(([question, answer]) => {
-        doc.fontSize(12).fillColor('#1e0a3c').text(question, { continued: false });
-        doc.moveDown(0.5);
-        doc.fontSize(12).fillColor('#555555').text(String(answer), { indent: 15 });
-        doc.moveDown(1.5);
+        if (!answer) return;
+        doc.fontSize(11).fillColor('#1e0a3c').font('Helvetica-Bold').text(question.trim().toUpperCase());
+        doc.moveDown(0.3);
+        doc.fontSize(11).fillColor('#444444').font('Helvetica').text(String(answer), { indent: 15 });
+        doc.moveDown(1.2);
+        
+        // Add subtle separator
+        const currentY = doc.y;
+        doc.moveTo(50, currentY).lineTo(550, currentY).strokeColor('#eeeeee').lineWidth(0.5).stroke();
+        doc.moveDown(1);
       });
+
+      // --- FOOTER ---
+      doc.fontSize(9).fillColor('#aaaaaa').text('This document serves as an official confirmation of your application to Needit Startup. Our team will review your responses and reach out shortly.', 50, 750, { align: 'center', width: 500 });
 
       doc.end();
     });
 
     const pdfBuffer = await generatePDF();
 
-    // Send Email to Founder with PDF attachment
-    const mailOptions = {
+    // 1. Send Briefing to User
+    if (userEmail) {
+      const userMail = {
+        from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
+        to: userEmail,
+        subject: `Your Global Expansion Briefing - Needit Startup`,
+        html: `
+          <div style="font-family: 'Helvetica', Arial, sans-serif; max-w: 600px; margin: 0 auto; padding: 40px; border: 1px solid #e0e0e0; border-radius: 20px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <h1 style="color: #1e0a3c; margin: 0; font-size: 28px;">Hello!</h1>
+              <p style="color: #666; font-size: 16px;">Thank you for applying to Needit Startup.</p>
+            </div>
+            <div style="background-color: #f8f9fa; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+              <h2 style="color: #1e0a3c; font-size: 18px; margin-top: 0;">What's Next?</h2>
+              <p style="color: #444; line-height: 1.6;">We have received your application. To help you get started, we've generated an <b>Initial Expansion Briefing</b> based on your responses.</p>
+              <p style="color: #444; line-height: 1.6;">Please find your formatted report attached to this email.</p>
+            </div>
+            <p style="color: #888; font-size: 12px; text-align: center;">This is an automated briefing. Our strategists will contact you within 48 hours.</p>
+          </div>
+        `,
+        attachments: [{ filename: 'Needit_Expansion_Briefing.pdf', content: pdfBuffer }]
+      };
+      await transporter.sendMail(userMail);
+    }
+
+    // 2. Send Copy to Founder
+    const founderMail = {
       from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
       to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
-      subject: `📄 New Application Report Received!`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h2 style="color: #1e0a3c;">New Application Received!</h2>
-          <p>Someone just submitted the Google Application Form.</p>
-          <p>Please find the official PDF report attached to this email.</p>
-          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-          <p style="font-size: 12px; color: #888;">Automated notification from your NeeditStartup backend.</p>
-        </div>
-      `,
-      attachments: [
-        {
-          filename: 'Application_Report.pdf',
-          content: pdfBuffer,
-          contentType: 'application/pdf'
-        }
-      ]
+      subject: `🚀 New Application: ${formData['Name'] || formData[' Founder Name '] || 'New User'}`,
+      html: `<p>New application received. See attached briefing.</p>`,
+      attachments: [{ filename: 'Report.pdf', content: pdfBuffer }]
     };
+    await transporter.sendMail(founderMail);
 
-    await transporter.sendMail(mailOptions);
-
-    res.status(201).json({ success: true, message: 'Application processed and PDF sent' });
+    res.status(201).json({ success: true, message: 'Application stored and briefings sent' });
   } catch (error) {
     console.error('Webhook error:', error);
     res.status(500).json({ error: 'Failed to process application.' });

@@ -34,7 +34,7 @@ export default function Contact() {
         setFormData({ name: '', email: '', company: '', message: '' });
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
-        alert(data.error || 'Something went wrong. Please try again.');
+        alert(data.details ? `Error: ${data.details}` : (data.error || 'Something went wrong. Please try again.'));
       }
     } catch (error) {
       console.error('Error submitting form:', error);

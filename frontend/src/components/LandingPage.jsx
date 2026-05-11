@@ -64,6 +64,7 @@ export const Navbar = () => {
     { name: 'Programs', href: '/programs' },
     { name: 'Industries', href: '/industries' },
     { name: 'Services', href: '/services' },
+    { name: 'Blogs', href: '/blogs' },
     { name: 'Contact', href: '/contact' }
   ];
 
