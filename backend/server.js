@@ -81,6 +81,9 @@ app.post('/api/google-form', async (req, res) => {
     const insert = db.prepare('INSERT INTO applications (data) VALUES (?)');
     const info = insert.run(JSON.stringify(formData));
     
+    console.log("--- New Application Received ---");
+    console.log("Form Data:", JSON.stringify(formData, null, 2));
+    
     // Find User Email from Form Data
     const findEmail = (data) => {
       const keys = Object.keys(data);
