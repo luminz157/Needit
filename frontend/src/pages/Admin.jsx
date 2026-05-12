@@ -18,7 +18,7 @@ export default function Admin() {
   const [qrCode, setQrCode] = useState(null);
   const [setupCode, setSetupCode] = useState('');
 
-  const API_URL = import.meta.env.VITE_API_URL || 'https://needit-nhg9.onrender.com';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://foundriva-nhg9.onrender.com';
 
   useEffect(() => {
     if (token) {
