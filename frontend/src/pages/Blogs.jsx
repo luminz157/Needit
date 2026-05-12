@@ -153,7 +153,7 @@ const Blogs = () => {
   };
 
   return (
-    <div className="pt-32 pb-20 px-6 lg:px-12 bg-white">
+    <div className="pt-32 pb-20 px-6 lg:px-12 bg-transparent">
       {/* Blogs Grid Section */}
       <div className="max-w-[1440px] mx-auto">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
