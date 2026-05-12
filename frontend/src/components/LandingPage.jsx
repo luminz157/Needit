@@ -93,13 +93,13 @@ export const Navbar = () => {
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 h-[5.25rem] overflow-visible transition-all duration-300 bg-white ${
+      className={`fixed top-0 left-0 right-0 z-50 h-[3.75rem] md:h-[5.25rem] overflow-visible transition-all duration-300 bg-white ${
         scrolled ? 'shadow-sm' : ''
       }`}
     >
       <div className="max-w-[1440px] h-full mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <img src="/1.png" alt="Foundriva Logo" className="h-[6.4rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
+          <img src="/1.png" alt="Foundriva Logo" className="h-[5.5rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-5 lg:gap-8 xl:gap-10">
@@ -527,107 +527,140 @@ const PlatformSection = () => (
 // --- What's New Section (Services Preview) ---
 
 const WhatsNew = () => (
-  <section className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
-      <div className="-mt-12">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-10 tracking-tighter"
-        >
-          Core services we <br />
-          provide for you
-        </motion.h2>
-        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-6">
-          {[
-            { icon: Globe, title: 'Market Access', desc: 'International market entry & Global partnerships.' },
-            { icon: TrendingUp, title: 'Digital Growth', desc: 'Performance marketing, Branding & Lead generation.' },
-            { icon: DollarSign, title: 'Startup Funding', desc: 'Investor introductions & VC connectivity (TRL 6+).' },
-            { icon: Briefcase, title: 'Incubation', desc: 'Mentorship, Startup planning & Business strategy.' }
-          ].map((f, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+  <section className="py-24 relative z-10 overflow-hidden">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+      <div className="grid lg:grid-cols-[50%_50%] gap-12 xl:gap-20 items-center">
+        {/* Left Side: Heading + 4 Horizontal Rectangles (50% width) */}
+        <div className="space-y-8">
+          <div>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ backgroundColor: "rgba(30, 10, 60, 1)", color: "white" }}
-              className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
-              onClick={() => window.location.href = '/services'}
+              className="text-4xl lg:text-[56px] font-bold text-[#1e0a3c] leading-[1.05] mb-6 tracking-tighter"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md group-hover:bg-white group-hover:text-[#1e0a3c] transition-colors">
-                <f.icon size={20} />
-              </div>
-              <div>
-                <h4 className="font-bold text-[#1e0a3c] group-hover:text-white text-[18px] mb-1.5 transition-colors tracking-tight">{f.title}</h4>
-                <p className="text-[14px] text-[#1e0a3c]/30 group-hover:text-white/60 font-bold leading-snug transition-colors">{f.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+              Core services we <br />
+              provide for you
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-[17px] text-[#1e0a3c]/50 font-bold leading-relaxed max-w-md mb-8"
+            >
+              We provide a comprehensive ecosystem of support to help you navigate every stage of your startup journey.
+            </motion.p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: 'Market Entry',
+                desc: 'Strategic international market access and digital growth strategies.',
+                icon: Globe
+              },
+              {
+                title: 'Expansion Setup',
+                desc: 'Scalable export facilitation and distributor network management.',
+                icon: TrendingUp
+              },
+              {
+                title: 'Scale Globally',
+                desc: 'Global manufacturing support and international growth roadmaps.',
+                icon: Rocket
+              },
+              {
+                title: 'Explore More Services',
+                desc: 'Discover our full range of incubation, funding, and workspace solutions.',
+                icon: Layout,
+                isSpecial: true
+              }
+            ].map((service, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -8 }}
+                className={`p-5 rounded-[1.25rem] border transition-all duration-300 flex items-center gap-4 ${
+                  service.isSpecial 
+                    ? 'bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-xl shadow-[#1e0a3c]/20 cursor-pointer'
+                    : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-lg shadow-[#1e0a3c]/5'
+                }`}
+                onClick={() => service.isSpecial && (window.location.href = '/services')}
+              >
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm ${
+                  service.isSpecial ? 'bg-white text-[#1e0a3c]' : 'bg-white border border-[#1e0a3c]/10 text-[#1e0a3c]'
+                }`}>
+                  <service.icon size={18} />
+                </div>
+                <div>
+                  <h4 className="text-[17px] font-bold tracking-tight">{service.title}</h4>
+                </div>
+                <ArrowRight size={18} className={`ml-auto ${service.isSpecial ? 'text-white/40' : 'text-[#1e0a3c]/20'}`} />
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="relative flex justify-center lg:justify-end py-8">
-        <div className="relative w-full max-w-[460px] h-[500px] scale-75 md:scale-90 lg:scale-75 xl:scale-100 origin-center lg:origin-right cursor-pointer" onClick={() => window.location.href = '/services'}>
-          {[
-            { label: 'Startups', value: '142', icon: Rocket },
-            { label: 'Mentors', value: '84', icon: Users },
-            { label: 'Funding', value: '$2.4M', icon: DollarSign },
-            { label: 'Programs', value: 'Active', icon: Zap }
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              animate={{ 
-                y: [0, -20, 0],
-                rotate: [0, i % 2 === 0 ? 0.5 : -0.5, 0]
-              }}
-              transition={{ 
-                duration: 4 + i * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.3
-              }}
-              className={`absolute p-7 rounded-[2.5rem] bg-[#1e0a3c] text-white flex flex-col justify-between shadow-2xl shadow-[#1e0a3c]/50 ${
-                i === 0 ? "top-0 left-0 w-48 h-48 z-10" :
-                i === 1 ? "top-20 right-0 w-56 h-36 z-20" :
-                i === 2 ? "bottom-20 left-10 w-44 h-56 z-30 opacity-90" :
-                "bottom-0 right-5 w-64 h-52 z-40"
-              }`}
-              style={{ filter: "drop-shadow(0 0 15px rgba(30, 10, 60, 0.3))" }}
-            >
-              <div className="flex items-center justify-between mb-5">
-                 <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
-                   <card.icon size={20} />
-                 </div>
-                 <div className="h-1.5 w-10 bg-white/20 rounded-full" />
-              </div>
-              
-              <div>
-                <p className="text-[10px] font-bold opacity-30 tracking-[0.15em] mb-1.5">{card.label}</p>
-                <p className="text-2xl font-bold">{card.value}</p>
-              </div>
-
-              <div className="mt-5 space-y-2.5">
-                 <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                    <motion.div 
-                       initial={{ width: 0 }}
-                       animate={{ width: i === 3 ? "100%" : "60%" }}
-                       transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-                       className="h-full bg-white/30" 
-                    />
-                 </div>
-                 {i === 3 && (
-                   <div className="flex gap-2.5 pt-2.5">
-                     <div className="h-9 flex-1 bg-white/10 rounded-xl" />
-                     <div className="h-9 w-9 bg-white rounded-xl shadow-inner shadow-black/10" />
+        {/* Right Side: Animation (50% width) */}
+        <div className="relative flex justify-center h-full pt-16">
+          <div className="relative w-full max-w-[460px] h-[500px] scale-90 xl:scale-100 origin-center">
+            {[
+              { label: 'Startups', value: '142', icon: Rocket },
+              { label: 'Mentors', value: '84', icon: Users },
+              { label: 'Funding', value: '$2.4M', icon: DollarSign },
+              { label: 'Programs', value: 'Active', icon: Zap }
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                animate={{ 
+                  y: [0, -20, 0],
+                  rotate: [0, i % 2 === 0 ? 0.5 : -0.5, 0]
+                }}
+                transition={{ 
+                  duration: 4 + i * 0.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3
+                }}
+                className={`absolute p-7 rounded-[2.5rem] bg-[#1e0a3c] text-white flex flex-col justify-between shadow-2xl shadow-[#1e0a3c]/50 ${
+                  i === 0 ? "top-0 left-0 w-48 h-48 z-10" :
+                  i === 1 ? "top-20 right-0 w-56 h-36 z-20" :
+                  i === 2 ? "bottom-20 left-10 w-44 h-56 z-30 opacity-90" :
+                  "bottom-0 right-5 w-64 h-52 z-40"
+                }`}
+                style={{ filter: "drop-shadow(0 0 15px rgba(30, 10, 60, 0.3))" }}
+              >
+                <div className="flex items-center justify-between mb-5">
+                   <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                     <card.icon size={20} />
                    </div>
-                 )}
-              </div>
-            </motion.div>
-          ))}
+                   <div className="h-1.5 w-10 bg-white/20 rounded-full" />
+                </div>
+                
+                <div>
+                  <p className="text-[10px] font-bold opacity-30 tracking-[0.15em] mb-1.5">{card.label}</p>
+                  <p className="text-2xl font-bold">{card.value}</p>
+                </div>
+
+                <div className="mt-5 space-y-2.5">
+                   <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                      <motion.div 
+                         initial={{ width: 0 }}
+                         animate={{ width: i === 3 ? "100%" : "60%" }}
+                         transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+                         className="h-full bg-white/30" 
+                      />
+                   </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -868,18 +901,19 @@ export const Footer = () => {
   const navigate = useNavigate();
 
   const services = [
+    "Co-Working Space",
     "Export Support",
     "Distributor Network",
     "Manufacturing Support",
     "Investor Access",
-    "Grant Application"
+    "Digital Marketing"
   ];
 
   return (
     <>
       <footer className="bg-white relative z-10">
         {/* Main Footer Content */}
-        <div className="px-6 lg:px-12 py-10">
+        <div className="px-6 lg:px-12 py-6">
           <div className="max-w-[1440px] mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 mb-0">
               {/* About Us Section with Logo */}
@@ -890,7 +924,7 @@ export const Footer = () => {
                 className="col-span-1 md:col-span-3"
               >
                 <div className="mb-4">
-                  <img src="/2.png" alt="Foundriva Logo" className="h-24 md:h-28 object-contain transform scale-125 md:scale-150 origin-center" />
+                  <img src="/2.png" alt="Foundriva Logo" className="h-[7.5rem] md:h-[10.5rem] object-contain object-left ml-[-35px]" />
                 </div>
                 <div>
                   <h3 className="text-[16px] font-bold text-[#1e0a3c] tracking-tight mb-3">About Us</h3>
