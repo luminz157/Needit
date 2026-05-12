@@ -109,18 +109,25 @@ const Blogs = () => {
   }, []);
 
   const handleLike = (index) => {
-    const post = blogPosts[index];
-    if (post.liked) return; // Only allow one like per user
-
-    const newLikedStatus = !post.liked;
-    
     setBlogPosts(prev => {
       const newPosts = [...prev];
-      newPosts[index] = { 
-        ...newPosts[index], 
-        likes: newPosts[index].likes + 1,
-        liked: true 
-      };
+      const post = newPosts[index];
+      
+      if (post.liked) {
+        // Unlike
+        newPosts[index] = { 
+          ...post, 
+          likes: Math.max(0, post.likes - 1),
+          liked: false 
+        };
+      } else {
+        // Like
+        newPosts[index] = { 
+          ...post, 
+          likes: post.likes + 1,
+          liked: true 
+        };
+      }
       
       // Persist to localStorage
       const likedTitles = newPosts.filter(p => p.liked).map(p => p.title);
@@ -201,13 +208,15 @@ const Blogs = () => {
                           handleLike(i);
                         }}
                         className={`flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest transition-colors group/like ${
-                          post.liked ? 'text-red-500' : 'text-[#1e0a3c]/40 hover:text-red-500'
+                          post.liked ? 'text-red-500' : 'text-[#1e0a3c]/40'
                         }`}
                       >
                         <Heart 
                           size={14} 
+                          fill={post.liked ? "#ef4444" : "none"} 
+                          color={post.liked ? "#ef4444" : "currentColor"}
                           className={`transition-all ${
-                            post.liked ? 'fill-red-500 text-red-500' : 'group-hover/like:fill-red-500 group-hover/like:text-red-500'
+                            !post.liked ? 'text-[#1e0a3c]/40' : ''
                           }`} 
                         /> 
                         {post.likes} {post.likes === 1 ? 'LIKE' : 'LIKES'}

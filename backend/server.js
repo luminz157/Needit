@@ -5,27 +5,9 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const PDFDocument = require('pdfkit');
 const db = require('./db');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const speakeasy = require('speakeasy');
-const qrcode = require('qrcode');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || 'foundriva_super_secret_key_123';
-
-// Auto-create initial admin if not exists
-const initAdmin = async () => {
-  const adminExists = db.prepare('SELECT COUNT(*) as count FROM admins').get();
-  if (adminExists.count === 0) {
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'foundriva2026', 10);
-    db.prepare('INSERT INTO admins (username, password) VALUES (?, ?)').run('admin', hashedPassword);
-    console.log('--- DEFAULT ADMIN CREATED ---');
-  }
-};
-initAdmin();
-
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -40,19 +22,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// --- AUTH MIDDLEWARE ---
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) return res.status(401).json({ error: 'Access denied. No token provided.' });
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ error: 'Invalid or expired token.' });
-    req.user = user;
-    next();
-  });
-};
 
 // --- API ENDPOINTS ---
 
@@ -140,114 +109,6 @@ app.post('/api/google-form', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: error.message });
   }
-});
-
-// --- ADMIN SECURE ENDPOINTS ---
-
-// A. Admin Login
-app.post('/api/admin/login', async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username);
-    if (!admin) return res.status(401).json({ error: 'Invalid credentials' });
-
-    const validPassword = await bcrypt.compare(password, admin.password);
-    if (!validPassword) return res.status(401).json({ error: 'Invalid credentials' });
-
-    // If 2FA is not enabled, return token. If enabled, return flag.
-    if (!admin.two_factor_enabled) {
-      const token = jwt.sign({ id: admin.id, username: admin.username }, JWT_SECRET, { expiresIn: '8h' });
-      return res.json({ success: true, token, twoFactorRequired: false });
-    }
-
-    res.json({ success: true, twoFactorRequired: true, tempId: admin.id });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// B. Verify 2FA and Login
-app.post('/api/admin/2fa/verify-login', async (req, res) => {
-  const { tempId, code } = req.body;
-  try {
-    const admin = db.prepare('SELECT * FROM admins WHERE id = ?').get(tempId);
-    if (!admin) return res.status(401).json({ error: 'Session expired' });
-
-    const verified = speakeasy.totp.verify({
-      secret: admin.two_factor_secret,
-      encoding: 'base32',
-      token: code,
-      window: 1 // Allows for 30 seconds of clock drift
-    });
-
-    if (!verified) return res.status(401).json({ error: 'Invalid 2FA code' });
-
-    const token = jwt.sign({ id: admin.id, username: admin.username }, JWT_SECRET, { expiresIn: '8h' });
-    res.json({ success: true, token });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// C. Setup 2FA (Get QR Code)
-app.post('/api/admin/2fa/setup', authenticateToken, async (req, res) => {
-  try {
-    const secret = speakeasy.generateSecret({ name: `Foundriva (${req.user.username})` });
-    const qrCodeUrl = await qrcode.toDataURL(secret.otpauth_url);
-
-    // Save secret temporarily (unverified)
-    db.prepare('UPDATE admins SET two_factor_secret = ? WHERE id = ?').run(secret.base32, req.user.id);
-
-    res.json({ success: true, qrCode: qrCodeUrl, secret: secret.base32 });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// D. Confirm 2FA Setup
-app.post('/api/admin/2fa/confirm', authenticateToken, (req, res) => {
-  const { code } = req.body;
-  try {
-    const admin = db.prepare('SELECT * FROM admins WHERE id = ?').get(req.user.id);
-    const verified = speakeasy.totp.verify({
-      secret: admin.two_factor_secret,
-      encoding: 'base32',
-      token: code,
-      window: 1 // Allows for 30 seconds of clock drift
-    });
-
-    if (verified) {
-      db.prepare('UPDATE admins SET two_factor_enabled = 1 WHERE id = ?').run(req.user.id);
-      res.json({ success: true, message: '2FA Enabled successfully' });
-    } else {
-      res.status(400).json({ error: 'Invalid code. Verification failed.' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// E. Change Password
-app.post('/api/admin/password/update', authenticateToken, async (req, res) => {
-  const { newPassword } = req.body;
-  try {
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    db.prepare('UPDATE admins SET password = ? WHERE id = ?').run(hashedPassword, req.user.id);
-    res.json({ success: true, message: 'Password updated successfully' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// F. Admin View Data (Protected)
-app.get('/api/admin/contacts', authenticateToken, (req, res) => {
-  const contacts = db.prepare('SELECT * FROM contacts ORDER BY created_at DESC').all();
-  res.json({ success: true, data: contacts });
-});
-
-app.get('/api/admin/applications', authenticateToken, (req, res) => {
-  const apps = db.prepare('SELECT * FROM applications ORDER BY created_at DESC').all();
-  res.json({ success: true, data: apps });
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

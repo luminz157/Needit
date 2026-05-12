@@ -23,14 +23,6 @@ db.exec(`
     data TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
-
-  CREATE TABLE IF NOT EXISTS admins (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    two_factor_secret TEXT,
-    two_factor_enabled INTEGER DEFAULT 0
-  );
 `);
 
 console.log('Database initialized successfully.');

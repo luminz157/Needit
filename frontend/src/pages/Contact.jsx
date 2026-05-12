@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Rocket, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Rocket, ArrowRight, Share2 } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -37,7 +37,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-[11px] font-bold opacity-40 uppercase tracking-widest mb-1">WhatsApp / Phone</p>
-                <p className="text-[15px] font-bold">+91 08922554</p>
+                <p className="text-[15px] font-bold">+91 91089 22554</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -51,11 +51,18 @@ export default function Contact() {
             </div>
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-[#1e0a3c]/5 flex items-center justify-center flex-shrink-0">
-                <MapPin size={18} className="text-[#1e0a3c]" />
+                <Share2 size={18} className="text-[#1e0a3c]" />
               </div>
               <div>
                 <p className="text-[11px] font-bold opacity-40 uppercase tracking-widest mb-1">LinkedIn</p>
-                <a href="#" className="text-[15px] font-bold hover:text-[#1e0a3c] transition-colors">Need It Startup Official</a>
+                <a 
+                  href="https://linkedin.com/company/foundriva" 
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[15px] font-bold hover:text-[#1e0a3c] transition-colors"
+                >
+                  Foundriva
+                </a>
               </div>
             </div>
           </div>
