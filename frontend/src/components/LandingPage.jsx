@@ -918,7 +918,7 @@ export const Footer = () => {
                     <motion.a
                       href="/"
                       whileHover={{ x: 4 }}
-                      className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Home
                     </motion.a>
@@ -927,7 +927,7 @@ export const Footer = () => {
                     <motion.a
                       href="/programs"
                       whileHover={{ x: 4 }}
-                      className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Programs
                     </motion.a>
@@ -936,7 +936,7 @@ export const Footer = () => {
                     <motion.a
                       href="/industries"
                       whileHover={{ x: 4 }}
-                      className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Industries
                     </motion.a>
@@ -945,16 +945,16 @@ export const Footer = () => {
                     <motion.a
                       href="/services"
                       whileHover={{ x: 4 }}
-                      className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Services
                     </motion.a>
                   </li>
                   <li>
                     <motion.a
-                      href="#"
+                      href="/blogs"
                       whileHover={{ x: 4 }}
-                      className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Blogs
                     </motion.a>
@@ -965,7 +965,7 @@ export const Footer = () => {
                       target="_blank"
                       rel="noreferrer"
                       whileHover={{ x: 4 }}
-                      className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Startup Applications
                     </motion.a>
@@ -1016,7 +1016,7 @@ export const Footer = () => {
                   <motion.a
                     href="mailto:needitstartup@gmail.com"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors"
+                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
                   >
                     <Mail size={16} className="flex-shrink-0" />
                     <span className="text-[13px] font-bold">needitstartup@gmail.com</span>
@@ -1025,7 +1025,7 @@ export const Footer = () => {
                   <motion.a
                     href="tel:+919108922554"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors"
+                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
                   >
                     <Phone size={16} className="flex-shrink-0" />
                     <span className="text-[13px] font-bold">+91 91089 22554</span>
@@ -1036,7 +1036,7 @@ export const Footer = () => {
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors"
+                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -1051,7 +1051,7 @@ export const Footer = () => {
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors"
+                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
                   >
                     <Share2 size={16} className="flex-shrink-0" />
                     <span className="text-[13px] font-bold">NeedItStartup</span>
