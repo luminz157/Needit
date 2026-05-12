@@ -93,13 +93,13 @@ export const Navbar = () => {
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 h-[5.25rem] overflow-visible transition-all duration-300 bg-white ${
+      className={`fixed top-0 left-0 right-0 z-50 h-[3.75rem] md:h-[5.25rem] overflow-visible transition-all duration-300 bg-white ${
         scrolled ? 'shadow-sm' : ''
       }`}
     >
       <div className="max-w-[1440px] h-full mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <img src="/1.png" alt="Foundriva Logo" className="h-[6.4rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
+          <img src="/1.png" alt="Foundriva Logo" className="h-[4.5rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-5 lg:gap-8 xl:gap-10">
