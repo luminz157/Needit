@@ -527,176 +527,137 @@ const PlatformSection = () => (
 // --- What's New Section (Services Preview) ---
 
 const WhatsNew = () => (
-  <section className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
-      <div className="-mt-12">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-10 tracking-tighter"
-        >
-          Core services we <br />
-          provide for you
-        </motion.h2>
-        <div className="grid gap-6">
-          <div className="grid sm:grid-cols-3 gap-6">
+  <section className="py-24 relative z-10 overflow-hidden">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+      <div className="grid lg:grid-cols-5 gap-12 xl:gap-20 items-start">
+        {/* Left Side: Heading + 3 Stages (60% width) */}
+        <div className="lg:col-span-3 space-y-10">
+          <div>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-6 tracking-tighter"
+            >
+              Core services we <br />
+              provide for you
+            </motion.h2>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-5">
             {[
-              { icon: Globe, title: 'Market Access', desc: 'International market entry & Global partnerships.' },
-              { icon: TrendingUp, title: 'Digital Growth', desc: 'Performance marketing, branding & lead generation.' },
-              { icon: DollarSign, title: 'Startup Funding', desc: 'Investor introductions & VC connectivity (TRL 6+).' }
-            ].map((f, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 20 }}
+              {
+                title: 'Market Entry',
+                icon: Globe,
+                points: ['Market Access', 'Digital Marketing', 'Incubation']
+              },
+              {
+                title: 'Expansion',
+                icon: TrendingUp,
+                points: ['Export Support', 'Distributor Network', 'Investor Support']
+              },
+              {
+                title: 'Scale',
+                icon: Rocket,
+                points: ['Manufacturing', 'Growth Roadmap', 'Partnerships']
+              }
+            ].map((stage, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ translateY: -8 }}
-                className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
+                whileHover={{ y: -8 }}
+                className={`p-6 rounded-[2rem] border transition-all duration-300 cursor-pointer shadow-xl aspect-square flex flex-col justify-between ${
+                  i === 1
+                    ? 'bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50'
+                    : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20'
+                }`}
                 onClick={() => window.location.href = '/services'}
               >
-                <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md transition-colors">
-                  <f.icon size={20} />
-                </div>
                 <div>
-                  <h4 className="font-bold text-[#1e0a3c] text-[18px] mb-1.5 tracking-tight">{f.title}</h4>
-                  <p className="text-[14px] text-[#1e0a3c]/50 font-bold leading-snug">{f.desc}</p>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 shadow-md ${
+                    i === 1 ? 'bg-white/10 text-white' : 'bg-[#1e0a3c] text-white'
+                  }`}>
+                    <stage.icon size={20} />
+                  </div>
+                  <h4 className={`text-[18px] font-bold tracking-tight mb-3 ${
+                    i === 1 ? 'text-white' : 'text-[#1e0a3c]'
+                  }`}>{stage.title}</h4>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            whileHover={{ scale: 1.03 }}
-            className="relative overflow-hidden rounded-[3rem] border border-[#1e0a3c]/10 bg-white p-10 shadow-2xl shadow-[#1e0a3c]/10 min-h-[320px]"
-            onClick={() => window.location.href = '/services'}
-          >
-            <div className="absolute -right-16 top-10 w-40 h-40 rounded-full bg-[#1e0a3c]/10 blur-2xl" />
-            <div className="absolute -left-16 bottom-10 w-40 h-40 rounded-full bg-[#1e0a3c]/10 blur-2xl" />
-            <motion.div
-              initial={{ x: -60, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="absolute inset-x-0 top-0 h-1 rounded-t-[1.5rem] bg-[#1e0a3c]"
-            />
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="w-16 h-16 rounded-[2rem] bg-[#1e0a3c] flex items-center justify-center text-white shadow-lg">
-                <Layout size={30} />
-              </div>
-              <div className="max-w-2xl">
-                <p className="text-[12px] uppercase tracking-[0.35em] text-[#1e0a3c]/40 mb-3">New Service</p>
-                <h4 className="text-[28px] md:text-[34px] font-bold text-[#1e0a3c] mb-3">Co-Working Space</h4>
-                <p className="text-[15px] text-[#1e0a3c]/70 leading-relaxed font-bold max-w-xl">
-                  Helping startups find the right workspace with flexible desks, meeting rooms, and community-driven office support.
-                </p>
-              </div>
-            </div>
-            <motion.div
-              initial={{ x: 60, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              className="mt-8 inline-flex items-center gap-2 text-[#1e0a3c] font-bold"
-            >
-              Discover coworking <ArrowRight size={16} />
-            </motion.div>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              { icon: Briefcase, title: 'Incubation', desc: 'Mentorship, startup planning & business strategy.' },
-              { icon: Users, title: 'Investor Access', desc: 'Connections to investors, partners, and funding networks.' },
-              { icon: Award, title: 'Grant Application', desc: 'Assistance securing grants, subsidies, and innovation funding.' }
-            ].map((f, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 + 0.2 }}
-                whileHover={{ translateY: -8 }}
-                className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
-                onClick={() => window.location.href = '/services'}
-              >
-                <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md transition-colors">
-                  <f.icon size={20} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#1e0a3c] text-[18px] mb-1.5 tracking-tight">{f.title}</h4>
-                  <p className="text-[14px] text-[#1e0a3c]/50 font-bold leading-snug">{f.desc}</p>
-                </div>
+                
+                <ul className="space-y-2">
+                  {stage.points.map((point, j) => (
+                    <li key={j} className={`flex items-center gap-2 text-[12px] font-bold ${
+                      i === 1 ? 'text-white/70' : 'text-[#1e0a3c]/50'
+                    }`}>
+                      <div className={`w-1 h-1 rounded-full ${i === 1 ? 'bg-white/30' : 'bg-[#1e0a3c]/20'}`} />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="relative flex justify-center lg:justify-end py-8">
-        <div className="relative w-full max-w-[460px] h-[500px] scale-75 md:scale-90 lg:scale-75 xl:scale-100 origin-center lg:origin-right cursor-pointer" onClick={() => window.location.href = '/services'}>
-          {[
-            { label: 'Startups', value: '142', icon: Rocket },
-            { label: 'Mentors', value: '84', icon: Users },
-            { label: 'Funding', value: '$2.4M', icon: DollarSign },
-            { label: 'Programs', value: 'Active', icon: Zap }
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              animate={{ 
-                y: [0, -20, 0],
-                rotate: [0, i % 2 === 0 ? 0.5 : -0.5, 0]
-              }}
-              transition={{ 
-                duration: 4 + i * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.3
-              }}
-              className={`absolute p-7 rounded-[2.5rem] bg-[#1e0a3c] text-white flex flex-col justify-between shadow-2xl shadow-[#1e0a3c]/50 ${
-                i === 0 ? "top-0 left-0 w-48 h-48 z-10" :
-                i === 1 ? "top-20 right-0 w-56 h-36 z-20" :
-                i === 2 ? "bottom-20 left-10 w-44 h-56 z-30 opacity-90" :
-                "bottom-0 right-5 w-64 h-52 z-40"
-              }`}
-              style={{ filter: "drop-shadow(0 0 15px rgba(30, 10, 60, 0.3))" }}
-            >
-              <div className="flex items-center justify-between mb-5">
-                 <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
-                   <card.icon size={20} />
-                 </div>
-                 <div className="h-1.5 w-10 bg-white/20 rounded-full" />
-              </div>
-              
-              <div>
-                <p className="text-[10px] font-bold opacity-30 tracking-[0.15em] mb-1.5">{card.label}</p>
-                <p className="text-2xl font-bold">{card.value}</p>
-              </div>
-
-              <div className="mt-5 space-y-2.5">
-                 <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                    <motion.div 
-                       initial={{ width: 0 }}
-                       animate={{ width: i === 3 ? "100%" : "60%" }}
-                       transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-                       className="h-full bg-white/30" 
-                    />
-                 </div>
-                 {i === 3 && (
-                   <div className="flex gap-2.5 pt-2.5">
-                     <div className="h-9 flex-1 bg-white/10 rounded-xl" />
-                     <div className="h-9 w-9 bg-white rounded-xl shadow-inner shadow-black/10" />
+        {/* Right Side: Animation (40% width) */}
+        <div className="lg:col-span-2 relative flex justify-center lg:justify-end h-full pt-16">
+          <div className="relative w-full max-w-[460px] h-[500px] scale-90 xl:scale-100 origin-center lg:origin-right cursor-pointer" onClick={() => window.location.href = '/services'}>
+            {[
+              { label: 'Startups', value: '142', icon: Rocket },
+              { label: 'Mentors', value: '84', icon: Users },
+              { label: 'Funding', value: '$2.4M', icon: DollarSign },
+              { label: 'Programs', value: 'Active', icon: Zap }
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                animate={{ 
+                  y: [0, -20, 0],
+                  rotate: [0, i % 2 === 0 ? 0.5 : -0.5, 0]
+                }}
+                transition={{ 
+                  duration: 4 + i * 0.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3
+                }}
+                className={`absolute p-7 rounded-[2.5rem] bg-[#1e0a3c] text-white flex flex-col justify-between shadow-2xl shadow-[#1e0a3c]/50 ${
+                  i === 0 ? "top-0 left-0 w-48 h-48 z-10" :
+                  i === 1 ? "top-20 right-0 w-56 h-36 z-20" :
+                  i === 2 ? "bottom-20 left-10 w-44 h-56 z-30 opacity-90" :
+                  "bottom-0 right-5 w-64 h-52 z-40"
+                }`}
+                style={{ filter: "drop-shadow(0 0 15px rgba(30, 10, 60, 0.3))" }}
+              >
+                <div className="flex items-center justify-between mb-5">
+                   <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                     <card.icon size={20} />
                    </div>
-                 )}
-              </div>
-            </motion.div>
-          ))}
+                   <div className="h-1.5 w-10 bg-white/20 rounded-full" />
+                </div>
+                
+                <div>
+                  <p className="text-[10px] font-bold opacity-30 tracking-[0.15em] mb-1.5">{card.label}</p>
+                  <p className="text-2xl font-bold">{card.value}</p>
+                </div>
+
+                <div className="mt-5 space-y-2.5">
+                   <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                      <motion.div 
+                         initial={{ width: 0 }}
+                         animate={{ width: i === 3 ? "100%" : "60%" }}
+                         transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
+                         className="h-full bg-white/30" 
+                      />
+                   </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -949,7 +910,7 @@ export const Footer = () => {
     <>
       <footer className="bg-white relative z-10">
         {/* Main Footer Content */}
-        <div className="px-6 lg:px-12 py-10">
+        <div className="px-6 lg:px-12 py-6">
           <div className="max-w-[1440px] mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 mb-0">
               {/* About Us Section with Logo */}
@@ -960,7 +921,7 @@ export const Footer = () => {
                 className="col-span-1 md:col-span-3"
               >
                 <div className="mb-4">
-                  <img src="/2.png" alt="Foundriva Logo" className="h-24 md:h-28 object-contain transform scale-125 md:scale-150 origin-center" />
+                  <img src="/2.png" alt="Foundriva Logo" className="h-[7.5rem] md:h-[10.5rem] object-contain object-left ml-[-35px]" />
                 </div>
                 <div>
                   <h3 className="text-[16px] font-bold text-[#1e0a3c] tracking-tight mb-3">About Us</h3>
