@@ -1080,7 +1080,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               className="text-[11px] font-bold text-white/40 tracking-widest"
             >
-              © 2025 Foundriva. All Rights Reserved.
+              © 2026 Foundriva. All Rights Reserved.
             </motion.p>
           </div>
         </div>
