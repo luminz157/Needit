@@ -176,7 +176,8 @@ app.post('/api/admin/2fa/verify-login', async (req, res) => {
     const verified = speakeasy.totp.verify({
       secret: admin.two_factor_secret,
       encoding: 'base32',
-      token: code
+      token: code,
+      window: 1 // Allows for 30 seconds of clock drift
     });
 
     if (!verified) return res.status(401).json({ error: 'Invalid 2FA code' });
@@ -211,7 +212,8 @@ app.post('/api/admin/2fa/confirm', authenticateToken, (req, res) => {
     const verified = speakeasy.totp.verify({
       secret: admin.two_factor_secret,
       encoding: 'base32',
-      token: code
+      token: code,
+      window: 1 // Allows for 30 seconds of clock drift
     });
 
     if (verified) {
