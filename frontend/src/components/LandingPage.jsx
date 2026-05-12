@@ -93,13 +93,13 @@ export const Navbar = () => {
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        scrolled ? 'shadow-sm py-1.5' : 'py-2.5'
+      className={`fixed top-0 left-0 right-0 z-50 h-[5.25rem] overflow-visible transition-all duration-300 bg-white ${
+        scrolled ? 'shadow-sm' : ''
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
+      <div className="max-w-[1440px] h-full mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <img src="/final_logo_cropped.png" alt="Needit Logo" className="h-10 md:h-14 lg:h-18 object-contain group-hover:scale-105 transition-transform" />
+          <img src="/1.png" alt="Foundriva Logo" className="h-[6.4rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-5 lg:gap-8 xl:gap-10">
@@ -241,7 +241,7 @@ const Hero = () => (
           <div className="w-[280px] h-[560px] bg-[#1e0a3c] rounded-[3.5rem] border-[10px] border-[#1e0a3c] shadow-2xl shadow-[#1e0a3c]/40 overflow-hidden p-9 text-white relative">
             <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-white/5" />
             <div className="mt-10">
-               <p className="text-[10px] font-bold opacity-30 tracking-widest mb-2">Needit portal</p>
+               <p className="text-[10px] font-bold opacity-30 tracking-widest mb-2">Foundriva portal</p>
                <p className="text-2xl font-bold mb-8">Active tracks</p>
                
                <div className="h-44 w-full bg-white/5 rounded-[2.2rem] mb-9 flex flex-col p-7 border border-white/5 gap-4">
@@ -305,7 +305,7 @@ const Hero = () => (
               </div>
             </div>
             <div className="h-12 w-full bg-white/10 rounded-xl flex items-center justify-center">
-              <span className="text-[10px] font-bold opacity-30 tracking-widest">Needit.ai</span>
+              <span className="text-[10px] font-bold opacity-30 tracking-widest">Foundriva.ai</span>
             </div>
           </div>
         </motion.div>
@@ -339,7 +339,7 @@ const TrustedSection = () => (
             transition={{ delay: 0.1 }}
             className="text-[16px] text-[#1e0a3c]/40 font-bold leading-relaxed max-w-lg"
           >
-            Needit provides the foundational support every early-stage startup needs to thrive. From technical infrastructure to expert-led mentorship, we ensure your journey is backed by industry best practices and a global network of specialized startup tracks.
+            Foundriva provides the foundational support every early-stage startup needs to thrive. From technical infrastructure to expert-led mentorship, we ensure your journey is backed by industry best practices and a global network of specialized startup tracks.
           </motion.p>
         </div>
       </div>
@@ -347,7 +347,7 @@ const TrustedSection = () => (
       <div className="grid md:grid-cols-3 gap-8 items-center">
         {[
           { id: '01.', title: 'Expert guidance', desc: 'Tailored tools for every stage of your startup journey. We provide hands-on support to turn vision into reality. Leverage our global network of seasoned founders to navigate complex challenges and accelerate your market entry.' },
-          { id: '02.', title: 'Best practices', desc: 'Needit unites and secures a growing ecosystem of startup tracks based on deep industry insights. Benefit from structured frameworks that optimize your operations, reduce risk, and maximize your potential for rapid scaling.' },
+          { id: '02.', title: 'Best practices', desc: 'Foundriva unites and secures a growing ecosystem of startup tracks based on deep industry insights. Benefit from structured frameworks that optimize your operations, reduce risk, and maximize your potential for rapid scaling.' },
           { id: '03.', title: 'Secure growth', desc: 'Enterprise-grade security and blockchain integration for your peace of mind and scalable future. Protect your assets while maintaining the agility needed to innovate and capture new market opportunities.' }
         ].map((s, i) => (
           <motion.div
@@ -754,14 +754,14 @@ const TermsModal = ({ isOpen, onClose }) => {
         <div className="space-y-8 text-[#1e0a3c]/80 text-[15px] leading-relaxed font-bold">
           <section>
             <p className="mb-4">
-              Welcome to NeedItStartup. By accessing or using our services, platform, programs, or website, you agree to comply with and be bound by the following Terms and Conditions.
+              Welcome to Foundriva. By accessing or using our services, platform, programs, or website, you agree to comply with and be bound by the following Terms and Conditions.
             </p>
           </section>
 
           <section>
             <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">1. No Guaranteed Funding or Business Outcomes</h2>
             <p>
-              NeedItStartup does not guarantee funding, investment, partnerships, export approvals, business growth, revenue generation, or specific commercial outcomes.
+              Foundriva does not guarantee funding, investment, partnerships, export approvals, business growth, revenue generation, or specific commercial outcomes.
             </p>
             <p className="mt-3">
               All services are provided as strategic support, guidance, ecosystem access, consulting, and execution assistance intended to support startup development and expansion.
@@ -783,7 +783,7 @@ const TermsModal = ({ isOpen, onClose }) => {
               Investor access, expansion support, or partnership-related services may only be available to startups that meet internal evaluation standards and applicable Technology Readiness Level (TRL) requirements.
             </p>
             <p className="mt-3">
-              NeedItStartup reserves the right to accept or reject applications based on eligibility, feasibility, readiness, or alignment with company objectives.
+              Foundriva reserves the right to accept or reject applications based on eligibility, feasibility, readiness, or alignment with company objectives.
             </p>
           </section>
 
@@ -791,13 +791,13 @@ const TermsModal = ({ isOpen, onClose }) => {
             <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">4. Intellectual Property</h2>
             <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80">
               <li>All startup ideas, business models, pitch decks, documents, data, designs, and submitted materials remain the intellectual property of the respective founder or startup.</li>
-              <li>NeedItStartup may use non-confidential project information, testimonials, public collaborations, or publicly available startup achievements for portfolio, branding, promotional, or marketing purposes unless otherwise agreed upon in writing.</li>
+              <li>Foundriva may use non-confidential project information, testimonials, public collaborations, or publicly available startup achievements for portfolio, branding, promotional, or marketing purposes unless otherwise agreed upon in writing.</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">5. Limitation of Liability</h2>
-            <p>NeedItStartup shall not be held liable for:</p>
+            <p>Foundriva shall not be held liable for:</p>
             <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80 mt-3">
               <li>Funding rejection</li>
               <li>Investor decisions</li>
@@ -809,7 +809,7 @@ const TermsModal = ({ isOpen, onClose }) => {
               <li>Commercial or operational damages arising from the use of our services</li>
             </ul>
             <p className="mt-3">
-              All decisions made by investors, external partners, agencies, or regulatory authorities remain independent of NeedItStartup.
+              All decisions made by investors, external partners, agencies, or regulatory authorities remain independent of Foundriva.
             </p>
           </section>
 
@@ -819,14 +819,14 @@ const TermsModal = ({ isOpen, onClose }) => {
               Certain services may involve external consultants, investors, agencies, distributors, mentors, technology providers, or third-party platforms.
             </p>
             <p className="mt-3">
-              NeedItStartup is not responsible for independent third-party decisions, actions, delays, service quality, or outcomes resulting from such collaborations.
+              Foundriva is not responsible for independent third-party decisions, actions, delays, service quality, or outcomes resulting from such collaborations.
             </p>
           </section>
 
           <section>
             <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">7. Termination of Services</h2>
             <p>
-              NeedItStartup reserves the right to suspend, reject, or terminate services in cases involving:
+              Foundriva reserves the right to suspend, reject, or terminate services in cases involving:
             </p>
             <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80 mt-3">
               <li>Fraudulent activities</li>
@@ -841,7 +841,7 @@ const TermsModal = ({ isOpen, onClose }) => {
           <section>
             <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">8. Changes to Terms</h2>
             <p>
-              NeedItStartup reserves the right to modify or update these Terms and Conditions at any time without prior notice. Continued use of the platform or services constitutes acceptance of the updated terms.
+              Foundriva reserves the right to modify or update these Terms and Conditions at any time without prior notice. Continued use of the platform or services constitutes acceptance of the updated terms.
             </p>
           </section>
 
@@ -851,8 +851,8 @@ const TermsModal = ({ isOpen, onClose }) => {
               For any questions regarding these Terms and Conditions, please contact:
             </p>
             <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80 mt-3">
-              <li>Email: <a href="mailto:needitstartup@gmail.com" className="text-[#1e0a3c] underline">needitstartup@gmail.com</a></li>
-              <li>Instagram: @needit_startup</li>
+              <li>Email: <a href="mailto:foundriva@gmail.com" className="text-[#1e0a3c] underline">foundriva@gmail.com</a></li>
+              <li>Instagram: @found_riva</li>
               <li>Phone: +91 91089 22554</li>
             </ul>
           </section>
@@ -890,13 +890,13 @@ export const Footer = () => {
                 viewport={{ once: true }}
                 className="col-span-1 md:col-span-3"
               >
-                <div className="mb-12">
-                  <img src="/final_logo_cropped.png" alt="NeedItStartup Logo" className="h-24 object-contain" />
+                <div className="mb-4">
+                  <img src="/2.png" alt="Foundriva Logo" className="h-24 md:h-28 object-contain transform scale-125 md:scale-150 origin-center" />
                 </div>
                 <div>
                   <h3 className="text-[16px] font-bold text-[#1e0a3c] tracking-tight mb-3">About Us</h3>
                   <p className="text-[13px] text-[#1e0a3c]/70 leading-relaxed font-bold max-w-md">
-                    NeedItStartup empowers early-stage founders with strategic guidance, scalable solutions, and global startup opportunities to transform innovative ideas into impactful ventures.
+                    Foundriva empowers early-stage founders with strategic guidance, scalable solutions, and global startup opportunities to transform innovative ideas into impactful ventures.
                   </p>
                 </div>
               </motion.div>
@@ -1014,12 +1014,12 @@ export const Footer = () => {
                 
                 <div className="space-y-3">
                   <motion.a
-                    href="mailto:needitstartup@gmail.com"
+                    href="mailto:foundriva@gmail.com"
                     whileHover={{ x: 4 }}
                     className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
                   >
                     <Mail size={16} className="flex-shrink-0" />
-                    <span className="text-[13px] font-bold">needitstartup@gmail.com</span>
+                    <span className="text-[13px] font-bold">foundriva@gmail.com</span>
                   </motion.a>
 
                   <motion.a
@@ -1032,7 +1032,7 @@ export const Footer = () => {
                   </motion.a>
 
                   <motion.a
-                    href="https://instagram.com/needit_startup"
+                    href="https://instagram.com/found_riva"
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
@@ -1043,18 +1043,18 @@ export const Footer = () => {
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                       <circle cx="17.5" cy="6.5" r="1.5"></circle>
                     </svg>
-                    <span className="text-[13px] font-bold">@needit_startup</span>
+                    <span className="text-[13px] font-bold">@found_riva</span>
                   </motion.a>
 
                   <motion.a
-                    href="https://linkedin.com/company/needitstartup"
+                    href="https://linkedin.com/company/foundriva"
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
                     className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
                   >
                     <Share2 size={16} className="flex-shrink-0" />
-                    <span className="text-[13px] font-bold">NeedItStartup</span>
+                    <span className="text-[13px] font-bold">Foundriva</span>
                   </motion.a>
                 </div>
               </motion.div>
@@ -1081,7 +1081,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               className="text-[11px] font-bold text-white/40 tracking-widest"
             >
-              © 2025 NeedItStartup. All Rights Reserved.
+              © 2025 Foundriva. All Rights Reserved.
             </motion.p>
           </div>
         </div>
