@@ -529,82 +529,85 @@ const PlatformSection = () => (
 const WhatsNew = () => (
   <section className="py-24 relative z-10 overflow-hidden">
     <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-      <div className="grid lg:grid-cols-5 gap-12 xl:gap-20 items-start">
-        {/* Left Side: Heading + 3 Stages (60% width) */}
-        <div className="lg:col-span-3 space-y-10">
+      <div className="grid lg:grid-cols-[50%_50%] gap-12 xl:gap-20 items-center">
+        {/* Left Side: Heading + 4 Horizontal Rectangles (50% width) */}
+        <div className="space-y-8">
           <div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-6 tracking-tighter"
+              className="text-4xl lg:text-[56px] font-bold text-[#1e0a3c] leading-[1.05] mb-6 tracking-tighter"
             >
               Core services we <br />
               provide for you
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-[17px] text-[#1e0a3c]/50 font-bold leading-relaxed max-w-md mb-8"
+            >
+              We provide a comprehensive ecosystem of support to help you navigate every stage of your startup journey.
+            </motion.p>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 gap-4">
             {[
               {
                 title: 'Market Entry',
-                icon: Globe,
-                points: ['Market Access', 'Digital Marketing', 'Incubation']
+                desc: 'Strategic international market access and digital growth strategies.',
+                icon: Globe
               },
               {
-                title: 'Expansion',
-                icon: TrendingUp,
-                points: ['Export Support', 'Distributor Network', 'Investor Support']
+                title: 'Expansion Setup',
+                desc: 'Scalable export facilitation and distributor network management.',
+                icon: TrendingUp
               },
               {
-                title: 'Scale',
-                icon: Rocket,
-                points: ['Manufacturing', 'Growth Roadmap', 'Partnerships']
+                title: 'Scale Globally',
+                desc: 'Global manufacturing support and international growth roadmaps.',
+                icon: Rocket
+              },
+              {
+                title: 'Explore More Services',
+                desc: 'Discover our full range of incubation, funding, and workspace solutions.',
+                icon: Layout,
+                isSpecial: true
               }
-            ].map((stage, i) => (
+            ].map((service, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -8 }}
-                className={`p-6 rounded-[2rem] border transition-all duration-300 cursor-pointer shadow-xl aspect-square flex flex-col justify-between ${
-                  i === 1
-                    ? 'bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50'
-                    : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20'
+                className={`p-5 rounded-[1.25rem] border transition-all duration-300 flex items-center gap-4 ${
+                  service.isSpecial 
+                    ? 'bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-xl shadow-[#1e0a3c]/20 cursor-pointer'
+                    : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-lg shadow-[#1e0a3c]/5'
                 }`}
-                onClick={() => window.location.href = '/services'}
+                onClick={() => service.isSpecial && (window.location.href = '/services')}
               >
-                <div>
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 shadow-md ${
-                    i === 1 ? 'bg-white/10 text-white' : 'bg-[#1e0a3c] text-white'
-                  }`}>
-                    <stage.icon size={20} />
-                  </div>
-                  <h4 className={`text-[18px] font-bold tracking-tight mb-3 ${
-                    i === 1 ? 'text-white' : 'text-[#1e0a3c]'
-                  }`}>{stage.title}</h4>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm ${
+                  service.isSpecial ? 'bg-white text-[#1e0a3c]' : 'bg-white border border-[#1e0a3c]/10 text-[#1e0a3c]'
+                }`}>
+                  <service.icon size={18} />
                 </div>
-                
-                <ul className="space-y-2">
-                  {stage.points.map((point, j) => (
-                    <li key={j} className={`flex items-center gap-2 text-[12px] font-bold ${
-                      i === 1 ? 'text-white/70' : 'text-[#1e0a3c]/50'
-                    }`}>
-                      <div className={`w-1 h-1 rounded-full ${i === 1 ? 'bg-white/30' : 'bg-[#1e0a3c]/20'}`} />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <h4 className="text-[17px] font-bold tracking-tight">{service.title}</h4>
+                </div>
+                <ArrowRight size={18} className={`ml-auto ${service.isSpecial ? 'text-white/40' : 'text-[#1e0a3c]/20'}`} />
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Right Side: Animation (40% width) */}
-        <div className="lg:col-span-2 relative flex justify-center lg:justify-end h-full pt-16">
-          <div className="relative w-full max-w-[460px] h-[500px] scale-90 xl:scale-100 origin-center lg:origin-right cursor-pointer" onClick={() => window.location.href = '/services'}>
+        {/* Right Side: Animation (50% width) */}
+        <div className="relative flex justify-center h-full pt-16">
+          <div className="relative w-full max-w-[460px] h-[500px] scale-90 xl:scale-100 origin-center">
             {[
               { label: 'Startups', value: '142', icon: Rocket },
               { label: 'Mentors', value: '84', icon: Users },
