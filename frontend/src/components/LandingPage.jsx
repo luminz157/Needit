@@ -749,7 +749,6 @@ const TermsModal = ({ isOpen, onClose }) => {
         </button>
 
         <h1 className="text-[32px] font-bold text-[#1e0a3c] mb-4 tracking-tight">Terms and Conditions</h1>
-        <p className="text-sm text-[#1e0a3c]/70 mb-8">Last Updated: 2025</p>
 
         <div className="space-y-8 text-[#1e0a3c]/80 text-[15px] leading-relaxed font-bold">
           <section>
