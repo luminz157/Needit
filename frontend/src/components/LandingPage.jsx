@@ -99,7 +99,7 @@ export const Navbar = () => {
     >
       <div className="max-w-[1440px] h-full mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
         <a href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <img src="/1.png" alt="Foundriva Logo" className="h-[4.5rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
+          <img src="/1.png" alt="Foundriva Logo" className="h-[5.5rem] md:h-[7.3rem] lg:h-[8.5rem] object-contain group-hover:scale-105 transition-transform" />
         </a>
 
         <nav className="hidden md:flex items-center gap-5 lg:gap-8 xl:gap-10">
