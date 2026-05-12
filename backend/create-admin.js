@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 async function createAdmin() {
   const username = 'admin';
-  const password = process.env.ADMIN_PASSWORD || 'needit2026';
+  const password = process.env.ADMIN_PASSWORD || 'foundriva2026';
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {

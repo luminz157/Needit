@@ -539,32 +539,101 @@ const WhatsNew = () => (
           Core services we <br />
           provide for you
         </motion.h2>
-        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-6">
-          {[
-            { icon: Globe, title: 'Market Access', desc: 'International market entry & Global partnerships.' },
-            { icon: TrendingUp, title: 'Digital Growth', desc: 'Performance marketing, Branding & Lead generation.' },
-            { icon: DollarSign, title: 'Startup Funding', desc: 'Investor introductions & VC connectivity (TRL 6+).' },
-            { icon: Briefcase, title: 'Incubation', desc: 'Mentorship, Startup planning & Business strategy.' }
-          ].map((f, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+        <div className="grid gap-6">
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              { icon: Globe, title: 'Market Access', desc: 'International market entry & Global partnerships.' },
+              { icon: TrendingUp, title: 'Digital Growth', desc: 'Performance marketing, branding & lead generation.' },
+              { icon: DollarSign, title: 'Startup Funding', desc: 'Investor introductions & VC connectivity (TRL 6+).' }
+            ].map((f, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ translateY: -8 }}
+                className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
+                onClick={() => window.location.href = '/services'}
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md transition-colors">
+                  <f.icon size={20} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#1e0a3c] text-[18px] mb-1.5 tracking-tight">{f.title}</h4>
+                  <p className="text-[14px] text-[#1e0a3c]/50 font-bold leading-snug">{f.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            whileHover={{ scale: 1.03 }}
+            className="relative overflow-hidden rounded-[3rem] border border-[#1e0a3c]/10 bg-white p-10 shadow-2xl shadow-[#1e0a3c]/10 min-h-[320px]"
+            onClick={() => window.location.href = '/services'}
+          >
+            <div className="absolute -right-16 top-10 w-40 h-40 rounded-full bg-[#1e0a3c]/10 blur-2xl" />
+            <div className="absolute -left-16 bottom-10 w-40 h-40 rounded-full bg-[#1e0a3c]/10 blur-2xl" />
+            <motion.div
+              initial={{ x: -60, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ backgroundColor: "rgba(30, 10, 60, 1)", color: "white" }}
-              className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
-              onClick={() => window.location.href = '/services'}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="absolute inset-x-0 top-0 h-1 rounded-t-[1.5rem] bg-[#1e0a3c]"
+            />
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="w-16 h-16 rounded-[2rem] bg-[#1e0a3c] flex items-center justify-center text-white shadow-lg">
+                <Layout size={30} />
+              </div>
+              <div className="max-w-2xl">
+                <p className="text-[12px] uppercase tracking-[0.35em] text-[#1e0a3c]/40 mb-3">New Service</p>
+                <h4 className="text-[28px] md:text-[34px] font-bold text-[#1e0a3c] mb-3">Co-Working Space</h4>
+                <p className="text-[15px] text-[#1e0a3c]/70 leading-relaxed font-bold max-w-xl">
+                  Helping startups find the right workspace with flexible desks, meeting rooms, and community-driven office support.
+                </p>
+              </div>
+            </div>
+            <motion.div
+              initial={{ x: 60, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+              className="mt-8 inline-flex items-center gap-2 text-[#1e0a3c] font-bold"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md group-hover:bg-white group-hover:text-[#1e0a3c] transition-colors">
-                <f.icon size={20} />
-              </div>
-              <div>
-                <h4 className="font-bold text-[#1e0a3c] group-hover:text-white text-[18px] mb-1.5 transition-colors tracking-tight">{f.title}</h4>
-                <p className="text-[14px] text-[#1e0a3c]/30 group-hover:text-white/60 font-bold leading-snug transition-colors">{f.desc}</p>
-              </div>
+              Discover coworking <ArrowRight size={16} />
             </motion.div>
-          ))}
+          </motion.div>
+
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              { icon: Briefcase, title: 'Incubation', desc: 'Mentorship, startup planning & business strategy.' },
+              { icon: Users, title: 'Investor Access', desc: 'Connections to investors, partners, and funding networks.' },
+              { icon: Award, title: 'Grant Application', desc: 'Assistance securing grants, subsidies, and innovation funding.' }
+            ].map((f, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 + 0.2 }}
+                whileHover={{ translateY: -8 }}
+                className="flex gap-4 p-7 rounded-[2rem] border border-[#1e0a3c]/5 group transition-all duration-300 cursor-pointer bg-white shadow-lg shadow-[#1e0a3c]/5"
+                onClick={() => window.location.href = '/services'}
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#1e0a3c] flex-shrink-0 flex items-center justify-center text-white shadow-md transition-colors">
+                  <f.icon size={20} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#1e0a3c] text-[18px] mb-1.5 tracking-tight">{f.title}</h4>
+                  <p className="text-[14px] text-[#1e0a3c]/50 font-bold leading-snug">{f.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 

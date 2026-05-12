@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, TrendingUp, DollarSign, Briefcase, Shield, Settings, ArrowRight } from 'lucide-react';
+import { Globe, TrendingUp, DollarSign, Briefcase, Shield, Settings, Layout, ArrowRight } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -77,9 +77,9 @@ export default function Services() {
 
   const services = [
     {
-      title: "Market Access",
-      icon: <Globe />,
-      items: ["International market entry", "Global partnerships", "Expansion strategy", "Business matchmaking"]
+      title: "Co-Working Space",
+      icon: <Layout />,
+      items: ["Flexible desk plans and dedicated meeting rooms", "Community events and mentor-led networking", "High-speed internet and office support services"]
     },
     {
       title: "Export Support",
@@ -129,7 +129,8 @@ export default function Services() {
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
         {services.map((service, index) => {
-          const isDark = index % 2 === 1;
+          const isHighlight = service.type === 'highlight';
+          const isDark = !isHighlight && index % 2 === 1;
           return (
           <motion.div 
             key={index}
@@ -138,18 +139,21 @@ export default function Services() {
             whileHover="hover"
             viewport={{ once: false, amount: 0.3 }}
             variants={cardCombined}
-            className={`group relative flex flex-col items-center text-center h-full min-h-[340px] rounded-[1.5rem] p-8 lg:p-10 border transition-all shadow-2xl hover:shadow-xl overflow-hidden ${
-              isDark 
-                ? "bg-[#1e0a3c] text-white border-[#1e0a3c]/10 shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50" 
-                : "bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20"
-            }`}
-          >
+            className={`group relative ${isHighlight ? 'col-span-3 lg:max-w-[50%] mx-auto' : ''} flex flex-col ${isHighlight ? 'items-start text-left' : 'items-center text-center'} h-full min-h-[340px] rounded-[1.5rem] p-8 lg:p-10 border transition-all shadow-2xl hover:shadow-xl overflow-hidden ${
+              isHighlight
+                ? 'bg-[#f8fafc] text-[#1e0a3c] border-[#1e0a3c]/10 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/40'
+                : isDark 
+                  ? 'bg-[#1e0a3c] text-white border-[#1e0a3c]/10 shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50' 
+                  : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20'
+            }`}>
             {/* Animated border glow effect */}
             <motion.div 
               className={`absolute inset-0 rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
-                isDark 
-                  ? "bg-gradient-to-r from-white/10 via-white/5 to-transparent" 
-                  : "bg-gradient-to-r from-[#1e0a3c]/10 via-[#1e0a3c]/5 to-transparent"
+                isHighlight
+                  ? 'bg-gradient-to-r from-[#1e0a3c]/10 via-[#1e0a3c]/15 to-transparent'
+                  : isDark 
+                    ? 'bg-gradient-to-r from-white/10 via-white/5 to-transparent' 
+                    : 'bg-gradient-to-r from-[#1e0a3c]/10 via-[#1e0a3c]/5 to-transparent'
               }`}
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
@@ -157,17 +161,17 @@ export default function Services() {
             />
             
             <motion.div 
-              className={`relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-all duration-300 ${isDark ? "bg-white/10 group-hover:bg-white/15" : "bg-[#1e0a3c]/5 group-hover:bg-[#1e0a3c]/10"}`}
+              className={`relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-all duration-300 ${isHighlight ? 'bg-[#1e0a3c] text-white' : isDark ? 'bg-white/10 group-hover:bg-white/15' : 'bg-[#1e0a3c]/5 group-hover:bg-[#1e0a3c]/10'}`}
               initial="rest"
               whileHover="hover"
               variants={iconAnimation}
             >
-              {React.cloneElement(service.icon, { className: `w-10 h-10 ${isDark ? "text-white" : "text-[#1e0a3c]"}` })}
+              {React.cloneElement(service.icon, { className: `w-10 h-10 ${isHighlight ? 'text-white' : isDark ? 'text-white' : 'text-[#1e0a3c]'}` })}
             </motion.div>
-            <h3 className={`relative z-10 text-2xl font-bold mb-4 tracking-tight ${isDark ? "text-white" : "text-[#1e0a3c]"}`}>{service.title}</h3>
+            <h3 className={`relative z-10 text-2xl font-bold mb-4 tracking-tight ${isHighlight ? 'text-[#1e0a3c]' : isDark ? 'text-white' : 'text-[#1e0a3c]'}`}>{service.title}</h3>
             {service.note && (
               <motion.span 
-                className={`relative z-10 inline-block w-fit px-3 py-1 text-xs font-bold rounded-full mb-4 ${isDark ? "bg-white/10 text-white" : "bg-[#1e0a3c]/10 text-[#1e0a3c]"}`}
+                className={`relative z-10 inline-block w-fit px-3 py-1 text-xs font-bold rounded-full mb-4 ${isDark ? 'bg-white/10 text-white' : 'bg-[#1e0a3c]/10 text-[#1e0a3c]'}`}
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.3 }}
@@ -175,21 +179,31 @@ export default function Services() {
                 {service.note}
               </motion.span>
             )}
-            <ul className="relative z-10 space-y-4 w-full text-left mt-4">
-              {service.items.map((item, i) => (
-                <motion.li 
-                  key={i} 
-                  className={`flex items-start gap-3 text-[15px] font-bold ${isDark ? "text-white/80" : "text-[#1e0a3c]/80"}`}
-                  initial="rest"
-                  whileHover="hover"
-                  variants={itemAnimation}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <ArrowRight size={18} className={`mt-0.5 shrink-0 transition-colors duration-300 ${isDark ? "text-white/40 group-hover:text-white/60" : "text-[#1e0a3c]/40 group-hover:text-[#1e0a3c]/60"}`} />
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
+            {isHighlight ? (
+              <>
+                <ul className="relative z-10 list-disc list-inside space-y-3 mt-4 text-[15px] text-[#1e0a3c]/70 leading-relaxed font-bold">
+                  {service.points.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <ul className="relative z-10 space-y-4 w-full text-left mt-4">
+                {service.items.map((item, i) => (
+                  <motion.li 
+                    key={i} 
+                    className={`flex items-start gap-3 text-[15px] font-bold ${isDark ? 'text-white/80' : 'text-[#1e0a3c]/80'}`}
+                    initial="rest"
+                    whileHover="hover"
+                    variants={itemAnimation}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <ArrowRight size={18} className={`mt-0.5 shrink-0 transition-colors duration-300 ${isDark ? 'text-white/40 group-hover:text-white/60' : 'text-[#1e0a3c]/40 group-hover:text-[#1e0a3c]/60'}`} />
+                    {item}
+                  </motion.li>
+                ))}
+              </ul>
+            )}
           </motion.div>
         )})}
       </motion.div>

@@ -12,13 +12,13 @@ const qrcode = require('qrcode');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || 'needit_super_secret_key_123';
+const JWT_SECRET = process.env.JWT_SECRET || 'foundriva_super_secret_key_123';
 
 // Auto-create initial admin if not exists
 const initAdmin = async () => {
   const adminExists = db.prepare('SELECT COUNT(*) as count FROM admins').get();
   if (adminExists.count === 0) {
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'needit2026', 10);
+    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'foundriva2026', 10);
     db.prepare('INSERT INTO admins (username, password) VALUES (?, ?)').run('admin', hashedPassword);
     console.log('--- DEFAULT ADMIN CREATED ---');
   }
@@ -64,7 +64,7 @@ app.post('/api/contact', async (req, res) => {
     insert.run(name, email, company || '', message);
     
     await transporter.sendMail({
-      from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
+      from: `"Foundriva" <${process.env.EMAIL_USER}>`,
       to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
       subject: `🚀 New Inquiry from ${name}`,
       html: `<p>New inquiry from ${name} (${email})</p><p>${message}</p>`
@@ -103,7 +103,7 @@ app.post('/api/google-form', async (req, res) => {
       doc.on('end', () => resolve(Buffer.concat(buffers)));
       doc.on('error', reject);
       doc.rect(0, 0, 600, 150).fill('#1e0a3c');
-      doc.fontSize(28).fillColor('#ffffff').text('NEEDIT STARTUP', 50, 65);
+      doc.fontSize(28).fillColor('#ffffff').text('FOUNDRIVA', 50, 65);
       doc.moveDown(5);
       doc.fillColor('#1e0a3c').fontSize(16).text('Application Receipt');
       Object.entries(formData).forEach(([q, a]) => {
@@ -119,16 +119,16 @@ app.post('/api/google-form', async (req, res) => {
 
     if (userEmail) {
       await transporter.sendMail({
-        from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
+        from: `"Foundriva" <${process.env.EMAIL_USER}>`,
         to: userEmail,
-        subject: `Your Briefing - Needit Startup`,
+        subject: `Your Briefing - Foundriva`,
         html: `<p>Thank you for applying. See attached report.</p>`,
         attachments: [{ filename: 'Report.pdf', content: pdfBuffer }]
       });
     }
 
     await transporter.sendMail({
-      from: `"Needit Startup" <${process.env.EMAIL_USER}>`,
+      from: `"Foundriva" <${process.env.EMAIL_USER}>`,
       to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
       subject: `🚀 New Application Received`,
       html: `<p>New application received. See attached report.</p>`,
@@ -192,7 +192,7 @@ app.post('/api/admin/2fa/verify-login', async (req, res) => {
 // C. Setup 2FA (Get QR Code)
 app.post('/api/admin/2fa/setup', authenticateToken, async (req, res) => {
   try {
-    const secret = speakeasy.generateSecret({ name: `NeeditStartup (${req.user.username})` });
+    const secret = speakeasy.generateSecret({ name: `Foundriva (${req.user.username})` });
     const qrCodeUrl = await qrcode.toDataURL(secret.otpauth_url);
 
     // Save secret temporarily (unverified)
