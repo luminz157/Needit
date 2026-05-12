@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, TrendingUp, DollarSign, Briefcase, Shield, Settings, Layout, ArrowRight } from 'lucide-react';
+import { Globe, TrendingUp, DollarSign, Briefcase, Shield, Settings, Layout, ArrowRight, Megaphone } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -103,9 +103,9 @@ export default function Services() {
       items: ["Investor introductions and networking", "Pitch deck preparation", "Due diligence readiness", "Capital raise guidance"]
     },
     {
-      title: "Grant Application",
-      icon: <DollarSign />,
-      items: ["Grant opportunity sourcing", "Proposal and application support", "Submission tracking", "Eligibility and documentation review"]
+      title: "Digital Marketing",
+      icon: <Megaphone />,
+      items: ["Search Engine Optimization (SEO)", "Social media marketing and management", "Paid advertising campaigns (PPC, Meta Ads, Google Ads)", "Content strategy and brand storytelling", "Performance analytics and reporting"]
     }
   ];
 

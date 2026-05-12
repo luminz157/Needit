@@ -937,11 +937,12 @@ export const Footer = () => {
   const navigate = useNavigate();
 
   const services = [
+    "Co-Working Space",
     "Export Support",
     "Distributor Network",
     "Manufacturing Support",
     "Investor Access",
-    "Grant Application"
+    "Digital Marketing"
   ];
 
   return (
