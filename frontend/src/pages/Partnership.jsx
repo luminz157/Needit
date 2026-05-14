@@ -97,9 +97,11 @@ const Partnership = () => {
               Build the Next Generation of Startups Together. We collaborate with innovation hubs and ecosystems to bridge the gap between innovation and execution.
             </motion.p>
             
-            <motion.div variants={fadeUp} className="flex justify-center gap-4">
+             <motion.div variants={fadeUp} className="flex justify-center gap-4">
                <a 
-                href="mailto:partnerships@foundriva.com" 
+                href="https://forms.gle/FYk8TNABaD7w2Jag8" 
+                target="_blank"
+                rel="noreferrer"
                 className="px-8 py-4 rounded-[1.25rem] bg-white border-2 border-[#1e0a3c] text-[#1e0a3c] flex items-center justify-center hover:bg-[#1e0a3c] hover:text-white hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/5 font-bold tracking-widest text-[14px] gap-2"
               >
                 <Handshake size={20} /> Become a Partner
@@ -151,7 +153,9 @@ const Partnership = () => {
                   className="bg-[#1e0a3c] p-8 rounded-[2rem] shadow-xl shadow-[#1e0a3c]/20 border border-white/10 text-center group hover:scale-105 transition-all duration-500"
                 >
                   <div className="mb-6 flex justify-center">
-                    <stat.icon size={32} className="text-white" />
+                    <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white shadow-inner">
+                      <stat.icon size={32} />
+                    </div>
                   </div>
                   <p className="text-[12px] font-bold text-white/40 uppercase tracking-widest mb-1">{stat.label}</p>
                   <p className="text-xl font-bold text-white">{stat.value}</p>
@@ -244,9 +248,9 @@ const Partnership = () => {
                 variants={fadeUp}
                 custom={i * 0.05}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white px-8 py-5 rounded-2xl border border-[#1e0a3c]/10 shadow-lg shadow-[#1e0a3c]/5 transition-all duration-300 flex items-center justify-center text-center min-w-[240px]"
+                className="bg-white px-8 py-5 rounded-2xl border border-[#1e0a3c]/10 shadow-lg shadow-[#1e0a3c]/5 transition-all duration-300 flex items-center justify-center text-center min-w-[240px] hover:bg-[#1e0a3c] group cursor-default"
               >
-                <span className="text-[16px] font-bold text-[#1e0a3c]/80 leading-tight">
+                <span className="text-[16px] font-bold text-[#1e0a3c]/80 group-hover:text-white leading-tight transition-colors">
                   {entity}
                 </span>
               </motion.div>
@@ -341,7 +345,8 @@ const Partnership = () => {
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i * 0.1}
-                    className="flex items-center gap-4 p-6 rounded-2xl bg-white border border-[#1e0a3c]/5 shadow-sm flex-grow"
+                    whileHover={{ x: 12, backgroundColor: "rgba(30, 10, 60, 0.02)" }}
+                    className="flex items-center gap-4 p-6 rounded-2xl bg-white border border-[#1e0a3c]/5 shadow-sm flex-grow cursor-default transition-colors duration-300"
                   >
                     <CheckCircle2 className="text-[#1e0a3c]" size={20} />
                     <span className="text-[#1e0a3c] font-bold text-[17px]">{item}</span>
@@ -375,7 +380,8 @@ const Partnership = () => {
                     viewport={{ once: true }}
                     variants={fadeUp}
                     custom={i * 0.2}
-                    className="p-8 rounded-[2rem] bg-[#1e0a3c] border border-white/10 shadow-xl shadow-[#1e0a3c]/20 flex-grow relative overflow-hidden group"
+                    whileHover={{ x: 12 }}
+                    className="p-8 rounded-[2rem] bg-[#1e0a3c] border border-white/10 shadow-xl shadow-[#1e0a3c]/20 flex-grow relative overflow-hidden group cursor-default"
                   >
                     <div className="flex items-center gap-6 relative z-10 h-full">
                       <span className="text-[32px] font-black text-white/40 leading-none">
@@ -457,7 +463,7 @@ const Partnership = () => {
                 </div>
                 <div className="text-left">
                   <p className="text-[10px] font-bold opacity-40 uppercase tracking-widest">Email Us</p>
-                  <a href="mailto:partnerships@foundriva.com" className="font-bold hover:underline">partnerships@foundriva.com</a>
+                  <a href="mailto:foundriva@gmail.com" className="font-bold hover:underline">foundriva@gmail.com</a>
                 </div>
               </div>
               
@@ -478,7 +484,9 @@ const Partnership = () => {
               className="inline-block"
             >
               <a 
-                href="mailto:partnerships@foundriva.com" 
+                href="https://forms.gle/FYk8TNABaD7w2Jag8" 
+                target="_blank"
+                rel="noreferrer"
                 className="mt-8 px-8 py-4 rounded-[1.25rem] bg-white border-2 border-[#1e0a3c] text-[#1e0a3c] font-bold tracking-widest text-[14px] shadow-2xl shadow-[#1e0a3c]/5 flex items-center justify-center gap-2 hover:bg-[#1e0a3c] hover:text-white transition-all"
               >
                 <Handshake size={20} /> Become a Partner

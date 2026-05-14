@@ -1059,10 +1059,21 @@ export const Footer = () => {
                   <motion.a
                     href="mailto:foundriva@gmail.com"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
+                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit group"
                   >
                     <Mail size={16} className="flex-shrink-0" />
                     <span className="text-[13px] font-bold">foundriva@gmail.com</span>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.foundriva.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit group"
+                  >
+                    <Globe size={16} className="flex-shrink-0" />
+                    <span className="text-[13px] font-bold">www.foundriva.com</span>
                   </motion.a>
 
                   <motion.a
