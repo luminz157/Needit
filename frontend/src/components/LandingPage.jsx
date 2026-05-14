@@ -65,6 +65,7 @@ export const Navbar = () => {
     { name: 'Industries', href: '/industries' },
     { name: 'Services', href: '/services' },
     { name: 'Blogs', href: '/blogs' },
+    { name: 'Partnership', href: '/partnership' },
     { name: 'Application', href: '/contact' }
   ];
 
@@ -990,6 +991,15 @@ export const Footer = () => {
                       className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
                     >
                       Blogs
+                    </motion.a>
+                  </li>
+                  <li>
+                    <motion.a
+                      href="/partnership"
+                      whileHover={{ x: 4 }}
+                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                    >
+                      Partnership
                     </motion.a>
                   </li>
                   <li>

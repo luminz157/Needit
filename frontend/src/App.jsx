@@ -5,6 +5,7 @@ import Services from './pages/Services.jsx';
 import Programs from './pages/Programs.jsx';
 import Industries from './pages/Industries.jsx';
 import Blogs from './pages/Blogs.jsx';
+import Partnership from './pages/Partnership.jsx';
 import './App.css';
 
 // We'll use a wrapper to provide the layout for all pages
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/programs" element={<Programs />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/partnership" element={<Partnership />} />
           {/* Catch all route - Redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
