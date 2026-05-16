@@ -49,7 +49,7 @@ export default function Services() {
       icon: <Megaphone fill="currentColor" />,
       image: "/s2.png",
       fees: [
-        { icon: <Calendar size={16} className="text-white" />, text: "Fees: ₹10,000 / Month" }
+        { icon: <Calendar size={16} className="text-white" />, text: "Fees: ₹15,000 / Month" }
       ]
     },
     {
