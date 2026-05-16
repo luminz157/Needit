@@ -1,59 +1,15 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Globe, TrendingUp, DollarSign, Briefcase, Shield, Settings, Layout, ArrowRight, Megaphone } from 'lucide-react';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
+import { Factory, Megaphone, Users, Handshake, FileText, Globe, Tag, Calendar } from 'lucide-react';
 
 const stagger = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
 };
 
-const cardHover = {
-  rest: {
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.3, ease: "easeOut" }
-  },
-  hover: {
-    y: -12,
-    scale: 1.02,
-    transition: { duration: 0.3, ease: "easeOut" }
-  }
-};
-
-const iconAnimation = {
-  rest: {
-    scale: 1,
-    rotate: 0,
-    transition: { duration: 0.3 }
-  },
-  hover: {
-    scale: 1.15,
-    rotate: 10,
-    transition: { duration: 0.3, ease: "easeOut" }
-  }
-};
-
-const itemAnimation = {
-  rest: { x: 0, opacity: 1 },
-  hover: {
-    x: 4,
-    opacity: 1,
-    transition: { duration: 0.2 }
-  }
-};
-
-const scrollReveal = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
-  }
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
 const cardCombined = {
@@ -64,8 +20,7 @@ const cardCombined = {
     transition: { duration: 0.5, ease: "easeOut" }
   },
   hover: {
-    y: -12,
-    scale: 1.02,
+    y: -5,
     transition: { duration: 0.3, ease: "easeOut" }
   }
 };
@@ -77,47 +32,70 @@ export default function Services() {
 
   const services = [
     {
-      title: "Co-Working Space",
-      icon: <Layout />,
-      items: ["Flexible desk plans and dedicated meeting rooms", "Community events and mentor-led networking", "High-speed internet and office support services"]
+      title: "Manufacturing, Export & Distribution Support",
+      description: "Manufacturer sourcing, coordination, export guidance, distributor network access and international market entry support.",
+      icon: <Factory fill="currentColor" />,
+      image: "/s1.png",
+      fees: [
+        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+      ]
     },
     {
-      title: "Export Support",
-      icon: <Shield />,
-      items: ["Regulatory guidance for export markets", "Export documentation and customs support", "Market clearance and compliance assistance", "Strategic export route planning"]
+      title: "Digital Marketing Support",
+      description: "Brand building, social media management, content strategy, ad campaign setup and lead generation for startups.",
+      icon: <Megaphone fill="currentColor" />,
+      image: "/s2.png",
+      fees: [
+        { icon: <Calendar size={16} className="text-[#1e0a3c]" />, text: "Fees: ₹20,000 / Month" }
+      ]
     },
     {
-      title: "Distributor Network",
-      icon: <Briefcase />,
-      items: ["Channel partner sourcing and onboarding", "Distributor agreement support", "Market coverage planning", "Logistics and local distribution coordination"]
+      title: "Co-Working Space Support",
+      description: "Access to co-working spaces, incubation networks and startup ecosystem to help you build and grow.",
+      icon: <Users fill="currentColor" />,
+      image: "/s3.png",
+      fees: [
+        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Support Fees: ₹10,000 (One-Time)" }
+      ]
     },
     {
-      title: "Manufacturing Support",
-      icon: <Settings />,
-      items: ["Vendor evaluation and selection", "Local production setup", "Manufacturing optimization", "Quality assurance and supply chain support"]
+      title: "Investor Access Support",
+      tag: "TRL 6+ Only",
+      description: "Investor readiness guidance, pitch deck review, VC & angel investor introductions and funding network access.",
+      icon: <Handshake fill="currentColor" />,
+      image: "/s4.png",
+      fees: [
+        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "3% Success Fee on Total Funds Raised" }
+      ]
     },
     {
-      title: "Investor Access",
-      note: "For eligible startups",
-      icon: <TrendingUp />,
-      items: ["Investor introductions and networking", "Pitch deck preparation", "Due diligence readiness", "Capital raise guidance"]
+      title: "Grant Application Guidance",
+      description: "End-to-end support in identifying, applying and securing government and private grants for your startup.",
+      icon: <FileText fill="currentColor" />,
+      image: "/s5.png",
+      fees: [
+        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+      ]
     },
     {
-      title: "Digital Marketing",
-      icon: <Megaphone />,
-      items: ["Search Engine Optimization (SEO)", "Social media marketing and management", "Paid advertising campaigns (PPC, Meta Ads, Google Ads)", "Content strategy and brand storytelling", "Performance analytics and reporting"]
+      title: "Global Expansion Support",
+      description: "International market research, business expansion strategy, global partnerships and trade connections.",
+      icon: <Globe fill="transparent" />,
+      image: "/s6.jpeg",
+      fees: [
+        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+      ]
     }
   ];
 
   return (
     <div className="pt-32 pb-20 px-6 lg:px-12 max-w-[1440px] mx-auto min-h-screen">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center mb-16">
-        <motion.p variants={fadeUp} className="text-[11px] font-bold tracking-[0.35em] text-[#1e0a3c] opacity-50 mb-5 uppercase">What We Offer</motion.p>
-        <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-[#1e0a3c] mb-6 tracking-tighter">
-          Detailed Services
+        <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-[#1e0a3c] mb-4 tracking-tighter">
+          Our Services
         </motion.h1>
-        <motion.p variants={fadeUp} className="text-[16px] text-[#1e0a3c]/60 font-bold max-w-2xl mx-auto leading-relaxed">
-          Comprehensive support tailored to accelerate your startup's growth, from market validation to global expansion.
+        <motion.p variants={fadeUp} className="text-[16px] text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
+          Foundriva empowers high-potential startups by providing end-to-end support for growth, global expansion, and investor access.
         </motion.p>
       </motion.div>
 
@@ -128,10 +106,7 @@ export default function Services() {
         variants={stagger}
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
-        {services.map((service, index) => {
-          const isHighlight = service.type === 'highlight';
-          const isDark = !isHighlight && index % 2 === 1;
-          return (
+        {services.map((service, index) => (
           <motion.div 
             key={index}
             initial="hidden"
@@ -139,73 +114,50 @@ export default function Services() {
             whileHover="hover"
             viewport={{ once: false, amount: 0.3 }}
             variants={cardCombined}
-            className={`group relative ${isHighlight ? 'col-span-3 lg:max-w-[50%] mx-auto' : ''} flex flex-col ${isHighlight ? 'items-start text-left' : 'items-center text-center'} h-full min-h-[340px] rounded-[1.5rem] p-8 lg:p-10 border transition-all shadow-2xl hover:shadow-xl overflow-hidden ${
-              isHighlight
-                ? 'bg-[#f8fafc] text-[#1e0a3c] border-[#1e0a3c]/10 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/40'
-                : isDark 
-                  ? 'bg-[#1e0a3c] text-white border-[#1e0a3c]/10 shadow-[#1e0a3c]/30 hover:shadow-[#1e0a3c]/50' 
-                  : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-[#1e0a3c]/10 hover:shadow-[#1e0a3c]/20'
-            }`}>
-            {/* Animated border glow effect */}
-            <motion.div 
-              className={`absolute inset-0 rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
-                isHighlight
-                  ? 'bg-gradient-to-r from-[#1e0a3c]/10 via-[#1e0a3c]/15 to-transparent'
-                  : isDark 
-                    ? 'bg-gradient-to-r from-white/10 via-white/5 to-transparent' 
-                    : 'bg-gradient-to-r from-[#1e0a3c]/10 via-[#1e0a3c]/5 to-transparent'
-              }`}
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-            
-            <motion.div 
-              className={`relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-all duration-300 ${isHighlight ? 'bg-[#1e0a3c] text-white' : isDark ? 'bg-white/10 group-hover:bg-white/15' : 'bg-[#1e0a3c]/5 group-hover:bg-[#1e0a3c]/10'}`}
-              initial="rest"
-              whileHover="hover"
-              variants={iconAnimation}
-            >
-              {React.cloneElement(service.icon, { className: `w-10 h-10 ${isHighlight ? 'text-white' : isDark ? 'text-white' : 'text-[#1e0a3c]'}` })}
-            </motion.div>
-            <h3 className={`relative z-10 text-2xl font-bold mb-4 tracking-tight ${isHighlight ? 'text-[#1e0a3c]' : isDark ? 'text-white' : 'text-[#1e0a3c]'}`}>{service.title}</h3>
-            {service.note && (
-              <motion.span 
-                className={`relative z-10 inline-block w-fit px-3 py-1 text-xs font-bold rounded-full mb-4 ${isDark ? 'bg-white/10 text-white' : 'bg-[#1e0a3c]/10 text-[#1e0a3c]'}`}
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-              >
-                {service.note}
-              </motion.span>
-            )}
-            {isHighlight ? (
-              <>
-                <ul className="relative z-10 list-disc list-inside space-y-3 mt-4 text-[15px] text-[#1e0a3c]/70 leading-relaxed font-bold">
-                  {service.points.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <ul className="relative z-10 space-y-4 w-full text-left mt-4">
-                {service.items.map((item, i) => (
-                  <motion.li 
-                    key={i} 
-                    className={`flex items-start gap-3 text-[15px] font-bold ${isDark ? 'text-white/80' : 'text-[#1e0a3c]/80'}`}
-                    initial="rest"
-                    whileHover="hover"
-                    variants={itemAnimation}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <ArrowRight size={18} className={`mt-0.5 shrink-0 transition-colors duration-300 ${isDark ? 'text-white/40 group-hover:text-white/60' : 'text-[#1e0a3c]/40 group-hover:text-[#1e0a3c]/60'}`} />
-                    {item}
-                  </motion.li>
+            className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-all duration-300"
+          >
+            {/* Image Section */}
+            <div className="relative h-44 w-full overflow-hidden bg-gray-50">
+              <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              
+              {/* Curved Background for Icon */}
+              <svg className="absolute top-0 left-0 h-full w-32 text-white" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
+              </svg>
+              
+              {/* Icon Container */}
+              <div className="absolute top-1/2 left-6 -translate-y-1/2 text-[#1e0a3c]">
+                {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="p-6 flex flex-col flex-grow">
+              <div className="flex items-start gap-3 mb-2 min-h-[56px]">
+                <h3 className="text-[19px] font-bold text-[#1e0a3c] leading-snug">{service.title}</h3>
+                {service.tag && (
+                  <span className="bg-[#1e0a3c]/5 text-[#1e0a3c] text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-[#1e0a3c]/10">
+                    {service.tag}
+                  </span>
+                )}
+              </div>
+              
+              <p className="text-[14px] text-gray-600 leading-relaxed mb-6 flex-grow">
+                {service.description}
+              </p>
+
+              {/* Fees Section */}
+              <div className="flex flex-col gap-2 mt-auto">
+                {service.fees.map((fee, i) => (
+                  <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-[#1e0a3c] bg-[#1e0a3c]/5 px-3 py-2 rounded-lg border border-[#1e0a3c]/10">
+                    {fee.icon}
+                    <span>{fee.text}</span>
+                  </div>
                 ))}
-              </ul>
-            )}
+              </div>
+            </div>
           </motion.div>
-        )})}
+        ))}
       </motion.div>
     </div>
   );
