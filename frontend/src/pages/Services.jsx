@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Factory, Megaphone, Users, Handshake, FileText, Globe, Tag, Calendar } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Factory, Megaphone, Users, Handshake, FileText, Globe, Tag, Calendar, X } from 'lucide-react';
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -26,6 +27,8 @@ const cardCombined = {
 };
 
 export default function Services() {
+  const [showTerms, setShowTerms] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -37,7 +40,7 @@ export default function Services() {
       icon: <Factory fill="currentColor" />,
       image: "/s1.png",
       fees: [
-        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
       ]
     },
     {
@@ -46,7 +49,7 @@ export default function Services() {
       icon: <Megaphone fill="currentColor" />,
       image: "/s2.png",
       fees: [
-        { icon: <Calendar size={16} className="text-[#1e0a3c]" />, text: "Fees: ₹20,000 / Month" }
+        { icon: <Calendar size={16} className="text-white" />, text: "Fees: ₹10,000 / Month" }
       ]
     },
     {
@@ -55,7 +58,7 @@ export default function Services() {
       icon: <Users fill="currentColor" />,
       image: "/s3.png",
       fees: [
-        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Support Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Support Fees: ₹10,000 (One-Time)" }
       ]
     },
     {
@@ -65,7 +68,7 @@ export default function Services() {
       icon: <Handshake fill="currentColor" />,
       image: "/s4.png",
       fees: [
-        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "3% Success Fee on Total Funds Raised" }
+        { icon: <Tag size={16} className="text-white" />, text: "3% Success Fee on Total Funds Raised" }
       ]
     },
     {
@@ -73,17 +76,18 @@ export default function Services() {
       description: "End-to-end support in identifying, applying and securing government and private grants for your startup.",
       icon: <FileText fill="currentColor" />,
       image: "/s5.png",
+      imageClass: "scale-[1.04]",
       fees: [
-        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Consultation Fees: ₹500 (One-Time)" }
       ]
     },
     {
       title: "Global Expansion Support",
       description: "International market research, business expansion strategy, global partnerships and trade connections.",
       icon: <Globe fill="transparent" />,
-      image: "/s6.jpeg",
+      image: "/s6.png",
       fees: [
-        { icon: <Tag size={16} className="text-[#1e0a3c]" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
       ]
     }
   ];
@@ -114,19 +118,19 @@ export default function Services() {
             whileHover="hover"
             viewport={{ once: false, amount: 0.3 }}
             variants={cardCombined}
-            className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-all duration-300"
+            className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
           >
             {/* Image Section */}
-            <div className="relative h-44 w-full overflow-hidden bg-gray-50">
-              <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+              <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
               
               {/* Curved Background for Icon */}
-              <svg className="absolute top-0 left-0 h-full w-32 text-white" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+              <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
                 <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
               </svg>
               
               {/* Icon Container */}
-              <div className="absolute top-1/2 left-6 -translate-y-1/2 text-[#1e0a3c]">
+              <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
                 {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
               </div>
             </div>
@@ -134,22 +138,22 @@ export default function Services() {
             {/* Content Section */}
             <div className="p-6 flex flex-col flex-grow">
               <div className="flex items-start gap-3 mb-2 min-h-[56px]">
-                <h3 className="text-[19px] font-bold text-[#1e0a3c] leading-snug">{service.title}</h3>
+                <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
                 {service.tag && (
-                  <span className="bg-[#1e0a3c]/5 text-[#1e0a3c] text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-[#1e0a3c]/10">
+                  <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
                     {service.tag}
                   </span>
                 )}
               </div>
               
-              <p className="text-[14px] text-gray-600 leading-relaxed mb-6 flex-grow">
+              <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
                 {service.description}
               </p>
 
               {/* Fees Section */}
               <div className="flex flex-col gap-2 mt-auto">
                 {service.fees.map((fee, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-[#1e0a3c] bg-[#1e0a3c]/5 px-3 py-2 rounded-lg border border-[#1e0a3c]/10">
+                  <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
                     {fee.icon}
                     <span>{fee.text}</span>
                   </div>
@@ -159,6 +163,63 @@ export default function Services() {
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Terms and Conditions Section */}
+      <motion.div 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true }} 
+        variants={fadeUp}
+        className="mt-16 max-w-3xl mx-auto text-center"
+      >
+        <button 
+          onClick={() => setShowTerms(true)}
+          className="text-[#1e0a3c] font-semibold hover:text-[#1e0a3c]/80 flex items-center justify-center gap-2 mx-auto transition-colors bg-gray-50 hover:bg-gray-100 px-8 py-3.5 rounded-full border border-gray-200 shadow-sm"
+        >
+          <span>Terms and Conditions</span>
+        </button>
+      </motion.div>
+
+      {/* Modal Popup - rendered via Portal to cover footer/navbar */}
+      {ReactDOM.createPortal(
+        <AnimatePresence>
+          {showTerms && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden relative"
+              >
+                {/* Header */}
+                <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-4 bg-gray-50/50">
+                  <button 
+                    onClick={() => setShowTerms(false)}
+                    className="p-2 -ml-2 hover:bg-gray-200 rounded-full transition-colors text-gray-500 hover:text-gray-800 focus:outline-none"
+                  >
+                    <X size={20} />
+                  </button>
+                  <h2 className="text-xl font-bold text-[#1e0a3c]">Terms and Conditions</h2>
+                </div>
+                
+                {/* Content */}
+                <div className="p-6 md:p-8 max-h-[70vh] overflow-y-auto">
+                  <ul className="space-y-4 text-[15px] text-gray-600 list-disc list-inside leading-relaxed">
+                    <li>Consultation fees are non-refundable once service execution begins.</li>
+                    <li>Investor access support is subject to startup evaluation and scalability assessment.</li>
+                    <li>Manufacturing, distribution, and export support are dependent on sector feasibility and partner availability.</li>
+                    <li>Digital marketing advertising budgets are separate from service charges.</li>
+                    <li>Foundriva does not guarantee funding, investment approvals, distributor onboarding, or export approvals.</li>
+                    <li>Timelines may vary depending on startup requirements and third-party coordination.</li>
+                  </ul>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
