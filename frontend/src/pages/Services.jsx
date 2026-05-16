@@ -108,16 +108,23 @@ export default function Services() {
         whileInView="visible" 
         viewport={{ once: true }} 
         variants={stagger}
-        className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
       >
         {services.map((service, index) => (
           <motion.div 
             key={index}
             initial="hidden"
-            whileInView="visible"
+            animate="visible"
             whileHover="hover"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={cardCombined}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: { 
+                opacity: 1, 
+                y: 0, 
+                transition: { duration: 0.5, ease: "easeOut", delay: index * 0.1 } 
+              },
+              hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
+            }}
             className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
           >
             {/* Image Section */}
