@@ -46,7 +46,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-[11px] font-bold opacity-40 uppercase tracking-widest mb-1">Email Us</p>
-                <p className="text-[15px] font-bold">scaleacessnetwork@gmail.com</p>
+                <p className="text-[15px] font-bold">scaleaccessnetwork@gmail.com</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -56,12 +56,12 @@ export default function Contact() {
               <div>
                 <p className="text-[11px] font-bold opacity-40 uppercase tracking-widest mb-1">LinkedIn</p>
                 <a 
-                  href="https://linkedin.com/company/scaleacessnetwork" 
+                  href="https://linkedin.com/company/scaleaccessnetwork" 
                   target="_blank"
                   rel="noreferrer"
                   className="text-[15px] font-bold hover:text-[#1e0a3c] transition-colors"
                 >
-                  scaleacessnetwork
+                  scaleaccessnetwork
                 </a>
               </div>
             </div>

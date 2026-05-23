@@ -89,7 +89,7 @@ export default function Services() {
           Our Services
         </motion.h1>
         <motion.p variants={fadeUp} className="text-[16px] text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
-          scaleacessnetwork empowers high-potential startups by providing end-to-end support for growth, global expansion, and investor access.
+          scaleaccessnetwork empowers high-potential startups by providing end-to-end support for growth, global expansion, and investor access.
         </motion.p>
       </motion.div>
 
@@ -303,7 +303,7 @@ export default function Services() {
                     <li>Investor access support is subject to startup evaluation and scalability assessment.</li>
                     <li>Manufacturing, distribution, and export support are dependent on sector feasibility and partner availability.</li>
                     <li>Digital marketing advertising budgets are separate from service charges.</li>
-                    <li>scaleacessnetwork does not guarantee funding, investment approvals, distributor onboarding, or export approvals.</li>
+                    <li>scaleaccessnetwork does not guarantee funding, investment approvals, distributor onboarding, or export approvals.</li>
                     <li>Timelines may vary depending on startup requirements and third-party coordination.</li>
                   </ul>
                 </div>

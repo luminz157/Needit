@@ -129,10 +129,10 @@ const Partnership = () => {
                 Empowering founders <br /> through synergy.
               </h2>
               <p className="text-[17px] text-[#1e0a3c]/60 font-bold leading-relaxed mb-8">
-                At scaleacessnetwork, we collaborate with incubation centers, innovation hubs, accelerators, universities, and startup ecosystems to support high-potential founders through mentorship, market access, branding, business development, and strategic growth support.
+                At scaleaccessnetwork, we collaborate with incubation centers, innovation hubs, accelerators, universities, and startup ecosystems to support high-potential founders through mentorship, market access, branding, business development, and strategic growth support.
               </p>
                 <p className="text-[17px] text-[#1e0a3c]/60 font-bold leading-relaxed mb-8">
-                  At scaleacessnetwork, we collaborate with incubation centers, innovation hubs, accelerators, universities, and startup ecosystems to support high-potential founders through mentorship, market access, branding, business development, and strategic growth support.
+                  At scaleaccessnetwork, we collaborate with incubation centers, innovation hubs, accelerators, universities, and startup ecosystems to support high-potential founders through mentorship, market access, branding, business development, and strategic growth support.
                 </p>
               <p className="text-[17px] text-[#1e0a3c]/60 font-bold leading-relaxed">
                 We believe strong ecosystems create successful startups. Through our incubation partnerships, we aim to bridge the gap between innovation and execution, ensuring every visionary founder has the platform they need to scale globally.
@@ -173,7 +173,7 @@ const Partnership = () => {
       <section className="py-24 px-6 lg:px-12 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto relative z-10">
           <SectionHeader 
-            title="Why Partner With scaleacessnetwork?" 
+            title="Why Partner With scaleaccessnetwork?" 
             subtitle="We provide specialized support tracks that complement incubation programs and accelerate startup success."
           />
           
@@ -403,12 +403,12 @@ const Partnership = () => {
         </div>
       </section>
 
-      {/* Why Ecosystems Choose scaleacessnetwork - Redesigned to match Image 1 Style */}
-        {/* Why Ecosystems Choose scaleacessnetwork - Redesigned to match Image 1 Style */}
+      {/* Why Ecosystems Choose scaleaccessnetwork - Redesigned to match Image 1 Style */}
+        {/* Why Ecosystems Choose scaleaccessnetwork - Redesigned to match Image 1 Style */}
       <section className="py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto text-center">
-          <SectionHeader 
-            title="Why Ecosystems Choose scaleacessnetwork" 
+            <SectionHeader 
+            title="Why Ecosystems Choose scaleaccessnetwork" 
             subtitle="We provide a structured framework to empower startups, accelerate growth, and foster sustainable innovation."
           />
           
@@ -467,7 +467,7 @@ const Partnership = () => {
                 </div>
                 <div className="text-left">
                   <p className="text-[10px] font-bold opacity-40 uppercase tracking-widest">Email Us</p>
-                  <a href="mailto:scaleacessnetwork@gmail.com" className="font-bold hover:underline">scaleacessnetwork@gmail.com</a>
+                  <a href="mailto:scaleaccessnetwork@gmail.com" className="font-bold hover:underline">scaleaccessnetwork@gmail.com</a>
                 </div>
               </div>
               
@@ -477,7 +477,7 @@ const Partnership = () => {
                 </div>
                 <div className="text-left">
                   <p className="text-[10px] font-bold opacity-40 uppercase tracking-widest">Visit Website</p>
-                  <a href="https://www.scaleacessnetwork.com" target="_blank" rel="noreferrer" className="font-bold hover:underline">www.scaleacessnetwork.com</a>
+                  <a href="https://www.scaleaccessnetwork.com" target="_blank" rel="noreferrer" className="font-bold hover:underline">www.scaleaccessnetwork.com</a>
                 </div>
               </div>
             </div>
