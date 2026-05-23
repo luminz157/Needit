@@ -40,7 +40,7 @@ export default function Services() {
       icon: <Factory fill="currentColor" />,
       image: "/s1.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -49,7 +49,7 @@ export default function Services() {
       icon: <Megaphone fill="currentColor" />,
       image: "/s2.png",
       fees: [
-        { icon: <Calendar size={16} className="text-white" />, text: "Fees: ₹15,000 / Month" }
+        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -58,7 +58,7 @@ export default function Services() {
       icon: <Users fill="currentColor" />,
       image: "/s3.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Support Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -68,17 +68,7 @@ export default function Services() {
       icon: <Handshake fill="currentColor" />,
       image: "/s4.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "3% Success Fee on Total Funds Raised" }
-      ]
-    },
-    {
-      title: "Grant Application Guidance",
-      description: "End-to-end support in identifying, applying and securing government and private grants for your startup.",
-      icon: <FileText fill="currentColor" />,
-      image: "/s5.png",
-      imageClass: "scale-[1.04]",
-      fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Consultation Fees: ₹500 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -87,7 +77,7 @@ export default function Services() {
       icon: <Globe fill="transparent" />,
       image: "/s6.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Consultation Fees: ₹10,000 (One-Time)" }
+        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
       ]
     }
   ];
@@ -99,77 +89,173 @@ export default function Services() {
           Our Services
         </motion.h1>
         <motion.p variants={fadeUp} className="text-[16px] text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
-          Foundriva empowers high-potential startups by providing end-to-end support for growth, global expansion, and investor access.
+          scaleacessnetwork empowers high-potential startups by providing end-to-end support for growth, global expansion, and investor access.
         </motion.p>
       </motion.div>
 
-      <motion.div 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true }} 
-        variants={stagger}
-        className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
-      >
-        {services.map((service, index) => (
-          <motion.div 
-            key={index}
-            initial="hidden"
-            animate="visible"
-            whileHover="hover"
-            variants={{
-              hidden: { opacity: 0, y: 40 },
-              visible: { 
-                opacity: 1, 
-                y: 0, 
-                transition: { duration: 0.5, ease: "easeOut", delay: index * 0.1 } 
-              },
-              hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
-            }}
-            className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
-          >
-            {/* Image Section */}
-            <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
-              <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
-              
-              {/* Curved Background for Icon */}
-              <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
-                <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
-              </svg>
-              
-              {/* Icon Container */}
-              <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
-                {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
+      <div className="mx-auto w-full max-w-[1120px]">
+        {/* Large screens: top row 3 cards, bottom row 2 cards centered */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-x-8 gap-y-12">
+          {services.slice(0,3).map((service, index) => (
+            <motion.div 
+              key={index}
+              initial="hidden"
+              animate="visible"
+              whileHover="hover"
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0, 
+                  transition: { duration: 0.5, ease: "easeOut", delay: index * 0.1 } 
+                },
+                hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
+              }}
+              className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
+            >
+              <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+                <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
+                <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                  <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
+                </svg>
+                <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
+                  {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
+                </div>
               </div>
-            </div>
 
-            {/* Content Section */}
-            <div className="p-6 flex flex-col flex-grow">
-              <div className="flex items-start gap-3 mb-2 min-h-[56px]">
-                <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
-                {service.tag && (
-                  <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
-                    {service.tag}
-                  </span>
-                )}
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-start gap-3 mb-2 min-h-[56px]">
+                  <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
+                  {service.tag && (
+                    <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
+                      {service.tag}
+                    </span>
+                  )}
+                </div>
+                <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
+
+                <div className="flex flex-col gap-2 mt-auto">
+                  {service.fees.map((fee, i) => (
+                    <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                      {fee.icon}
+                      <span>{fee.text}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              
-              <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
-                {service.description}
-              </p>
+            </motion.div>
+          ))}
+        </div>
 
-              {/* Fees Section */}
-              <div className="flex flex-col gap-2 mt-auto">
-                {service.fees.map((fee, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                    {fee.icon}
-                    <span>{fee.text}</span>
+        {/* Bottom row for large screens: center the two remaining cards */}
+        <div className="hidden lg:flex justify-center gap-x-8 mt-8">
+          {services.slice(3).map((service, idx) => (
+            <div key={idx} className="w-[33%]">
+              <motion.div 
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut", delay: idx * 0.1 } },
+                  hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
+                }}
+                className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300 h-full"
+              >
+                <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+                  <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
+                  <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                    <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
+                  </svg>
+                  <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
+                    {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
                   </div>
-                ))}
-              </div>
+                </div>
+
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-start gap-3 mb-2 min-h-[56px]">
+                    <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
+                    {service.tag && (
+                      <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
+                        {service.tag}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
+                    {service.description}
+                  </p>
+
+                  <div className="flex flex-col gap-2 mt-auto">
+                    {service.fees.map((fee, i) => (
+                      <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                        {fee.icon}
+                        <span>{fee.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
-        ))}
-      </motion.div>
+          ))}
+        </div>
+
+        {/* Mobile & tablet fallback: simple 2-column grid */}
+        <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+          {services.map((service, index) => (
+            <motion.div 
+              key={index}
+              initial="hidden"
+              animate="visible"
+              whileHover="hover"
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0, 
+                  transition: { duration: 0.5, ease: "easeOut", delay: index * 0.1 } 
+                },
+                hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
+              }}
+              className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
+            >
+              <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+                <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
+                <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                  <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
+                </svg>
+                <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
+                  {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-start gap-3 mb-2 min-h-[56px]">
+                  <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
+                  {service.tag && (
+                    <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
+                      {service.tag}
+                    </span>
+                  )}
+                </div>
+                <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
+
+                <div className="flex flex-col gap-2 mt-auto">
+                  {service.fees.map((fee, i) => (
+                    <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                      {fee.icon}
+                      <span>{fee.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
       {/* Terms and Conditions Section */}
       <motion.div 
@@ -217,7 +303,7 @@ export default function Services() {
                     <li>Investor access support is subject to startup evaluation and scalability assessment.</li>
                     <li>Manufacturing, distribution, and export support are dependent on sector feasibility and partner availability.</li>
                     <li>Digital marketing advertising budgets are separate from service charges.</li>
-                    <li>Foundriva does not guarantee funding, investment approvals, distributor onboarding, or export approvals.</li>
+                    <li>scaleacessnetwork does not guarantee funding, investment approvals, distributor onboarding, or export approvals.</li>
                     <li>Timelines may vary depending on startup requirements and third-party coordination.</li>
                   </ul>
                 </div>
