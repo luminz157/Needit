@@ -33,7 +33,7 @@ app.post('/api/contact', async (req, res) => {
     insert.run(name, email, company || '', message);
     
     await transporter.sendMail({
-      from: `"Foundriva" <${process.env.EMAIL_USER}>`,
+      from: `"scaleaccessnetwork" <${process.env.EMAIL_USER}>`,
       to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
       subject: `🚀 New Inquiry from ${name}`,
       html: `<p>New inquiry from ${name} (${email})</p><p>${message}</p>`
@@ -72,7 +72,7 @@ app.post('/api/google-form', async (req, res) => {
       doc.on('end', () => resolve(Buffer.concat(buffers)));
       doc.on('error', reject);
       doc.rect(0, 0, 600, 150).fill('#1e0a3c');
-      doc.fontSize(28).fillColor('#ffffff').text('FOUNDRIVA', 50, 65);
+      doc.fontSize(28).fillColor('#ffffff').text('scaleaccessnetwork', 50, 65);
       doc.moveDown(5);
       doc.fillColor('#1e0a3c').fontSize(16).text('Application Receipt');
       Object.entries(formData).forEach(([q, a]) => {
@@ -86,18 +86,18 @@ app.post('/api/google-form', async (req, res) => {
 
     const pdfBuffer = await generatePDF();
 
-    if (userEmail) {
+      if (userEmail) {
       await transporter.sendMail({
-        from: `"Foundriva" <${process.env.EMAIL_USER}>`,
+        from: `"scaleaccessnetwork" <${process.env.EMAIL_USER}>`,
         to: userEmail,
-        subject: `Your Briefing - Foundriva`,
+        subject: `Your Briefing - scaleaccessnetwork`,
         html: `<p>Thank you for applying. See attached report.</p>`,
         attachments: [{ filename: 'Report.pdf', content: pdfBuffer }]
       });
     }
 
     await transporter.sendMail({
-      from: `"Foundriva" <${process.env.EMAIL_USER}>`,
+      from: `"scaleaccessnetwork" <${process.env.EMAIL_USER}>`,
       to: process.env.FOUNDER_EMAIL || process.env.EMAIL_USER,
       subject: `🚀 New Application Received`,
       html: `<p>New application received. See attached report.</p>`,
