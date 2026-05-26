@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   const showNavbar = true;
 
   return (
-    <div className="relative min-h-screen flex flex-col selection:bg-[#1e0a3c] selection:text-white overflow-x-hidden bg-white" style={{ fontFamily: "'Lato', sans-serif" }}>
+    <div className="relative min-h-screen flex flex-col selection:bg-rose-500 selection:text-white overflow-x-hidden bg-[#eefcf9]" style={{ fontFamily: "'Lato', sans-serif" }}>
       <MainBackground />
       <MouseBackground />
       <Navbar />

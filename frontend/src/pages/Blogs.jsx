@@ -180,27 +180,27 @@ const Blogs = () => {
                   alt={post.title} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black tracking-widest text-[#1e0a3c]">
+                <div className="absolute top-4 left-4 px-4 py-1.5 bg-white/95 backdrop-blur-sm rounded-full text-[10px] font-black tracking-widest text-indigo-700 border border-teal-50/50 shadow-sm">
                   {post.category}
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-4 text-[11px] font-bold text-[#1e0a3c]/40 uppercase tracking-widest">
+                <div className="flex items-center gap-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
                   <span className="flex items-center gap-1.5"><Calendar size={12} /> {post.date}</span>
-                  <span className="w-1 h-1 bg-[#1e0a3c]/20 rounded-full" />
+                  <span className="w-1 h-1 bg-slate-200 rounded-full" />
                   <span className="flex items-center gap-1.5"><Clock size={12} /> 5 min read</span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-[#1e0a3c] leading-[1.2] tracking-tight group-hover:text-[#1e0a3c]/70 transition-colors">
+                <h3 className="text-2xl font-bold text-black leading-[1.2] tracking-tight group-hover:text-teal-500 transition-colors">
                   {post.title}
                 </h3>
 
-                <p className="text-[15px] text-[#1e0a3c]/60 font-medium leading-relaxed line-clamp-3">
+                <p className="text-[15px] text-black font-semibold leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
 
-                <div className="pt-4 flex items-center justify-between border-t border-[#1e0a3c]/5">
+                <div className="pt-4 flex items-center justify-between border-t border-teal-50">
                    <div className="flex items-center gap-4">
                       <button 
                         onClick={(e) => {
@@ -208,7 +208,7 @@ const Blogs = () => {
                           handleLike(i);
                         }}
                         className={`flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest transition-colors group/like ${
-                          post.liked ? 'text-red-500' : 'text-[#1e0a3c]/40'
+                          post.liked ? 'text-red-600' : 'text-slate-400 hover:text-teal-500'
                         }`}
                       >
                         <Heart 
@@ -216,7 +216,7 @@ const Blogs = () => {
                           fill={post.liked ? "#ef4444" : "none"} 
                           color={post.liked ? "#ef4444" : "currentColor"}
                           className={`transition-all ${
-                            !post.liked ? 'text-[#1e0a3c]/40' : ''
+                            !post.liked ? 'text-slate-400 group-hover/like:text-teal-500' : ''
                           }`} 
                         /> 
                         {post.likes} {post.likes === 1 ? 'LIKE' : 'LIKES'}
@@ -227,9 +227,9 @@ const Blogs = () => {
                        e.stopPropagation();
                        handleShare(post, i);
                      }}
-                     className="p-2 rounded-full hover:bg-[#1e0a3c]/5 transition-colors group/share"
+                     className="p-2 rounded-full hover:bg-teal-50 transition-colors group/share"
                    >
-                      <Share2 size={16} className="text-[#1e0a3c]/40 group-hover/share:text-[#1e0a3c]" />
+                      <Share2 size={16} className="text-slate-400 group-hover/share:text-teal-600" />
                    </button>
                 </div>
               </div>

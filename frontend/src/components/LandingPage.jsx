@@ -12,8 +12,8 @@ const Card = ({ children, className = "" }) => (
       y: -8,
       transition: { duration: 0.2, ease: "easeOut" }
     }}
-    className={`bg-white text-[#1e0a3c] rounded-[1.5rem] p-8 border border-[#1e0a3c]/5 shadow-2xl shadow-[#1e0a3c]/10 transition-all duration-300 hover:bg-[#1e0a3c] hover:text-white group cursor-pointer hover:shadow-[#1e0a3c]/30 ${className}`}
-    style={{ boxShadow: "0 20px 40px -15px rgba(30, 10, 60, 0.15)", fontFamily: "'Lato', sans-serif" }}
+    className={`bg-white text-black rounded-[1.5rem] p-8 border border-teal-50/80 shadow-2xl shadow-teal-100/40 transition-all duration-300 hover:border-teal-200 hover:shadow-teal-200/50 group cursor-pointer ${className}`}
+    style={{ boxShadow: "0 20px 40px -15px rgba(20, 184, 166, 0.12)", fontFamily: "'Lato', sans-serif" }}
   >
     {children}
   </motion.div>
@@ -22,8 +22,8 @@ const Card = ({ children, className = "" }) => (
 export const MainBackground = () => (
   <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
     {/* Faded Grid */}
-    <div className="absolute inset-0 opacity-[0.06]" 
-         style={{ backgroundImage: `linear-gradient(#1e0a3c 1px, transparent 1px), linear-gradient(90deg, #1e0a3c 1px, transparent 1px)`, backgroundSize: '80px 80px' }} />
+    <div className="absolute inset-0 opacity-[0.25]" 
+         style={{ backgroundImage: `linear-gradient(rgba(20, 184, 166, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 184, 166, 0.4) 1px, transparent 1px)`, backgroundSize: '80px 80px' }} />
   </div>
 );
 
@@ -45,7 +45,7 @@ export const MouseBackground = () => {
 
   return (
     <motion.div
-      className="fixed pointer-events-none z-0 w-[250px] h-[250px] rounded-full blur-[90px] bg-[#1e0a3c]/10"
+      className="fixed pointer-events-none z-0 w-[280px] h-[280px] rounded-full blur-[100px] bg-gradient-to-tr from-[#f43f5e]/20 via-[#fb7185]/15 to-[#14b8a6]/20"
       style={{ x, y }}
     />
   );
@@ -94,8 +94,8 @@ export const Navbar = () => {
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 h-[3.75rem] md:h-[5.25rem] overflow-visible transition-all duration-300 bg-white ${
-        scrolled ? 'shadow-sm' : ''
+      className={`fixed top-0 left-0 right-0 z-50 h-[3.75rem] md:h-[5.25rem] overflow-visible transition-all duration-300 bg-white shadow-sm ${
+        scrolled ? 'border-b border-teal-50/50' : ''
       }`}
     >
       <div className="max-w-[1440px] h-full mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
@@ -109,7 +109,7 @@ export const Navbar = () => {
               key={l.name} 
               href={l.href} 
               onClick={(e) => handleNavClick(e, l)}
-              className="text-sm md:text-[16px] font-bold text-[#1e0a3c]/50 hover:text-[#1e0a3c] transition-colors tracking-tight whitespace-nowrap"
+              className="text-sm md:text-[16px] font-bold text-black/60 hover:text-teal-500 transition-colors tracking-tight whitespace-nowrap"
             >
               {l.name}
             </a>
@@ -120,13 +120,13 @@ export const Navbar = () => {
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex md:hidden items-center justify-center p-2 rounded-full border border-[#1e0a3c]/10 text-[#1e0a3c] hover:bg-[#1e0a3c]/5 transition"
+            className="inline-flex md:hidden items-center justify-center p-2 rounded-full border border-teal-100 text-black hover:bg-teal-50 transition"
             aria-label="Toggle navigation menu"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          <a href="/contact" className="hidden md:inline-flex px-6 py-2 rounded-xl bg-[#1e0a3c] text-white text-[14px] font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/20 tracking-wider whitespace-nowrap">
+          <a href="/contact" className="hidden md:inline-flex px-6 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 text-white text-[14px] font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-teal-500/20 tracking-wider whitespace-nowrap">
             Explore now
           </a>
         </div>
@@ -134,7 +134,7 @@ export const Navbar = () => {
 
       {mobileOpen && (
         <div className="md:hidden px-4 pb-4">
-          <div className="rounded-[2rem] bg-white shadow-2xl shadow-[#1e0a3c]/10 border border-[#1e0a3c]/10 overflow-hidden">
+          <div className="rounded-[2rem] bg-white shadow-2xl shadow-teal-100/40 border border-teal-50 overflow-hidden">
             <nav className="flex flex-col gap-2 p-4">
               {links.map((l) => (
                 <a
@@ -144,14 +144,14 @@ export const Navbar = () => {
                     handleNavClick(e, l);
                     setMobileOpen(false);
                   }}
-                  className="block rounded-2xl px-4 py-3 text-sm font-bold text-[#1e0a3c]/80 hover:text-[#1e0a3c] hover:bg-[#1e0a3c]/5 transition"
+                  className="block rounded-2xl px-4 py-3 text-sm font-bold text-black/80 hover:text-teal-500 hover:bg-teal-50 transition"
                 >
                   {l.name}
                 </a>
               ))}
               <a
                 href="/contact"
-                className="block mt-2 rounded-2xl bg-[#1e0a3c] px-4 py-3 text-center text-sm font-bold text-white hover:bg-[#1b0730] transition"
+                className="block mt-2 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 px-4 py-3 text-center text-sm font-bold text-white hover:opacity-95 transition"
               >
                 Explore now
               </a>
@@ -163,32 +163,121 @@ export const Navbar = () => {
   );
 };
 
+// --- Trusted Section ---
+
+const TrustedSection = () => (
+  <section className="pt-32 pb-20 relative z-10 bg-[#eefcf9] -mt-16">
+    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative">
+      
+      {/* Floating Stats Bar */}
+      <div className="absolute -top-16 left-6 right-6 lg:left-12 lg:right-12 z-30">
+        <div className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-xl shadow-teal-900/5 p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 border border-teal-50">
+          <div className="flex flex-col text-center md:text-left">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Startups</span>
+            <span className="text-2xl font-black text-slate-800">142+</span>
+          </div>
+          <div className="hidden md:block w-px h-12 bg-slate-100"></div>
+          <div className="flex flex-col text-center md:text-left">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Capital Raised</span>
+            <span className="text-2xl font-black text-emerald-500">$84M+</span>
+          </div>
+          <div className="hidden md:block w-px h-12 bg-slate-100"></div>
+          <div className="flex flex-col text-center md:text-left">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Global Markets</span>
+            <span className="text-2xl font-black text-[#f4625d]">12+</span>
+          </div>
+          <div className="w-full md:w-auto mt-2 md:mt-0">
+            <a href="/contact" className="w-full inline-flex justify-center items-center px-8 py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition shadow-lg">
+              Explore Ecosystem
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-8 mt-32">
+        <div className="bg-gradient-to-br from-[#f4625d] to-[#d63b37] text-white p-10 rounded-[2rem] flex flex-col justify-between min-h-[320px] shadow-2xl shadow-rose-500/20">
+          <p className="text-[11px] font-bold tracking-[0.35em] opacity-70 uppercase">Ecosystem support</p>
+          <h2 className="text-3xl font-bold leading-tight">Scale in Trusted Ecosystems</h2>
+          <p className="text-sm opacity-80 leading-relaxed">We provide startups direct access to premium corporate links, sandbox environments, and global distribution channels.</p>
+        </div>
+        <div className="bg-white text-black p-10 rounded-[2rem] border border-teal-50/80 flex flex-col justify-between min-h-[320px] shadow-2xl shadow-teal-100/40 hover:border-teal-200 transition-all duration-300">
+          <TrendingUp className="w-14 h-14 p-3.5 bg-red-100 text-red-600 rounded-2xl mb-6" />
+          <div>
+            <h3 className="text-2xl font-bold mb-3">Structured Scaling</h3>
+            <p className="text-sm opacity-60 leading-relaxed">Move systematically from local validation to global market fit with our standardized tracking metrics.</p>
+          </div>
+        </div>
+        <div className="bg-white text-black p-10 rounded-[2rem] border border-teal-50/80 flex flex-col justify-between min-h-[320px] shadow-2xl shadow-teal-100/40 hover:border-teal-200 transition-all duration-300">
+          <Award className="w-14 h-14 p-3.5 bg-emerald-100 text-emerald-600 rounded-2xl mb-6" />
+          <div>
+            <h3 className="text-2xl font-bold mb-3">Verified Readiness</h3>
+            <p className="text-sm opacity-60 leading-relaxed">Startups operating at TRL 6 and above are pre-screened to ensure they are investor-ready and enterprise-ready.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// --- How It Works Section ---
+
+const HowItWorks = () => {
+  const steps = [
+    { number: '01', title: 'Start Scouting Form', desc: 'Fill out details about your startup, technology readiness, product stage, and branding.' },
+    { number: '02', title: 'Screening & Selection', desc: 'Our screening committee evaluates your startup on technical maturity, business potential, and product readiness.' },
+    { number: '03', title: 'Scale Program Integration', desc: 'Selected startups join our custom scale tracks, gaining direct corporate links, distribution channels, and mentor networks.' }
+  ];
+
+  return (
+    <section className="py-20 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <p className="text-[11px] font-bold tracking-[0.35em] text-[#f43f5e] mb-5 text-center uppercase">Process & Integration</p>
+        <h2 className="text-4xl font-bold text-black text-center mb-16 tracking-tight">How It Works</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {steps.map((s, idx) => (
+            <div key={idx} className="bg-white border border-teal-50 rounded-[2rem] p-10 relative overflow-hidden group hover:border-teal-200 hover:shadow-2xl hover:shadow-teal-100/40 transition-all duration-500">
+              <span className="absolute -right-4 -top-8 text-[120px] font-black text-teal-400/5 leading-none select-none tracking-tighter group-hover:text-teal-400/10 transition-colors duration-500">{s.number}</span>
+              <div className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center mb-10 text-teal-500 font-black text-[14px]">
+                {s.number}
+              </div>
+              <h3 className="text-2xl font-bold text-black mb-4 relative z-10">{s.title}</h3>
+              <p className="text-sm text-black leading-relaxed relative z-10">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Hero Section ---
 
 const Hero = () => (
-  <section id="home" className="relative pt-24 pb-14 overflow-hidden">
+  <section id="home" className="relative pt-36 pb-20 overflow-hidden bg-[#164a4d] text-white rounded-b-[4rem] z-20">
     <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-12 items-center">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10">
-        <motion.p variants={fadeUp} className="text-[11px] font-bold tracking-[0.35em] text-[#1e0a3c] opacity-50 mb-5 uppercase">Global Expansion Framework</motion.p>
+        <motion.div variants={fadeUp} className="bg-white/10 text-white px-3.5 py-1.5 rounded-full inline-block text-[10px] font-bold tracking-[0.25em] mb-6 uppercase border border-white/20">
+          Global Expansion Framework
+        </motion.div>
         <motion.h1 
           variants={fadeUp}
-          className="text-5xl lg:text-[50px] leading-[1.1] font-bold text-[#1e0a3c] mb-10 tracking-tighter"
+          className="text-5xl lg:text-[50px] leading-[1.1] font-bold text-white mb-10 tracking-tighter"
         >
           From Startup to <br />
-          Global Success <Globe className="inline-block text-[#1e0a3c] w-[1em] h-[1em] -mt-2 ml-1" />
+          <span className="text-white">Global Success</span> <Globe className="inline-block text-[#fb7185] w-[1em] h-[1em] -mt-2 ml-1" />
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="text-[16px] text-[#1e0a3c]/60 font-bold leading-relaxed mb-9 max-w-md">
+        <motion.p variants={fadeUp} className="text-[16px] text-white/90 font-bold leading-relaxed mb-9 max-w-md">
           We help startups scale from idea to international markets with structured execution, partnerships, and market access.
         </motion.p>
 
         <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-4">
-          <a href="https://docs.google.com/forms/d/1CP_Aad1Ts39tiaHTDyTEvIQT4NgroCibfqgz2qhIlvg/viewform" target="_blank" rel="noreferrer" className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#1e0a3c] flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#1e0a3c]/20 font-bold tracking-widest text-[13px] gap-2">
+          <a href="https://docs.google.com/forms/d/1CP_Aad1Ts39tiaHTDyTEvIQT4NgroCibfqgz2qhIlvg/viewform" target="_blank" rel="noreferrer" className="w-full sm:w-auto px-7 py-4 rounded-xl bg-gradient-to-r from-[#f4625d] to-[#e04540] flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all shadow-xl shadow-rose-500/20 font-bold tracking-widest text-[13px] gap-2">
             <Rocket size={18} /> Apply for Global Expansion
           </a>
         </motion.div>
         
-        <motion.p variants={fadeUp} className="mt-6 text-[12px] font-bold text-[#1e0a3c]/40">
+        <motion.p variants={fadeUp} className="mt-6 text-[12px] font-bold text-teal-100/60">
           * Click Apply to fill out our Startup Scouting Form to get started.
         </motion.p>
       </motion.div>
@@ -198,40 +287,45 @@ const Hero = () => (
         <motion.div
           animate={{ y: [0, -20, 0], x: [0, 12, 0] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-10 top-1/4 z-40 bg-white p-4.5 rounded-2xl shadow-2xl shadow-[#1e0a3c]/20 border border-[#1e0a3c]/5 flex items-center gap-3.5"
+          className="absolute -left-10 top-1/4 z-40 bg-white p-4.5 rounded-2xl shadow-2xl shadow-teal-100 border border-teal-50/50 flex items-center gap-3.5"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#1e0a3c]/5 flex items-center justify-center text-[#1e0a3c]"><DollarSign size={18} /></div>
+          <div className="w-9 h-9 rounded-xl bg-teal-50 text-teal-500 flex items-center justify-center"><DollarSign size={18} /></div>
           <div>
-            <p className="text-[10px] font-bold opacity-30 tracking-wider">Seed funding</p>
-            <p className="text-[15px] font-bold text-[#1e0a3c]">$1.2M Ready</p>
+            <p className="text-[10px] font-bold opacity-30 tracking-wider text-black">Seed funding</p>
+            <p className="text-[15px] font-bold text-black">$1.2M Ready</p>
           </div>
         </motion.div>
 
         <motion.div
           animate={{ y: [0, 20, 0], x: [0, -12, 0] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute -right-8 bottom-1/4 z-40 bg-white p-4.5 rounded-2xl shadow-2xl shadow-[#1e0a3c]/20 border border-[#1e0a3c]/5 flex items-center gap-3.5"
+          className="absolute -right-8 bottom-1/4 z-40 bg-white p-4.5 rounded-2xl shadow-2xl shadow-teal-100 border border-teal-50/50 flex items-center gap-3.5"
         >
           <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600"><Check size={18} /></div>
           <div>
-            <p className="text-[10px] font-bold opacity-30 tracking-wider">Track verified</p>
-            <p className="text-[15px] font-bold text-[#1e0a3c]">Level 04 Track</p>
+            <p className="text-[10px] font-bold opacity-30 tracking-wider text-black">Track verified</p>
+            <p className="text-[15px] font-bold text-black">Level 04 Track</p>
           </div>
         </motion.div>
 
         <motion.div
           animate={{ x: [0, 8, 0], y: [0, -8, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-10 z-30 bg-white border border-[#1e0a3c]/10 rounded-2xl p-4.5 shadow-2xl shadow-[#1e0a3c]/15 flex items-center gap-3.5"
+          className="absolute top-0 right-10 z-30 bg-white border border-teal-50 rounded-2xl p-4.5 shadow-2xl shadow-teal-100 flex items-center gap-3.5"
         >
           <div className="w-9 h-9 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600">
             <TrendingUp size={18} />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-[#1e0a3c]/40 tracking-widest">Startups</p>
-            <p className="text-[15px] font-bold text-[#1e0a3c]">42 Active</p>
+            <p className="text-[10px] font-bold text-slate-400 tracking-widest">Startups</p>
+            <p className="text-[15px] font-bold text-black">42 Active</p>
           </div>
         </motion.div>
+
+        {/* Glow Effect Behind Phones (Light Green Glow) */}
+        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 pointer-events-none z-0">
+          <div className="w-[800px] h-[800px] bg-gradient-to-br from-[#38a39b]/40 via-[#eefcf9]/20 to-transparent rounded-full blur-[100px]" />
+        </div>
 
         {/* Mockup Animation */}
         <motion.div 
@@ -239,44 +333,44 @@ const Hero = () => (
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="relative z-20"
         >
-          <div className="w-[280px] h-[560px] bg-[#1e0a3c] rounded-[3.5rem] border-[10px] border-[#1e0a3c] shadow-2xl shadow-[#1e0a3c]/40 overflow-hidden p-9 text-white relative">
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-white/5" />
+          <div className="w-[280px] h-[560px] bg-white rounded-[3.5rem] border-[8px] border-gray-100 shadow-2xl shadow-teal-200/40 overflow-hidden p-7 relative">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-gray-100" />
             <div className="mt-10">
-               <p className="text-[10px] font-bold opacity-30 tracking-widest mb-2">scaleaccessnetwork portal</p>
-               <p className="text-2xl font-bold mb-8">Active tracks</p>
+               <p className="text-[10px] font-bold text-gray-400 tracking-widest mb-2">scaleaccessnetwork portal</p>
+               <p className="text-2xl font-bold text-black mb-6">Active tracks</p>
                
-               <div className="h-44 w-full bg-white/5 rounded-[2.2rem] mb-9 flex flex-col p-7 border border-white/5 gap-4">
+               <div className="h-44 w-full bg-gray-50 rounded-[1.8rem] mb-7 flex flex-col p-5 border border-gray-100 gap-3">
                   <div className="flex items-center justify-between">
-                    <p className="text-[10px] font-bold opacity-40">Seed Round</p>
-                    <TrendingUp size={14} className="text-emerald-400" />
+                    <p className="text-[10px] font-bold text-gray-500">Seed Round</p>
+                    <TrendingUp size={14} className="text-emerald-500" />
                   </div>
-                  <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: "85%" }}
                       transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 3 }}
-                      className="h-full bg-white/40" 
+                      className="h-full bg-gradient-to-r from-rose-400 to-fuchsia-400 rounded-full" 
                     />
                   </div>
                   <div className="flex justify-between items-end mt-auto">
                     <div className="space-y-1">
-                      <p className="text-[8px] opacity-30 font-bold">Progress</p>
-                      <p className="text-[12px] font-bold">$1.2M / $1.5M</p>
+                      <p className="text-[8px] text-gray-400 font-bold">Progress</p>
+                      <p className="text-[12px] font-bold text-black">$1.2M / $1.5M</p>
                     </div>
-                    <div className="w-12 h-12 rounded-full border-4 border-white/10 border-t-emerald-400 flex items-center justify-center">
-                      <span className="text-[9px] font-bold">85%</span>
+                    <div className="w-12 h-12 rounded-full border-4 border-gray-200 border-t-emerald-500 flex items-center justify-center">
+                      <span className="text-[9px] font-bold text-black">85%</span>
                     </div>
                   </div>
                </div>
                
-               <div className="space-y-3.5">
-                  <div className="h-14 bg-white/10 rounded-xl flex items-center px-4.5 gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400"><Zap size={16} /></div>
-                    <p className="text-[12px] font-bold opacity-60">Accelerator track</p>
+               <div className="space-y-3">
+                  <div className="h-13 bg-gray-50 rounded-xl flex items-center px-4 gap-3 border border-gray-100">
+                    <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-rose-500"><Zap size={15} /></div>
+                    <p className="text-[12px] font-bold text-gray-700">Accelerator track</p>
                   </div>
-                  <div className="h-14 bg-white/10 rounded-xl flex items-center px-4.5 gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-blue-400"><Target size={16} /></div>
-                    <p className="text-[12px] font-bold opacity-60">Expert mentorship</p>
+                  <div className="h-13 bg-gray-50 rounded-xl flex items-center px-4 gap-3 border border-gray-100">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600"><Target size={15} /></div>
+                    <p className="text-[12px] font-bold text-gray-700">Expert mentorship</p>
                   </div>
                </div>
             </div>
@@ -289,159 +383,27 @@ const Hero = () => (
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           className="absolute -right-4 top-24 z-10"
         >
-          <div className="w-[240px] h-[480px] bg-[#1e0a3c] rounded-[2.8rem] border-[9px] border-[#1e0a3c] shadow-2xl shadow-[#1e0a3c]/30 overflow-hidden p-7 text-white flex flex-col justify-between opacity-70">
+          <div className="w-[240px] h-[480px] bg-white rounded-[2.8rem] border-[8px] border-gray-100 shadow-2xl shadow-teal-200/30 overflow-hidden p-6 flex flex-col justify-between opacity-85">
             <div>
-              <div className="mt-14 h-3.5 w-20 bg-white/10 rounded-full mb-7" />
-              <div className="h-36 w-full bg-white/5 rounded-2xl p-5 space-y-4">
-                <p className="text-[10px] font-bold opacity-20 tracking-widest">Platform stats</p>
+              <div className="mt-14 h-3.5 w-20 bg-gray-200 rounded-full mb-7" />
+              <div className="h-36 w-full bg-gray-50 rounded-2xl p-5 space-y-4 border border-gray-100">
+                <p className="text-[10px] font-bold text-gray-400 tracking-widest">Platform stats</p>
                 <div className="flex gap-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
                 </div>
                 <div className="space-y-2.5">
-                  <div className="h-1.5 w-full bg-white/10 rounded-full" />
-                  <div className="h-1.5 w-2/3 bg-white/10 rounded-full" />
+                  <div className="h-1.5 w-full bg-gray-200 rounded-full" />
+                  <div className="h-1.5 w-2/3 bg-gray-200 rounded-full" />
                 </div>
               </div>
             </div>
-            <div className="h-12 w-full bg-white/10 rounded-xl flex items-center justify-center">
-              <span className="text-[10px] font-bold opacity-30 tracking-widest">scaleaccessnetwork.ai</span>
+            <div className="h-12 w-full bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+              <span className="text-[10px] font-bold text-gray-400 tracking-widest">scaleaccessnetwork.ai</span>
             </div>
           </div>
         </motion.div>
-      </div>
-    </div>
-  </section>
-);
-
-// --- Trusted Partner Section (About) ---
-
-const TrustedSection = () => (
-  <section id="about" className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-      <div className="flex flex-col lg:flex-row justify-between items-start mb-16 gap-10 lg:gap-20">
-        <div className="flex-1">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl lg:text-[46px] font-bold text-[#1e0a3c] leading-[1.1] tracking-tighter"
-          >
-            Your trusted partner of <br />
-            early startups.
-          </motion.h2>
-        </div>
-        <div className="flex-1 lg:pt-3">
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-[16px] text-[#1e0a3c]/40 font-bold leading-relaxed max-w-lg"
-          >
-            scaleaccessnetwork provides the foundational support every early-stage startup needs to thrive. From technical infrastructure to expert-led mentorship, we ensure your journey is backed by industry best practices and a global network of specialized startup tracks.
-          </motion.p>
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-8 items-center">
-        {[
-          { id: '01.', title: 'Expert guidance', desc: 'Tailored tools for every stage of your startup journey. We provide hands-on support to turn vision into reality. Leverage our global network of seasoned founders to navigate complex challenges and accelerate your market entry.' },
-          { id: '02.', title: 'Best practices', desc: 'scaleaccessnetwork unites and secures a growing ecosystem of startup tracks based on deep industry insights. Benefit from structured frameworks that optimize your operations, reduce risk, and maximize your potential for rapid scaling.' },
-          { id: '03.', title: 'Secure growth', desc: 'Enterprise-grade security and blockchain integration for your peace of mind and scalable future. Protect your assets while maintaining the agility needed to innovate and capture new market opportunities.' }
-        ].map((s, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            whileHover={{ y: -10 }}
-            className="flex flex-col p-10 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[400px] justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50"
-          >
-            <div className="flex flex-col items-center text-center justify-center h-full gap-4">
-              <p className="text-[72px] font-bold text-white tracking-tighter leading-none mb-8">{s.id.replace('.', '')}</p>
-              <h3 className="text-[24px] font-bold leading-tight tracking-tight">{s.title}</h3>
-              <p className="text-[15px] font-bold leading-relaxed opacity-70 px-2">{s.desc}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// --- Programs Preview Section (How It Works) ---
-
-const HowItWorks = () => (
-  <section className="py-20 relative z-10 overflow-hidden">
-    <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-      <div className="text-center mb-16">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl lg:text-[50px] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
-        >
-          Global Expansion Program
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-[16px] text-[#1e0a3c]/40 font-bold max-w-2xl mx-auto leading-relaxed"
-        >
-          A structured, phased approach designed to build credibility and systematically scale your business into international markets.
-        </motion.p>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-10">
-        {[
-          { 
-            icon: Target, 
-            title: 'Validate', 
-            desc: 'Focus on Branding, Market validation, and comprehensive Go-to-market planning. Establish a strong foundation with targeted customer research and tailored value propositions.'
-          },
-          { 
-            icon: Shield, 
-            title: 'Expand', 
-            desc: 'Secure Export support and establish international Distributor setups. Leverage strategic partnerships and compliance frameworks to seamlessly enter high-growth global markets.',
-            isMiddle: true 
-          },
-          { 
-            icon: Rocket, 
-            title: 'Scale', 
-            desc: 'Optimize Manufacturing pipelines and gain exclusive Investor access to scale globally. Accelerate your traction with top-tier VC connectivity and enterprise localization.'
-          }
-        ].map((step, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            whileHover={{ y: -10 }}
-            className="flex flex-col p-8 rounded-[2.2rem] border transition-all duration-500 h-auto min-h-[360px] items-center text-center justify-between shadow-2xl shadow-[#1e0a3c]/30 bg-[#1e0a3c] text-white border-[#1e0a3c] hover:shadow-[#1e0a3c]/50 cursor-pointer group"
-            onClick={() => window.location.href = '/programs'}
-          >
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-[1.8rem] flex items-center justify-center mb-6 shadow-lg bg-white/10 text-white">
-                <step.icon size={32} />
-              </div>
-              <h3 className="text-[32px] md:text-[36px] font-bold mb-4 tracking-tight text-white">{step.title}</h3>
-              <p className="text-[14px] md:text-[15px] font-medium leading-relaxed opacity-70 px-2 group-hover:opacity-90 transition-opacity">
-                {step.desc}
-              </p>
-            </div>
-            {step.isMiddle && (
-              <div className="flex items-center gap-2 px-6 py-3 bg-white text-[#1e0a3c] font-bold rounded-xl hover:scale-105 transition-all text-[14px] mt-8 shadow-lg">
-                View Program <ArrowRight size={16} />
-              </div>
-            )}
-          </motion.div>
-        ))}
       </div>
     </div>
   </section>
@@ -457,42 +419,42 @@ const PlatformSection = () => (
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="bg-[#1e0a3c] rounded-[2.5rem] p-10 text-white relative z-10 shadow-2xl shadow-[#1e0a3c]/40 cursor-pointer"
+          className="bg-white rounded-[2.5rem] p-8 relative z-10 shadow-2xl shadow-teal-200/40 cursor-pointer border border-gray-100"
           onClick={() => window.location.href = '/industries'}
         >
-          <div className="flex items-center justify-between mb-9">
+          <div className="flex items-center justify-between mb-7">
              <div>
-               <p className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-2">INDUSTRY FOCUS</p>
-               <p className="text-[14px] font-bold text-white/50 leading-tight">Specialized networks across high-impact sectors.</p>
+                <p className="text-teal-500 text-[10px] font-bold tracking-[0.2em] mb-2">INDUSTRY FOCUS</p>
+                <p className="text-[14px] font-bold text-gray-700 leading-tight">Specialized networks across high-impact sectors.</p>
              </div>
-             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/10 text-[14px] font-bold shadow-lg">N</div>
+             <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center border border-teal-200 text-[14px] font-bold text-teal-500 shadow-sm">N</div>
           </div>
           
-          <div className="h-36 w-full mb-9 relative">
-             <div className="absolute -top-7 left-0 text-[10px] font-bold opacity-30 tracking-[0.15em] uppercase">DeepTech & AI Growth</div>
+          <div className="h-36 w-full mb-7 relative">
+             <div className="absolute -top-7 left-0 text-[10px] font-bold text-gray-400 tracking-[0.15em] uppercase">DeepTech & AI Growth</div>
              <motion.svg viewBox="0 0 400 100" className="w-full h-full">
                 <motion.path
                   d="M0,80 C40,75 80,40 120,60 C160,80 200,20 240,50 C280,80 320,30 400,10"
-                  stroke="white"
+                  stroke="#f43f5e"
                   strokeWidth="3.5"
                   fill="none"
                   initial={{ pathLength: 0 }}
                   whileInView={{ pathLength: 1 }}
                   transition={{ duration: 2.5, ease: "easeInOut" }}
                 />
-                <text x="50" y="95" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>FINTECH</text>
-                <text x="320" y="25" fill="white" fontSize="8.5" opacity="0.4" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>CLIMATETECH</text>
+                <text x="50" y="95" fill="#e11d48" fontSize="8.5" opacity="0.7" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>FINTECH</text>
+                <text x="320" y="25" fill="#e11d48" fontSize="8.5" opacity="0.7" fontWeight="700" style={{ fontFamily: "'Lato', sans-serif" }}>CLIMATETECH</text>
              </motion.svg>
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
-             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Active Sectors</p>
-                <p className="text-2xl font-bold">8+</p>
+          <div className="grid grid-cols-2 gap-4">
+             <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <p className="text-gray-400 text-[10px] font-bold tracking-widest mb-2">Active Sectors</p>
+                <p className="text-2xl font-bold text-black">8+</p>
              </div>
-             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-                <p className="text-white/40 text-[10px] font-bold tracking-widest mb-2">Total Raised</p>
-                <p className="text-2xl font-bold">$ 14.5M</p>
+             <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <p className="text-gray-400 text-[10px] font-bold tracking-widest mb-2">Total Raised</p>
+                <p className="text-2xl font-bold text-black">$ 14.5M</p>
              </div>
           </div>
         </motion.div>
@@ -503,7 +465,7 @@ const PlatformSection = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl lg:text-[48px] font-bold text-[#1e0a3c] leading-[1.05] mb-7 tracking-tighter"
+          className="text-4xl lg:text-[48px] font-bold text-black leading-[1.05] mb-7 tracking-tighter"
         >
           Industries we <br />
           support globally.
@@ -513,11 +475,11 @@ const PlatformSection = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-[16px] text-[#1e0a3c]/40 font-bold leading-relaxed mb-9 max-w-md"
+          className="text-[16px] text-black font-bold leading-relaxed mb-9 max-w-md"
         >
           We bring specialized expertise and global networks to startups across diverse, high-impact industries including Artificial Intelligence, FinTech, BioTech, AgriTech, and ClimateTech.
         </motion.p>
-        <a href="/industries" className="inline-flex px-9 py-4.5 rounded-xl bg-[#1e0a3c] text-white font-bold text-[13px] tracking-[0.15em] items-center gap-2.5 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-blue-900/15">
+        <a href="/industries" className="inline-flex px-9 py-4.5 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 text-white font-bold text-[13px] tracking-[0.15em] items-center gap-2.5 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-teal-500/20">
           Explore Industries <ArrowRight size={18} />
         </a>
       </div>
@@ -538,7 +500,7 @@ const WhatsNew = () => (
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl lg:text-[56px] font-bold text-[#1e0a3c] leading-[1.05] mb-6 tracking-tighter"
+              className="text-4xl lg:text-[56px] font-bold text-black leading-[1.05] mb-6 tracking-tighter"
             >
               Core services we <br />
               provide for you
@@ -548,7 +510,7 @@ const WhatsNew = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-[17px] text-[#1e0a3c]/50 font-bold leading-relaxed max-w-md mb-8"
+              className="text-[17px] text-black font-bold leading-relaxed max-w-md mb-8"
             >
               We provide a comprehensive ecosystem of support to help you navigate every stage of your startup journey.
             </motion.p>
@@ -587,20 +549,20 @@ const WhatsNew = () => (
                 whileHover={{ y: -8 }}
                 className={`p-5 rounded-[1.25rem] border transition-all duration-300 flex items-center gap-4 ${
                   service.isSpecial 
-                    ? 'bg-[#1e0a3c] text-white border-[#1e0a3c] shadow-xl shadow-[#1e0a3c]/20 cursor-pointer'
-                    : 'bg-white text-[#1e0a3c] border-[#1e0a3c]/5 shadow-lg shadow-[#1e0a3c]/5'
+                    ? 'bg-gradient-to-r from-rose-500 to-rose-600 text-white border-indigo-500 shadow-xl shadow-teal-500/20 cursor-pointer'
+                    : 'bg-white text-black border-teal-50 shadow-lg shadow-teal-100/40 hover:border-teal-100'
                 }`}
                 onClick={() => service.isSpecial && (window.location.href = '/services')}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm ${
-                  service.isSpecial ? 'bg-white text-[#1e0a3c]' : 'bg-white border border-[#1e0a3c]/10 text-[#1e0a3c]'
+                  service.isSpecial ? 'bg-white text-teal-500' : 'bg-teal-50 text-teal-500 border border-teal-100/50'
                 }`}>
                   <service.icon size={18} />
                 </div>
                 <div>
                   <h4 className="text-[17px] font-bold tracking-tight">{service.title}</h4>
                 </div>
-                <ArrowRight size={18} className={`ml-auto ${service.isSpecial ? 'text-white/40' : 'text-[#1e0a3c]/20'}`} />
+                <ArrowRight size={18} className={`ml-auto ${service.isSpecial ? 'text-white' : 'text-teal-500/40'}`} />
               </motion.div>
             ))}
           </div>
@@ -629,33 +591,33 @@ const WhatsNew = () => (
                   ease: "easeInOut",
                   delay: i * 0.3
                 }}
-                className={`absolute p-7 rounded-[2.5rem] bg-[#1e0a3c] text-white flex flex-col justify-between shadow-2xl shadow-[#1e0a3c]/50 ${
+                className={`absolute p-7 rounded-[2.5rem] bg-white text-black border border-teal-50 flex flex-col justify-between shadow-2xl shadow-teal-100/60 ${
                   i === 0 ? "top-0 left-0 w-48 h-48 z-10" :
                   i === 1 ? "top-20 right-0 w-56 h-36 z-20" :
                   i === 2 ? "bottom-20 left-10 w-44 h-56 z-30 opacity-90" :
                   "bottom-0 right-5 w-64 h-52 z-40"
                 }`}
-                style={{ filter: "drop-shadow(0 0 15px rgba(30, 10, 60, 0.3))" }}
+                style={{ filter: "drop-shadow(0 10px 20px rgba(20, 184, 166, 0.08))" }}
               >
                 <div className="flex items-center justify-between mb-5">
-                   <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                   <div className="w-9 h-9 rounded-xl bg-teal-50 flex items-center justify-center text-teal-500">
                      <card.icon size={20} />
                    </div>
-                   <div className="h-1.5 w-10 bg-white/20 rounded-full" />
+                   <div className="h-1.5 w-10 bg-teal-100 rounded-full" />
                 </div>
                 
                 <div>
-                  <p className="text-[10px] font-bold opacity-30 tracking-[0.15em] mb-1.5">{card.label}</p>
-                  <p className="text-2xl font-bold">{card.value}</p>
+                  <p className="text-[10px] font-bold text-slate-400 tracking-[0.15em] mb-1.5 uppercase">{card.label}</p>
+                  <p className="text-2xl font-black text-indigo-950">{card.value}</p>
                 </div>
 
                 <div className="mt-5 space-y-2.5">
-                   <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                   <div className="h-1.5 w-full bg-teal-50 rounded-2xl overflow-hidden">
                       <motion.div 
                          initial={{ width: 0 }}
                          animate={{ width: i === 3 ? "100%" : "60%" }}
                          transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-                         className="h-full bg-white/30" 
+                         className="h-full bg-rose-500" 
                       />
                    </div>
                 </div>
@@ -678,7 +640,7 @@ const TimelineSection = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}
-          className="text-4xl lg:text-[50px] font-bold text-[#1e0a3c] mb-7 tracking-tighter"
+          className="text-4xl lg:text-[50px] font-bold text-black mb-7 tracking-tighter"
         >
           Timeline Section
         </motion.h2>
@@ -692,7 +654,7 @@ const TimelineSection = () => (
             whileInView={{ height: "100%" }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="w-full bg-[#1e0a3c]/30"
+            className="w-full bg-rose-500/30"
           />
         </div>
 
@@ -731,7 +693,7 @@ const TimelineSection = () => (
                   <motion.div 
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-                    className="w-[18px] h-[18px] bg-[#1e0a3c] rounded-full flex items-center justify-center transition-colors"
+                    className="w-[18px] h-[18px] bg-rose-500 rounded-full flex items-center justify-center transition-colors"
                   >
                     <div className="w-2 h-2 bg-white rounded-full"></div>
                   </motion.div>
@@ -740,10 +702,10 @@ const TimelineSection = () => (
 
               {/* Content */}
               <div className="flex-1 pb-4 group-hover:translate-x-2 transition-transform duration-300">
-                <h3 className="text-[22px] font-bold text-[#1e0a3c] mb-3">
-                  <span className="text-[#1e0a3c]">{step.time}</span> <span className="text-[#1e0a3c]/40 mx-1">—</span> {step.title}
+                <h3 className="text-[22px] font-bold text-black mb-3">
+                  <span className="text-teal-500">{step.time}</span> <span className="text-slate-300 mx-1">—</span> {step.title}
                 </h3>
-                <p className="text-[16px] text-[#1e0a3c]/50 font-bold leading-relaxed max-w-2xl">
+                <p className="text-[16px] text-black font-bold leading-relaxed max-w-2xl">
                   {step.desc}
                 </p>
               </div>
@@ -773,18 +735,18 @@ const TermsModal = ({ isOpen, onClose }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-[1.5rem] max-w-[1000px] w-full mx-auto min-h-[60vh] shadow-2xl shadow-[#1e0a3c]/20 p-6 md:p-10"
+        className="bg-white rounded-[1.5rem] max-w-[1000px] w-full mx-auto min-h-[60vh] shadow-2xl shadow-teal-100/60 p-6 md:p-10"
       >
         <button
           onClick={onClose}
-          className="flex items-center gap-2 text-[#1e0a3c] hover:text-[#1e0a3c]/70 transition-colors mb-8 font-bold text-[14px]"
+          className="flex items-center gap-2 text-black hover:text-teal-500 transition-colors mb-8 font-bold text-[14px]"
         >
           <ArrowLeft size={18} /> Back
         </button>
 
-        <h1 className="text-[32px] font-bold text-[#1e0a3c] mb-4 tracking-tight">Terms and Conditions</h1>
+        <h1 className="text-[32px] font-bold text-black mb-4 tracking-tight">Terms and Conditions</h1>
 
-        <div className="space-y-8 text-[#1e0a3c]/80 text-[15px] leading-relaxed font-bold">
+        <div className="space-y-8 text-slate-600 text-[15px] leading-relaxed font-bold">
           <section>
             <p className="mb-4">
                 Welcome to scaleaccessnetwork. By accessing or using our services, platform, programs, or website, you agree to comply with and be bound by the following Terms and Conditions.
@@ -792,7 +754,7 @@ const TermsModal = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">1. No Guaranteed Funding or Business Outcomes</h2>
+            <h2 className="text-[22px] font-bold text-black mb-3">1. No Guaranteed Funding or Business Outcomes</h2>
             <p>
               scaleaccessnetwork does not guarantee funding, investment, partnerships, export approvals, business growth, revenue generation, or specific commercial outcomes.
             </p>
@@ -800,10 +762,9 @@ const TermsModal = ({ isOpen, onClose }) => {
               All services are provided as strategic support, guidance, ecosystem access, consulting, and execution assistance intended to support startup development and expansion.
             </p>
           </section>
-
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">2. Payments and Pricing</h2>
-            <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80">
+            <h2 className="text-[22px] font-bold text-black mb-3">2. Payments and Pricing</h2>
+            <ul className="list-disc list-inside space-y-2 text-slate-600">
               <li>Payments are non-refundable once service execution or project work has commenced.</li>
               <li>Certain projects may follow milestone-based payment structures depending on the scope of work.</li>
               <li>Pricing may vary based on project complexity, requirements, customization, timelines, and service engagement.</li>
@@ -811,7 +772,7 @@ const TermsModal = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">3. Startup Eligibility &amp; TRL Requirements</h2>
+            <h2 className="text-[22px] font-bold text-black mb-3">3. Startup Eligibility &amp; TRL Requirements</h2>
             <p>
               Investor access, expansion support, or partnership-related services may only be available to startups that meet internal evaluation standards and applicable Technology Readiness Level (TRL) requirements.
             </p>
@@ -821,17 +782,17 @@ const TermsModal = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">4. Intellectual Property</h2>
-            <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80">
+            <h2 className="text-[22px] font-bold text-black mb-3">4. Intellectual Property</h2>
+            <ul className="list-disc list-inside space-y-2 text-slate-600">
               <li>All startup ideas, business models, pitch decks, documents, data, designs, and submitted materials remain the intellectual property of the respective founder or startup.</li>
               <li>scaleaccessnetwork may use non-confidential project information, testimonials, public collaborations, or publicly available startup achievements for portfolio, branding, promotional, or marketing purposes unless otherwise agreed upon in writing.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">5. Limitation of Liability</h2>
+            <h2 className="text-[22px] font-bold text-black mb-3">5. Limitation of Liability</h2>
             <p>scaleaccessnetwork shall not be held liable for:</p>
-            <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80 mt-3">
+            <ul className="list-disc list-inside space-y-2 text-slate-600 mt-3">
               <li>Funding rejection</li>
               <li>Investor decisions</li>
               <li>Partnership outcomes</li>
@@ -847,7 +808,7 @@ const TermsModal = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">6. Third-Party Services</h2>
+            <h2 className="text-[22px] font-bold text-black mb-3">6. Third-Party Services</h2>
             <p>
               Certain services may involve external consultants, investors, agencies, distributors, mentors, technology providers, or third-party platforms.
             </p>
@@ -857,11 +818,11 @@ const TermsModal = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">7. Termination of Services</h2>
-              <p>
+            <h2 className="text-[22px] font-bold text-black mb-3">7. Termination of Services</h2>
+            <p>
               scaleaccessnetwork reserves the right to suspend, reject, or terminate services in cases involving:
             </p>
-            <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80 mt-3">
+            <ul className="list-disc list-inside space-y-2 text-slate-600 mt-3">
               <li>Fraudulent activities</li>
               <li>False information</li>
               <li>Misuse of services</li>
@@ -872,19 +833,19 @@ const TermsModal = ({ isOpen, onClose }) => {
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">8. Changes to Terms</h2>
-              <p>
+            <h2 className="text-[22px] font-bold text-black mb-3">8. Changes to Terms</h2>
+            <p>
               scaleaccessnetwork reserves the right to modify or update these Terms and Conditions at any time without prior notice. Continued use of the platform or services constitutes acceptance of the updated terms.
             </p>
           </section>
 
           <section>
-            <h2 className="text-[22px] font-bold text-[#1e0a3c] mb-3">9. Contact Information</h2>
+            <h2 className="text-[22px] font-bold text-black mb-3">9. Contact Information</h2>
             <p>
               For any questions regarding these Terms and Conditions, please contact:
             </p>
-            <ul className="list-disc list-inside space-y-2 text-[#1e0a3c]/80 mt-3">
-              <li>Email: <a href="mailto:scaleaccessnetwork@gmail.com" className="text-[#1e0a3c] underline">scaleaccessnetwork@gmail.com</a></li>
+            <ul className="list-disc list-inside space-y-2 text-slate-600 mt-3">
+              <li>Email: <a href="mailto:scaleaccessnetwork@gmail.com" className="text-teal-500 underline">scaleaccessnetwork@gmail.com</a></li>
               <li>Instagram: @scaleaccessnetwork</li>
               <li>Phone: +91 91089 22554</li>
             </ul>
@@ -928,8 +889,8 @@ export const Footer = () => {
                   <img src="/2.png" alt="scaleaccessnetwork Logo" className="h-[6rem] md:h-[8rem] object-contain object-left ml-[-20px]" />
                 </div>
                 <div>
-                  <h3 className="text-[16px] font-bold text-[#1e0a3c] tracking-tight mb-3">About Us</h3>
-                  <p className="text-[13px] text-[#1e0a3c]/70 leading-relaxed font-bold max-w-md">
+                  <h3 className="text-[16px] font-bold text-black tracking-tight mb-3">About Us</h3>
+                  <p className="text-[13px] text-black leading-relaxed font-semibold max-w-md">
                     scaleaccessnetwork empowers early-stage founders with strategic guidance, scalable solutions, and global startup opportunities to transform innovative ideas into impactful ventures.
                   </p>
                 </div>
@@ -946,13 +907,13 @@ export const Footer = () => {
                 transition={{ delay: 0.1 }}
                 className="col-span-1 md:col-span-2"
               >
-                <h3 className="text-[15px] font-bold text-[#1e0a3c] mb-4 tracking-tight">Menu</h3>
+                <h3 className="text-[15px] font-bold text-black mb-4 tracking-tight">Menu</h3>
                 <ul className="space-y-2">
                   <li>
                     <motion.a
                       href="/"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Home
                     </motion.a>
@@ -961,7 +922,7 @@ export const Footer = () => {
                     <motion.a
                       href="/programs"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Programs
                     </motion.a>
@@ -970,7 +931,7 @@ export const Footer = () => {
                     <motion.a
                       href="/industries"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Industries
                     </motion.a>
@@ -979,7 +940,7 @@ export const Footer = () => {
                     <motion.a
                       href="/services"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Services
                     </motion.a>
@@ -988,7 +949,7 @@ export const Footer = () => {
                     <motion.a
                       href="/blogs"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Blogs
                     </motion.a>
@@ -997,7 +958,7 @@ export const Footer = () => {
                     <motion.a
                       href="/partnership"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Partnership
                     </motion.a>
@@ -1008,7 +969,7 @@ export const Footer = () => {
                       target="_blank"
                       rel="noreferrer"
                       whileHover={{ x: 4 }}
-                      className="inline-block text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold"
+                      className="inline-block text-[13px] text-black hover:text-teal-500 transition-colors font-bold"
                     >
                       Startup Applications
                     </motion.a>
@@ -1027,13 +988,13 @@ export const Footer = () => {
                 transition={{ delay: 0.2 }}
                 className="col-span-1 md:col-span-2"
               >
-                <h3 className="text-[15px] font-bold text-[#1e0a3c] mb-4 tracking-tight">Services</h3>
+                <h3 className="text-[15px] font-bold text-black mb-4 tracking-tight">Services</h3>
                 <ul className="space-y-2">
                   {services.map((service, index) => (
                     <li key={index}>
                       <motion.p
                         whileHover={{ x: 4 }}
-                        className="text-[13px] text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors font-bold cursor-pointer"
+                        className="text-[13px] text-black hover:text-teal-500 transition-colors font-bold cursor-pointer"
                       >
                         {service}
                       </motion.p>
@@ -1053,15 +1014,15 @@ export const Footer = () => {
                 transition={{ delay: 0.3 }}
                 className="col-span-1 md:col-span-2"
               >
-                <h3 className="text-[15px] font-bold text-[#1e0a3c] mb-4 tracking-tight">Contact Us</h3>
+                <h3 className="text-[15px] font-bold text-black mb-4 tracking-tight">Contact Us</h3>
                 
                 <div className="space-y-3">
                   <motion.a
                     href="mailto:scaleaccessnetwork@gmail.com"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit group"
+                    className="flex items-center gap-2 text-black hover:text-teal-500 transition-colors w-fit group"
                   >
-                    <Mail size={16} className="flex-shrink-0" />
+                    <Mail size={16} className="flex-shrink-0 text-blue-600" />
                     <span className="text-[13px] font-bold">scaleaccessnetwork@gmail.com</span>
                   </motion.a>
 
@@ -1070,18 +1031,18 @@ export const Footer = () => {
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit group"
+                    className="flex items-center gap-2 text-black hover:text-teal-500 transition-colors w-fit group"
                   >
-                    <Globe size={16} className="flex-shrink-0" />
+                    <Globe size={16} className="flex-shrink-0 text-pink-600" />
                     <span className="text-[13px] font-bold">www.scaleaccessnetwork.com</span>
                   </motion.a>
 
                   <motion.a
                     href="tel:+919108922554"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
+                    className="flex items-center gap-2 text-black hover:text-teal-500 transition-colors w-fit"
                   >
-                    <Phone size={16} className="flex-shrink-0" />
+                    <Phone size={16} className="flex-shrink-0 text-orange-600" />
                     <span className="text-[13px] font-bold">+91 91089 22554</span>
                   </motion.a>
 
@@ -1090,9 +1051,9 @@ export const Footer = () => {
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
+                    className="flex items-center gap-2 text-black hover:text-teal-500 transition-colors w-fit"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-teal-500">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                       <circle cx="17.5" cy="6.5" r="1.5"></circle>
@@ -1105,9 +1066,9 @@ export const Footer = () => {
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-2 text-[#1e0a3c]/60 hover:text-[#1e0a3c] transition-colors w-fit"
+                    className="flex items-center gap-2 text-black hover:text-teal-500 transition-colors w-fit"
                   >
-                    <Share2 size={16} className="flex-shrink-0" />
+                    <Share2 size={16} className="flex-shrink-0 text-teal-600" />
                     <span className="text-[13px] font-bold">scaleaccessnetwork</span>
                   </motion.a>
                 </div>
@@ -1117,7 +1078,7 @@ export const Footer = () => {
         </div>
 
         {/* Dark Bottom Strip */}
-        <div className="bg-[#0f1929] px-6 lg:px-12 py-4 border-t border-[#1e0a3c]/10">
+        <div className="bg-[#0f172a] px-6 lg:px-12 py-4 border-t border-slate-100/10">
           <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <motion.button
               initial={{ opacity: 0 }}
@@ -1168,7 +1129,7 @@ export default function LandingPage({ isRoute }) {
 
   if (!isRoute) {
     return (
-      <div className="relative min-h-screen selection:bg-[#1e0a3c] selection:text-white overflow-x-hidden bg-white" style={{ fontFamily: "'Lato', sans-serif" }}>
+      <div className="relative min-h-screen selection:bg-rose-500 selection:text-white overflow-x-hidden bg-white" style={{ fontFamily: "'Lato', sans-serif" }}>
         <MainBackground />
         <MouseBackground />
         <Navbar />

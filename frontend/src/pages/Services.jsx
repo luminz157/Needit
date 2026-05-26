@@ -40,7 +40,7 @@ export default function Services() {
       icon: <Factory fill="currentColor" />,
       image: "/s1.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
+        { icon: <Tag size={16} className="text-orange-600" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -49,7 +49,7 @@ export default function Services() {
       icon: <Megaphone fill="currentColor" />,
       image: "/s2.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
+        { icon: <Tag size={16} className="text-teal-600" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -58,7 +58,7 @@ export default function Services() {
       icon: <Users fill="currentColor" />,
       image: "/s3.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
+        { icon: <Tag size={16} className="text-teal-600" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -68,7 +68,7 @@ export default function Services() {
       icon: <Handshake fill="currentColor" />,
       image: "/s4.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
+        { icon: <Tag size={16} className="text-cyan-600" />, text: "Fees: ₹20,000" }
       ]
     },
     {
@@ -77,7 +77,7 @@ export default function Services() {
       icon: <Globe fill="transparent" />,
       image: "/s6.png",
       fees: [
-        { icon: <Tag size={16} className="text-white" />, text: "Fees: ₹20,000" }
+        { icon: <Tag size={16} className="text-red-600" />, text: "Fees: ₹20,000" }
       ]
     }
   ];
@@ -85,10 +85,10 @@ export default function Services() {
   return (
     <div className="pt-32 pb-20 px-6 lg:px-12 max-w-[1440px] mx-auto min-h-screen">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center mb-16">
-        <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-[#1e0a3c] mb-4 tracking-tighter">
+        <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-white bg-gradient-to-r from-[#114b53] to-[#1e6a75] px-8 py-5 rounded-3xl inline-block mb-4 tracking-tighter shadow-xl shadow-teal-500/20">
           Our Services
         </motion.h1>
-        <motion.p variants={fadeUp} className="text-[16px] text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
+        <motion.p variants={fadeUp} className="text-[16px] text-black font-bold max-w-2xl mx-auto leading-relaxed">
           scaleaccessnetwork empowers high-potential startups by providing end-to-end support for growth, global expansion, and investor access.
         </motion.p>
       </motion.div>
@@ -111,34 +111,34 @@ export default function Services() {
                 },
                 hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
               }}
-              className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
+              className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-teal-50/80 shadow-2xl shadow-teal-100/40 hover:border-teal-200 transition-all duration-300 hover:shadow-teal-200/50"
             >
-              <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+              <div className="relative h-44 w-full overflow-hidden bg-teal-50">
                 <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
-                <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                <svg className="absolute top-0 left-0 h-full w-32 text-white" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
                   <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
                 </svg>
-                <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
+                <div className="absolute top-1/2 left-5 -translate-y-1/2 text-teal-500">
                   {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
                 </div>
               </div>
 
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-start gap-3 mb-2 min-h-[56px]">
-                  <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
+                  <h3 className="text-[19px] font-bold text-black leading-snug">{service.title}</h3>
                   {service.tag && (
-                    <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
+                    <span className="bg-amber-50 text-amber-700 text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-amber-200">
                       {service.tag}
                     </span>
                   )}
                 </div>
-                <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
+                <p className="text-[14px] text-black font-semibold leading-relaxed mb-6 flex-grow">
                   {service.description}
                 </p>
 
                 <div className="flex flex-col gap-2 mt-auto">
                   {service.fees.map((fee, i) => (
-                    <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                    <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-black bg-teal-50/50 px-3 py-2 rounded-lg border border-teal-100/50">
                       {fee.icon}
                       <span>{fee.text}</span>
                     </div>
@@ -162,34 +162,34 @@ export default function Services() {
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut", delay: idx * 0.1 } },
                   hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
                 }}
-                className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300 h-full"
+                className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-teal-50/80 shadow-2xl shadow-teal-100/40 hover:border-teal-200 transition-all duration-300 hover:shadow-teal-200/50 h-full"
               >
-                <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+                <div className="relative h-44 w-full overflow-hidden bg-teal-50">
                   <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
-                  <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                  <svg className="absolute top-0 left-0 h-full w-32 text-white" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
                     <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
                   </svg>
-                  <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
+                  <div className="absolute top-1/2 left-5 -translate-y-1/2 text-teal-500">
                     {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
                   </div>
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-start gap-3 mb-2 min-h-[56px]">
-                    <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
+                    <h3 className="text-[19px] font-bold text-black leading-snug">{service.title}</h3>
                     {service.tag && (
-                      <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
+                      <span className="bg-amber-50 text-amber-700 text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-amber-200">
                         {service.tag}
                       </span>
                     )}
                   </div>
-                  <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
+                  <p className="text-[14px] text-black font-semibold leading-relaxed mb-6 flex-grow">
                     {service.description}
                   </p>
 
                   <div className="flex flex-col gap-2 mt-auto">
                     {service.fees.map((fee, i) => (
-                      <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                      <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-black bg-teal-50/50 px-3 py-2 rounded-lg border border-teal-100/50">
                         {fee.icon}
                         <span>{fee.text}</span>
                       </div>
@@ -218,34 +218,34 @@ export default function Services() {
                 },
                 hover: { y: -5, transition: { duration: 0.3, ease: "easeOut" } }
               }}
-              className="group relative flex flex-col bg-[#1e0a3c] rounded-2xl overflow-hidden border border-[#1e0a3c]/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(30,10,60,0.2)] transition-all duration-300"
+              className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-teal-50/80 shadow-2xl shadow-teal-100/40 hover:border-teal-200 transition-all duration-300 hover:shadow-teal-200/50"
             >
-              <div className="relative h-44 w-full overflow-hidden bg-[#1e0a3c]">
+              <div className="relative h-44 w-full overflow-hidden bg-teal-50">
                 <img src={service.image} alt={service.title} className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.08] object-cover ${service.imageClass || ''}`} />
-                <svg className="absolute top-0 left-0 h-full w-32 text-[#1e0a3c]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                <svg className="absolute top-0 left-0 h-full w-32 text-white" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
                   <path d="M0,0 L0,100 L35,100 Q100,50 35,0 Z" />
                 </svg>
-                <div className="absolute top-1/2 left-5 -translate-y-1/2 text-white">
+                <div className="absolute top-1/2 left-5 -translate-y-1/2 text-teal-500">
                   {React.cloneElement(service.icon, { size: 48, strokeWidth: 1.5 })}
                 </div>
               </div>
 
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-start gap-3 mb-2 min-h-[56px]">
-                  <h3 className="text-[19px] font-bold text-white leading-snug">{service.title}</h3>
+                  <h3 className="text-[19px] font-bold text-black leading-snug">{service.title}</h3>
                   {service.tag && (
-                    <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-white/20">
+                    <span className="bg-amber-50 text-amber-700 text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap mt-1 border border-amber-200">
                       {service.tag}
                     </span>
                   )}
                 </div>
-                <p className="text-[14px] text-gray-300 leading-relaxed mb-6 flex-grow">
+                <p className="text-[14px] text-black font-semibold leading-relaxed mb-6 flex-grow">
                   {service.description}
                 </p>
 
                 <div className="flex flex-col gap-2 mt-auto">
                   {service.fees.map((fee, i) => (
-                    <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-white bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                    <div key={i} className="flex items-center gap-2 text-[13px] font-semibold text-black bg-teal-50/50 px-3 py-2 rounded-lg border border-teal-100/50">
                       {fee.icon}
                       <span>{fee.text}</span>
                     </div>
@@ -267,7 +267,7 @@ export default function Services() {
       >
         <button 
           onClick={() => setShowTerms(true)}
-          className="text-[#1e0a3c] font-semibold hover:text-[#1e0a3c]/80 flex items-center justify-center gap-2 mx-auto transition-colors bg-gray-50 hover:bg-gray-100 px-8 py-3.5 rounded-full border border-gray-200 shadow-sm"
+          className="text-black font-bold hover:text-teal-500 flex items-center justify-center gap-2 mx-auto transition-colors bg-white hover:bg-teal-50/30 px-8 py-3.5 rounded-full border border-teal-100/80 shadow-sm"
         >
           <span>Terms and Conditions</span>
         </button>
@@ -293,7 +293,7 @@ export default function Services() {
                   >
                     <X size={20} />
                   </button>
-                  <h2 className="text-xl font-bold text-[#1e0a3c]">Terms and Conditions</h2>
+                  <h2 className="text-xl font-bold text-black">Terms and Conditions</h2>
                 </div>
                 
                 {/* Content */}
