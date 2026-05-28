@@ -81,7 +81,7 @@ export default function Industries() {
   return (
     <div className="pt-32 pb-20 px-6 lg:px-12 max-w-[1200px] mx-auto min-h-screen overflow-x-hidden">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center mb-24">
-        <motion.p variants={fadeUp} className="text-[11px] font-extrabold tracking-[0.35em] text-teal-500 mb-5 uppercase">Sectors</motion.p>
+        <motion.p variants={fadeUp} className="text-[11px] font-extrabold tracking-[0.35em] text-black mb-5 uppercase">Sectors</motion.p>
         <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-white bg-gradient-to-r from-[#114b53] to-[#1e6a75] px-8 py-5 rounded-3xl inline-block mb-6 tracking-tighter shadow-xl shadow-teal-500/20">
           Industries We Support
         </motion.h1>
@@ -105,7 +105,7 @@ export default function Industries() {
               whileHover={{ scale: 1.02, y: -5 }}
               className="w-full lg:w-[32%] group cursor-default"
             >
-              <div className="bg-gradient-to-br from-teal-500 to-teal-600 h-full rounded-[1.5rem] p-6 lg:p-8 shadow-2xl shadow-teal-500/20 flex flex-col items-center justify-center text-center relative overflow-hidden transition-all duration-500">
+              <div className={`${index % 2 === 0 ? 'bg-gradient-to-br from-[#f4625d] to-[#e24b47] shadow-rose-500/20' : 'bg-gradient-to-br from-[#0f766e] to-[#07575d] shadow-teal-900/20'} h-full rounded-[1.5rem] p-6 lg:p-8 shadow-2xl flex flex-col items-center justify-center text-center relative overflow-hidden transition-all duration-500`}>
                 <div className={`absolute top-0 ${index % 2 === 0 ? 'left-0' : 'right-0'} w-1.5 h-full bg-white/25`} />
                 
                 <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-teal-500 transition-all duration-500">

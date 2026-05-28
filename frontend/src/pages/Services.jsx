@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Factory, Megaphone, Users, Handshake, FileText, Globe, Tag, Calendar, X } from 'lucide-react';
+import { Factory, Megaphone, Users, Handshake, Globe, Tag, X } from 'lucide-react';
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -13,18 +13,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const cardCombined = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
-  },
-  hover: {
-    y: -5,
-    transition: { duration: 0.3, ease: "easeOut" }
-  }
-};
+
 
 export default function Services() {
   const [showTerms, setShowTerms] = useState(false);

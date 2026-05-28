@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { CheckCircle2, Clock, Calendar, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -47,7 +47,7 @@ export default function Programs() {
   return (
     <div className="pt-32 pb-20 px-6 lg:px-12 max-w-[1440px] mx-auto min-h-screen">
       <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center mb-20">
-        <motion.p variants={fadeUp} className="text-[11px] font-extrabold tracking-[0.35em] text-teal-500 mb-5 uppercase">Core Program</motion.p>
+        <motion.p variants={fadeUp} className="text-[11px] font-extrabold tracking-[0.35em] text-black mb-5 uppercase">Core Program</motion.p>
         <motion.h1 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-white bg-gradient-to-r from-[#114b53] to-[#1e6a75] px-8 py-5 rounded-3xl inline-block mb-6 tracking-tighter shadow-xl shadow-teal-500/20">
           Startup Global Expansion Program
         </motion.h1>

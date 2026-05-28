@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Share2, Calendar, Clock } from 'lucide-react';
 
@@ -90,6 +90,7 @@ const Blogs = () => {
   useEffect(() => {
     // Check localStorage for previously liked posts
     const likedPosts = JSON.parse(localStorage.getItem('likedBlogs') || '[]');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setBlogPosts(prev => prev.map(post => ({
       ...post,
       liked: likedPosts.includes(post.title)
@@ -163,7 +164,7 @@ const Blogs = () => {
     <div className="pt-32 pb-20 px-6 lg:px-12 bg-transparent">
       {/* Blogs Grid Section */}
       <div className="max-w-[1440px] mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, i) => (
             <motion.article
               id={`post-${i}`}
@@ -172,35 +173,35 @@ const Blogs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group cursor-pointer"
+              className="group cursor-pointer rounded-[1.7rem] border border-white/35 bg-white/14 p-5 shadow-[0_24px_55px_rgba(18,82,82,0.18)] backdrop-blur-md transition-all duration-500 hover:bg-white/20 hover:border-white/55"
             >
-              <div className="aspect-[4/3] bg-gray-100 rounded-[1.5rem] overflow-hidden mb-6 relative shadow-lg group-hover:shadow-2xl transition-all duration-500">
+              <div className="aspect-[4/3] bg-white/10 rounded-[1.15rem] overflow-hidden mb-6 relative shadow-lg group-hover:shadow-2xl transition-all duration-500">
                 <img 
                   src={post.image} 
                   alt={post.title} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4 px-4 py-1.5 bg-white/95 backdrop-blur-sm rounded-full text-[10px] font-black tracking-widest text-indigo-700 border border-teal-50/50 shadow-sm">
+                <div className="absolute top-4 left-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-black tracking-widest text-[#3345d9] border border-white/70 shadow-sm">
                   {post.category}
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                <div className="flex items-center gap-4 text-[11px] font-black text-white/72 uppercase tracking-widest">
                   <span className="flex items-center gap-1.5"><Calendar size={12} /> {post.date}</span>
-                  <span className="w-1 h-1 bg-slate-200 rounded-full" />
+                  <span className="w-1 h-1 bg-white/75 rounded-full" />
                   <span className="flex items-center gap-1.5"><Clock size={12} /> 5 min read</span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-black leading-[1.2] tracking-tight group-hover:text-teal-500 transition-colors">
+                <h3 className="text-2xl font-black text-white leading-[1.2] tracking-tight group-hover:text-white/85 transition-colors">
                   {post.title}
                 </h3>
 
-                <p className="text-[15px] text-black font-semibold leading-relaxed line-clamp-3">
+                <p className="text-[15px] text-white/86 font-bold leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
 
-                <div className="pt-4 flex items-center justify-between border-t border-teal-50">
+                <div className="pt-4 flex items-center justify-between border-t border-white/35">
                    <div className="flex items-center gap-4">
                       <button 
                         onClick={(e) => {
@@ -208,7 +209,7 @@ const Blogs = () => {
                           handleLike(i);
                         }}
                         className={`flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest transition-colors group/like ${
-                          post.liked ? 'text-red-600' : 'text-slate-400 hover:text-teal-500'
+                          post.liked ? 'text-rose-100' : 'text-white/72 hover:text-white'
                         }`}
                       >
                         <Heart 
@@ -216,7 +217,7 @@ const Blogs = () => {
                           fill={post.liked ? "#ef4444" : "none"} 
                           color={post.liked ? "#ef4444" : "currentColor"}
                           className={`transition-all ${
-                            !post.liked ? 'text-slate-400 group-hover/like:text-teal-500' : ''
+                            !post.liked ? 'text-white/72 group-hover/like:text-white' : ''
                           }`} 
                         /> 
                         {post.likes} {post.likes === 1 ? 'LIKE' : 'LIKES'}
@@ -227,9 +228,9 @@ const Blogs = () => {
                        e.stopPropagation();
                        handleShare(post, i);
                      }}
-                     className="p-2 rounded-full hover:bg-teal-50 transition-colors group/share"
+                     className="p-2 rounded-full hover:bg-white/18 transition-colors group/share"
                    >
-                      <Share2 size={16} className="text-slate-400 group-hover/share:text-teal-600" />
+                      <Share2 size={16} className="text-white/72 group-hover/share:text-white" />
                    </button>
                 </div>
               </div>

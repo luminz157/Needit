@@ -1,22 +1,15 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Users, 
   Globe, 
   Rocket, 
   Target, 
-  Briefcase, 
-  Shield, 
   Zap, 
-  Award, 
   Handshake, 
   Network, 
   Lightbulb, 
-  ArrowRight,
   Mail,
-  ExternalLink,
   CheckCircle2,
-  TrendingUp,
   Layers,
   Share2
 } from 'lucide-react';
@@ -48,24 +41,6 @@ const SectionHeader = ({ title, subtitle, centered = true }) => (
   </div>
 );
 
-const FeatureCard = ({ icon: Icon, title, description, delay = 0, colorClass = "bg-blue-100 text-blue-600" }) => (
-  <motion.div
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true }}
-    variants={fadeUp}
-    custom={delay}
-    whileHover={{ y: -8 }}
-    className="bg-white p-8 rounded-[2rem] border border-teal-50/80 shadow-2xl shadow-teal-100/40 hover:shadow-2xl hover:shadow-teal-200/50 hover:border-teal-200 transition-all duration-300 flex flex-col h-full"
-  >
-    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm ${colorClass}`}>
-      <Icon size={28} />
-    </div>
-    <h3 className="text-2xl font-bold text-black mb-4 tracking-tight">{title}</h3>
-    <p className="text-black font-semibold leading-relaxed">{description}</p>
-  </motion.div>
-);
-
 const Partnership = () => {
   return (
     <div className="pt-24 pb-20 relative">
@@ -79,7 +54,7 @@ const Partnership = () => {
           >
             <motion.p 
               variants={fadeUp}
-              className="text-[12px] font-extrabold tracking-[0.4em] text-teal-500 mb-6 uppercase"
+              className="text-[12px] font-extrabold tracking-[0.4em] text-black mb-6 uppercase"
             >
               Collaborative Ecosystem
             </motion.p>
@@ -124,6 +99,7 @@ const Partnership = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
+              className="bg-white/30 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] border border-white/40 shadow-xl"
             >
               <h2 className="text-4xl lg:text-[46px] font-bold text-black leading-[1.1] tracking-tighter mb-8">
                 Empowering founders <br /> through synergy.
@@ -141,29 +117,29 @@ const Partnership = () => {
             
             <div className="grid grid-cols-2 gap-6">
               {[
-                { icon: Users, label: 'Ecosystem', value: 'Global', colorClass: "bg-blue-100 text-blue-600" },
-                { icon: Share2, label: 'Partners', value: '50+', colorClass: "bg-emerald-100 text-emerald-600" },
-                { icon: Lightbulb, label: 'Innovation', value: 'High-Impact', colorClass: "bg-orange-100 text-orange-600" },
-                { icon: Target, label: 'Focus', value: 'Growth', colorClass: "bg-teal-100 text-teal-600" }
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  custom={i}
-                  className="bg-white p-8 rounded-[2rem] shadow-xl shadow-teal-100/40 border border-teal-50 text-center group hover:scale-105 transition-all duration-500"
-                >
-                  <div className="mb-6 flex justify-center">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner ${stat.colorClass}`}>
-                      <stat.icon size={32} />
+                  { icon: Users, label: 'Ecosystem', value: 'Global', colorClass: "bg-blue-100 text-blue-600" },
+                  { icon: Share2, label: 'Partners', value: '50+', colorClass: "bg-emerald-100 text-emerald-600" },
+                  { icon: Lightbulb, label: 'Innovation', value: 'High-Impact', colorClass: "bg-orange-100 text-orange-600" },
+                  { icon: Target, label: 'Focus', value: 'Growth', colorClass: "bg-teal-100 text-teal-600" }
+                ].map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    custom={i}
+                    className="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl shadow-teal-100/40 border border-teal-50 text-center group hover:scale-105 transition-all duration-500 min-h-[220px]"
+                  >
+                    <div className="mb-4 flex justify-center">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${stat.colorClass}`}>
+                        <stat.icon size={28} />
+                      </div>
                     </div>
-                  </div>
-                  <p className="text-[12px] font-bold text-white/50 uppercase tracking-widest mb-1">{stat.label}</p>
-                  <p className="text-xl font-bold text-white">{stat.value}</p>
-                </motion.div>
-              ))}
+                    <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
+                    <p className="text-xl font-bold text-black">{stat.value}</p>
+                  </motion.div>
+                ))}
             </div>
           </div>
         </div>
@@ -193,19 +169,18 @@ const Partnership = () => {
                   custom={i * 0.2}
                   className="relative p-8 rounded-xl bg-white border border-teal-50/80 shadow-2xl shadow-teal-100/40 flex flex-col w-full h-full group overflow-hidden min-h-[280px]"
                 >
-                  {/* Sequential Filling Dark Purple Background Animation */}
+                  {/* Visible Left-to-Right Sweeping Animation */}
                   <motion.div 
                     animate={{ 
-                      opacity: [0, 0.2, 0],
-                      x: ['-100%', '0%', '100%']
+                      x: ['-100%', '100%']
                     }}
                     transition={{ 
                       duration: 3, 
                       repeat: Infinity, 
-                      delay: i * 0.75,
+                      delay: i * 0.4,
                       ease: "easeInOut"
                     }}
-                    className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-teal-600/10 pointer-events-none"
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-teal-200/40 to-transparent pointer-events-none"
                   />
 
                   <div className="h-[90px] flex items-center justify-center mb-6 relative z-10">
@@ -302,7 +277,7 @@ const Partnership = () => {
                 custom={i}
                 className="w-full aspect-square max-w-[320px] p-8 rounded-2xl bg-white border border-teal-50/80 shadow-2xl shadow-teal-100/40 flex flex-col items-center justify-start text-center group hover:scale-[1.03] transition-all duration-500 hover:border-teal-200 hover:shadow-teal-200/50"
               >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 mb-6 mt-2 ${model.colorClass}`}>
+                <div className="w-14 h-14 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 mb-6 mt-2">
                   <opportunity.icon size={28} />
                 </div>
 
@@ -451,9 +426,9 @@ const Partnership = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="space-y-10"
+            className="space-y-10 bg-white/30 backdrop-blur-md rounded-[2.5rem] border border-white/40 p-8 md:p-16 max-w-4xl mx-auto shadow-2xl shadow-black/5"
           >
-            <p className="text-[12px] font-extrabold tracking-[0.4em] text-teal-500 mb-2 uppercase">Ready to collaborate?</p>
+            <p className="text-[12px] font-extrabold tracking-[0.4em] text-[#123f48] mb-2 uppercase">Ready to collaborate?</p>
             <h2 className="text-5xl lg:text-[64px] font-bold text-black tracking-tighter">Become an Incubation Partner</h2>
             <p className="text-[18px] text-black font-bold max-w-2xl mx-auto leading-relaxed">
               If your organization supports startups and innovation, we would love to explore collaboration opportunities.

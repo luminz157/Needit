@@ -12,10 +12,9 @@ import './App.css';
 const Layout = ({ children }) => {
   const location = useLocation();
   const showFooter = location.pathname !== '/contact';
-  const showNavbar = true;
 
   return (
-    <div className="relative min-h-screen flex flex-col selection:bg-rose-500 selection:text-white overflow-x-hidden bg-[#eefcf9]" style={{ fontFamily: "'Lato', sans-serif" }}>
+    <div className="relative min-h-screen flex flex-col selection:bg-rose-500 selection:text-white overflow-x-hidden bg-[#2db6b1]" style={{ fontFamily: "'Lato', sans-serif" }}>
       <MainBackground />
       <MouseBackground />
       <Navbar />
