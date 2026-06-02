@@ -41,7 +41,7 @@ export default function Programs() {
   const timeline = [
     { time: "30-Day", title: "Market Readiness", desc: "Complete market research, validate product-market fit, and finalize your go-to-market strategy." },
     { time: "60-Day", title: "Expansion Setup", desc: "Secure necessary compliance, begin distributor networking, and establish your initial presence." },
-    { time: "90-Day", title: "Global Scaling Roadmap", desc: "Launch operations, secure strategic partnerships, and prepare for TRL 6+ investor pitching." }
+    { time: "90-Day", title: "Global Scaling Roadmap", desc: "Launch operations, secure strategic partnerships, and prepare for TRL 5-9 investor pitching." }
   ];
 
   return (

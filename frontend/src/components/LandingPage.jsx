@@ -160,7 +160,7 @@ const TrustedSection = () => (
         {[
           { image: '/s3.png', title: 'Structured Scaling', meta: 'Workspace access', desc: 'Move from local validation to global market fit with standardized tracking metrics.' },
           { image: '/s6.png', title: 'Global Markets', meta: '12+ markets', desc: 'Premium corporate links, sandbox environments, and international distribution channels.' },
-          { image: '/s2.png', title: 'Verified Readiness', meta: 'TRL 6+', desc: 'Pre-screened startup support for investor-ready and enterprise-ready teams.' }
+          { image: '/s2.png', title: 'Verified Readiness', meta: 'TRL 5-9', desc: 'Pre-screened startup support for investor-ready and enterprise-ready teams.' }
         ].map((item, i) => (
           <motion.article
             key={item.title}
@@ -286,11 +286,11 @@ const Hero = () => (
               </div>
               <div className="rounded-xl bg-[#f7fbfa] px-4 py-3 col-span-2 sm:col-span-1">
                 <p className="text-[10px] font-black text-[#173638]/45">Readiness</p>
-                <p className="text-[12px] font-black text-[#173638]">TRL 6+</p>
+                <p className="text-[12px] font-black text-[#173638]">TRL 5-9</p>
               </div>
               <div className="px-2 col-span-1 flex flex-col justify-center">
                 <p className="text-[11px] font-black text-[#173638]/45">Active Startups</p>
-                <p className="text-[20px] md:text-[24px] font-black leading-none text-[#168f96]">142+</p>
+                <p className="text-[20px] md:text-[24px] font-black leading-none text-[#168f96]">20+</p>
               </div>
               <a href="/contact" className="col-span-1 inline-flex items-center justify-center rounded-full bg-[#123f48] px-4 py-3 text-[11px] font-black text-white transition hover:bg-[#0d333a] h-full text-center">
                 Explore
@@ -599,7 +599,7 @@ const WhatsNew = () => (
             {/* Animated layout for large screens */}
             <div className="hidden lg:block">
               {[
-                { label: 'Startups', value: '142', icon: Rocket },
+                { label: 'Startups', value: '20+', icon: Rocket },
                 { label: 'Mentors', value: '84', icon: Users },
                 { label: 'Funding', value: '$2.4M', icon: DollarSign },
                 { label: 'Programs', value: 'Active', icon: Zap }
@@ -655,7 +655,7 @@ const WhatsNew = () => (
             {/* Static compact grid for smaller screens */}
             <div className="grid lg:hidden grid-cols-2 gap-4">
               {[
-                { label: 'Startups', value: '142', icon: Rocket },
+                { label: 'Startups', value: '20+', icon: Rocket },
                 { label: 'Mentors', value: '84', icon: Users },
                 { label: 'Funding', value: '$2.4M', icon: DollarSign },
                 { label: 'Programs', value: 'Active', icon: Zap }
@@ -723,7 +723,7 @@ const TimelineSection = () => (
             { 
               time: '90-Day', 
               title: 'Global Scaling Roadmap', 
-              desc: 'Launch operations, secure strategic partnerships, and prepare for TRL 6+ investor pitching.' 
+              desc: 'Launch operations, secure strategic partnerships, and prepare for TRL 5-9 investor pitching.' 
             }
           ].map((step, i) => (
             <motion.div

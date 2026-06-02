@@ -52,7 +52,7 @@ export default function Services() {
     },
     {
       title: "Investor Access Support",
-      tag: "TRL 6+ Only",
+      tag: "TRL 5-9 Only",
       description: "Investor readiness guidance, pitch deck review, VC & angel investor introductions and funding network access.",
       icon: <Handshake fill="currentColor" />,
       image: "/s4.png",

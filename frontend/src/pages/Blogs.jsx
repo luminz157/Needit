@@ -34,7 +34,7 @@ const Blogs = () => {
     {
       date: 'May 08, 2026',
       title: 'Why Investor Readiness Matters',
-      excerpt: 'Investors evaluate product readiness, technology maturity, revenue potential, and team capability. Startups operating at TRL 6 and above often attract stronger investor interest.',
+      excerpt: 'Investors evaluate product readiness, technology maturity, revenue potential, and team capability. Startups operating at TRL 5-9 often attract stronger investor interest.',
       category: 'FUNDING',
       likes: 15,
       image: '/IMAGES/IMAGE_4.png',
