@@ -57,7 +57,7 @@ export default function Services() {
       icon: <Handshake fill="currentColor" />,
       image: "/s4.png",
       fees: [
-        { icon: <Tag size={16} className="text-cyan-600" />, text: "Fees: ₹20,000" }
+        { icon: <Tag size={16} className="text-cyan-600" />, text: "Success fee: 3%" }
       ]
     },
     {
